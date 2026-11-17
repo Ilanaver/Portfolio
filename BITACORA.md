@@ -5,6 +5,17 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Verificación automática en cada push y PR
+
+**Cambios**
+- Paso 38: `.github/workflows/verificar.yml` (push y PR; `contents: read`; cancela corridas viejas de la misma
+  rama): Python 3.12 con caché de pip, `requirements-dev.txt`, Chromium de Playwright (para que los tests de
+  capturas corran y no se salteen), `pytest`, `validar_datos.py`, Node 24 con caché de npm, `npm ci` y
+  `npm run build`.
+- Los mismos pasos en local: `pytest` 129 OK, `validar_datos.py` OK, build con 2 inicios y 6 páginas de proyecto.
+
+---
+
 ## 17/11/2026 — Auditoría local de repos, claves opacas y aprobación de capturas
 
 **Cambios**

@@ -1,0 +1,48 @@
+# Verificación en cada push y PR (§4.1): pytest + validar_datos.py + build completo del sitio.
+name: verificar
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verificar-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Dependencias de Python
+        run: pip install -r requirements-dev.txt
+
+      # Chromium para los tests de capturas automáticas (sin él, esos tests se saltean).
+      - name: Chromium de Playwright
+        run: python -X utf8 -m playwright install --with-deps chromium
+
+      - name: pytest
+        run: python -X utf8 -m pytest
+
+      - name: Validar datos
+        run: python -X utf8 scripts/validar_datos.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Build del sitio
+        run: |
+          npm ci
+          npm run build
