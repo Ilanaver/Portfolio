@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "locale_og": "es_AR",
+    "titulo_inicio": "Ilán Averbuch — Proyectos y CV",
+    "descripcion_inicio": "Proyectos, problemas que resolví y stack de Ilán Averbuch, estudiante de Ingeniería en IA en la UCEMA.",
+    "titulo_proyecto": "{nombre} — Ilán Averbuch",
+    "imagen_og_alt": "Ilán Averbuch — Proyectos y CV"
+  },
+  "raiz": {
+    "ir": "Ver el portfolio en español"
+  },
+  "error404": {
+    "titulo_pagina": "Página no encontrada — Ilán Averbuch",
+    "titulo": "No encontré esta página",
+    "texto": "Puede que el link esté mal escrito o que la página ya no exista.",
+    "volver": "Ir al inicio en español"
+  },
+  "redireccion": {
+    "titulo": "Esta página se mudó",
+    "texto": "La página de {nombre} ahora está en otra dirección.",
+    "enlace": "Ir a la página nueva"
+  },
+  "encabezado": {
+    "saltar": "Saltar al contenido",
+    "navegacion": "Secciones del sitio",
+    "enlaces": "Links de contacto",
+    "github": "GitHub",
+    "correo": "Correo",
+    "linkedin": "LinkedIn"
+  },
+  "idioma": {
+    "selector": "Idioma del sitio",
+    "es_corto": "ES",
+    "en_corto": "EN",
+    "es_nombre": "Español",
+    "en_nombre": "English"
+  },
+  "cv": {
+    "descargar": "Descargar CV",
+    "descargar_titulo_pdf": "Descargar el CV en PDF",
+    "descargar_titulo_imprimir": "Abre la impresión: elegí \"Guardar como PDF\""
+  },
+  "secciones": {
+    "sobre_mi": "Sobre mí",
+    "proyectos": "Proyectos",
+    "problemas": "Problemas que resolví",
+    "estudios": "Estudios",
+    "stack": "Stack",
+    "contacto": "Contacto"
+  },
+  "estados": {
+    "activo": "Activo",
+    "terminado": "Terminado",
+    "pausado": "Pausado"
+  },
+  "categorias": {
+    "lenguaje": "Lenguajes",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "datos": "Datos",
+    "infra": "Infraestructura",
+    "automatizacion": "Automatización",
+    "mensajeria": "Mensajería",
+    "ia": "IA",
+    "otros": "Otros"
+  },
+  "filtros": {
+    "titulo": "Filtrar proyectos",
+    "estado": "Estado",
+    "limpiar": "Limpiar filtros",
+    "resultado_uno": "{cantidad} proyecto",
+    "resultado_otros": "{cantidad} proyectos",
+    "sin_resultados": "Ningún proyecto coincide con los filtros elegidos."
+  },
+  "ficha": {
+    "estado": "Estado",
+    "periodo": "Período",
+    "desde": "desde {inicio}",
+    "rango": "{inicio} – {fin}",
+    "ultima_actividad": "Última actividad",
+    "tecnologias": "Tecnologías",
+    "servicios": "Servicios",
+    "links": "Links",
+    "demo": "Ver demo",
+    "repo": "Ver código",
+    "destacado": "Destacado",
+    "ver_proyecto": "Ver proyecto",
+    "ver_proyecto_aria": "Ver la página de {nombre}",
+    "mas_tecnologias": "+{cantidad}"
+  },
+  "captura": {
+    "alt_auto": "Captura del sitio de {nombre}"
+  },
+  "solo_espanol": {
+    "chip": "ES",
+    "titulo": "Solo disponible en español"
+  },
+  "proyecto": {
+    "volver": "Volver",
+    "volver_aria": "Volver a la página anterior",
+    "idea_original": "Idea original",
+    "resultado": "Resultado",
+    "linea_de_tiempo": "Línea de tiempo",
+    "tipo_hito": "Hito",
+    "tipo_arreglo": "Arreglo",
+    "tipo_bitacora": "Bitácora",
+    "bitacora_titulo": "Bitácora de desarrollo",
+    "bitacora_en_espanol_uno": "+ {cantidad} entrada de la bitácora de desarrollo (en español)",
+    "bitacora_en_espanol_otros": "+ {cantidad} entradas de la bitácora de desarrollo (en español)",
+    "sin_linea_de_tiempo": "Todavía no hay hitos cargados.",
+    "no_encontrado": "No encontré este proyecto.",
+    "ir_al_inicio": "Ir al inicio"
+  },
+  "problemas": {
+    "intro": "Problemas reales que aparecieron en mis proyectos: qué pasó, por qué y cómo lo arreglé.",
+    "en_proyecto": "en {nombre}"
+  },
+  "stack": {
+    "intro": "Lo que usé en mis proyectos, con la cantidad de proyectos en que aparece cada herramienta.",
+    "cantidad_uno": "{cantidad} proyecto",
+    "cantidad_otros": "{cantidad} proyectos"
+  },
+  "contacto": {
+    "texto": "La forma más rápida de contactarme es por correo:"
+  },
+  "impresion": {
+    "proyectos_destacados": "Proyectos destacados",
+    "otros_proyectos": "Otros proyectos",
+    "problemas_recientes": "Problemas que resolví (recientes)"
+  }
+}

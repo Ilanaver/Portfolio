@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "locale_og": "en_US",
+    "titulo_inicio": "Ilán Averbuch — Projects and CV",
+    "descripcion_inicio": "Projects, problems I solved and tech stack of Ilán Averbuch, AI Engineering student at UCEMA.",
+    "titulo_proyecto": "{nombre} — Ilán Averbuch",
+    "imagen_og_alt": "Ilán Averbuch — Projects and CV"
+  },
+  "raiz": {
+    "ir": "View the portfolio in English"
+  },
+  "error404": {
+    "titulo_pagina": "Page not found — Ilán Averbuch",
+    "titulo": "I couldn't find this page",
+    "texto": "The link may be mistyped, or the page may no longer exist.",
+    "volver": "Go to the English home page"
+  },
+  "redireccion": {
+    "titulo": "This page has moved",
+    "texto": "The page for {nombre} now lives at a new address.",
+    "enlace": "Go to the new page"
+  },
+  "encabezado": {
+    "saltar": "Skip to content",
+    "navegacion": "Site sections",
+    "enlaces": "Contact links",
+    "github": "GitHub",
+    "correo": "Email",
+    "linkedin": "LinkedIn"
+  },
+  "idioma": {
+    "selector": "Site language",
+    "es_corto": "ES",
+    "en_corto": "EN",
+    "es_nombre": "Español",
+    "en_nombre": "English"
+  },
+  "cv": {
+    "descargar": "Download CV",
+    "descargar_titulo_pdf": "Download the CV as a PDF",
+    "descargar_titulo_imprimir": "Opens the print dialog: choose \"Save as PDF\""
+  },
+  "secciones": {
+    "sobre_mi": "About me",
+    "proyectos": "Projects",
+    "problemas": "Problems I solved",
+    "estudios": "Education",
+    "stack": "Stack",
+    "contacto": "Contact"
+  },
+  "estados": {
+    "activo": "Active",
+    "terminado": "Finished",
+    "pausado": "Paused"
+  },
+  "categorias": {
+    "lenguaje": "Languages",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "datos": "Data",
+    "infra": "Infrastructure",
+    "automatizacion": "Automation",
+    "mensajeria": "Messaging",
+    "ia": "AI",
+    "otros": "Other"
+  },
+  "filtros": {
+    "titulo": "Filter projects",
+    "estado": "Status",
+    "limpiar": "Clear filters",
+    "resultado_uno": "{cantidad} project",
+    "resultado_otros": "{cantidad} projects",
+    "sin_resultados": "No project matches the selected filters."
+  },
+  "ficha": {
+    "estado": "Status",
+    "periodo": "Period",
+    "desde": "since {inicio}",
+    "rango": "{inicio} – {fin}",
+    "ultima_actividad": "Last activity",
+    "tecnologias": "Technologies",
+    "servicios": "Services",
+    "links": "Links",
+    "demo": "View demo",
+    "repo": "View code",
+    "destacado": "Featured",
+    "ver_proyecto": "View project",
+    "ver_proyecto_aria": "View the page for {nombre}",
+    "mas_tecnologias": "+{cantidad}"
+  },
+  "captura": {
+    "alt_auto": "Screenshot of {nombre}'s site"
+  },
+  "solo_espanol": {
+    "chip": "ES",
+    "titulo": "Only available in Spanish"
+  },
+  "proyecto": {
+    "volver": "Back",
+    "volver_aria": "Go back to the previous page",
+    "idea_original": "Original idea",
+    "resultado": "Outcome",
+    "linea_de_tiempo": "Timeline",
+    "tipo_hito": "Milestone",
+    "tipo_arreglo": "Fix",
+    "tipo_bitacora": "Log",
+    "bitacora_titulo": "Development log",
+    "bitacora_en_espanol_uno": "+ {cantidad} development log entry (in Spanish)",
+    "bitacora_en_espanol_otros": "+ {cantidad} development log entries (in Spanish)",
+    "sin_linea_de_tiempo": "No milestones yet.",
+    "no_encontrado": "I couldn't find this project.",
+    "ir_al_inicio": "Go to the home page"
+  },
+  "problemas": {
+    "intro": "Real problems that came up in my projects: what happened, why, and how I fixed it.",
+    "en_proyecto": "in {nombre}"
+  },
+  "stack": {
+    "intro": "What I've used in my projects, with the number of projects each tool appears in.",
+    "cantidad_uno": "{cantidad} project",
+    "cantidad_otros": "{cantidad} projects"
+  },
+  "contacto": {
+    "texto": "The quickest way to reach me is by email:"
+  },
+  "impresion": {
+    "proyectos_destacados": "Featured projects",
+    "otros_proyectos": "Other projects",
+    "problemas_recientes": "Problems I solved (recent)"
+  }
+}

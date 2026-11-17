@@ -5,6 +5,26 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Textos de interfaz en archivos de traducción ES/EN
+
+**Cambios**
+- Paso 3: `src/i18n/es.json` y `en.json` con todas las claves de la interfaz; `crearTraductor(idioma)` con
+  interpolación (`{cantidad}` formateado con `Intl.NumberFormat`) y plural `_uno`/`_otros`; clave faltante →
+  `[clave]` en desarrollo y español en producción; `IdiomaContexto` + `useIdioma()`; `guardarIdioma()` con
+  try/catch. `src/lib/fechas.js` con `Intl.DateTimeFormat` (`es-AR`/`en-US`) en UTC.
+- Prueba rápida con `ssrLoadModule` de Vite: plurales, miles (`3.400` / `3,400`) y fechas correctas.
+
+**Problema**
+- El script de prueba no encontraba `vite` al correr desde la carpeta temporal.
+
+**Causa**
+- Node resuelve paquetes desde la carpeta del script, no desde el directorio actual.
+
+**Arreglo**
+- Import con ruta absoluta `file:///…/node_modules/vite`. Solo afecta al script de prueba (no está en el repo).
+
+---
+
 ## 17/11/2026 — Proyecto Vite + React + Tailwind con entradas por idioma
 
 **Cambios**
