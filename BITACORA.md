@@ -5,6 +5,16 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Arranque de la Fase 2: paquete de scripts y pytest
+
+**Cambios**
+- Paso 21: paquete `scripts/portfolio/` (rutas base del repo), `scripts/tests/` con una prueba mínima y
+  `pytest.ini` (`pythonpath = scripts`). `requirements.txt` completo con versiones fijas (jsonschema, PyYAML,
+  requests, Pillow, playwright) y `requirements-dev.txt` que suma pytest (para `verificar.yml`).
+- `pytest`: 1 test OK.
+
+---
+
 ## 17/11/2026 — Fase 1 verificada en producción
 
 **Cambios**
