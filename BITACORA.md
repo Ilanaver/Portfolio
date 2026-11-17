@@ -5,6 +5,25 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Fase 1 verificada en producción
+
+**Cambios**
+- Deploy de `a20a8db` en READY. En producción: `/es/` y `/en/p/rivot/` sirven title, descripción, Open Graph
+  (con imagen 1200×630), `twitter:card`, canonical y hreflang es/en/x-default con la URL definitiva, y el HTML
+  pre-renderizado (`<h1>` presente sin JS). `/_vercel/insights/script.js` responde 200 y registra la vista
+  (`/_vercel/insights/view` 200); consola del navegador sin mensajes.
+- Rutas: `/` 200, `/es` → 308 a `/es/`, páginas de proyecto 200, imágenes OG y favicon 200, ruta inexistente →
+  404 bilingüe, `/README.md` y `src/datos/…` 404 (no se publican). `/assets/` con
+  `Cache-Control: public, max-age=31536000, immutable`.
+- Lighthouse móvil sobre producción: performance `/` 99, `/es/` 99, `/en/` 98, `/es/p/scanner-dca/` 100,
+  `/en/p/rivot/` 98; accesibilidad, buenas prácticas y SEO 100 en las cinco.
+- CV impreso desde producción: 1 página A4 en ES y en EN, con la URL del sitio.
+
+**Pendiente**
+- Revisión de Ilán del checkpoint antes de arrancar la Fase 2. Esta entrada sube en el próximo push.
+
+---
+
 ## 17/11/2026 — Sitio publicado en Vercel con su URL definitiva
 
 **Cambios**
