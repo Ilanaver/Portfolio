@@ -5,6 +5,20 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Analítica de visitas sin cookies
+
+**Cambios**
+- Paso 16: `@vercel/analytics@2.0.1` con `<Analytics />` en la raíz de `App.jsx`, presente en el inicio y en
+  las páginas de proyecto. Sin cookies ni banner. En producción carga `/_vercel/insights/script.js`.
+- El componente quedó incluido en el commit del paso 12 (`792a81e`), al reescribir `App.jsx`; este paso solo
+  verifica el bundle y lo registra.
+
+**Pendiente**
+- Activar Web Analytics en el proyecto de Vercel (lo hace Ilán, paso 20). En `npm run preview` el script da
+  404: es lo esperado fuera de Vercel.
+
+---
+
 ## 17/11/2026 — CV imprimible en A4 desde el inicio, en los dos idiomas
 
 **Cambios**
