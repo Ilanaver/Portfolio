@@ -153,15 +153,17 @@ def resolver_resultados(resultados, anteriores):
     """resultados: [{"clave", "estado": "ok" | "fallo", "proyecto"?, "tipo"?, "detalle"?, "nombre_publico"}].
 
     Devuelve (proyectos, advertencias). Lanza ErrorFallaTotal si fallan más de la mitad de los intentados.
+    Una falla simulada (input probar_alertas, "simulada": True) no cuenta para ese umbral.
     """
+    if supera_umbral(resultados):
+        fallidos, intentados = conteo_real(resultados)
+        raise ErrorFallaTotal("mas_de_la_mitad_fallaron", str(fallidos) + " de " + str(intentados))
     proyectos = []
     advertencias = []
-    fallidos = 0
     for resultado in resultados:
         if resultado["estado"] == "ok":
             proyectos.append(resultado["proyecto"])
             continue
-        fallidos += 1
         clave = resultado["clave"]
         anterior = anteriores.get(clave)
         if anterior is not None:
@@ -172,9 +174,25 @@ def resolver_resultados(resultados, anteriores):
         advertencias.append(
             advertencia(clave, resultado.get("nombre_publico"), resultado["tipo"], combinar(resultado.get("detalle"), detalle))
         )
-    if resultados and fallidos * 2 > len(resultados):
-        raise ErrorFallaTotal("mas_de_la_mitad_fallaron", str(fallidos) + " de " + str(len(resultados)))
     return proyectos, advertencias
+
+
+def conteo_real(resultados):
+    """(fallidos, intentados) sin contar las fallas simuladas."""
+    fallidos = 0
+    intentados = 0
+    for resultado in resultados:
+        if resultado.get("simulada"):
+            continue
+        intentados += 1
+        if resultado["estado"] != "ok":
+            fallidos += 1
+    return fallidos, intentados
+
+
+def supera_umbral(resultados):
+    fallidos, intentados = conteo_real(resultados)
+    return intentados > 0 and fallidos * 2 > intentados
 
 
 def combinar(primero, segundo):

@@ -5,6 +5,36 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Generador de datos de punta a punta y perfil desde YAML
+
+**Cambios**
+- Paso 33: `scripts/generar_datos.py` (entrada del Action). Lista de repos → claves opacas → registro de todos
+  los nombres privados en el filtro de redacción → cada repo con `PORTFOLIO.md` y cada extra en su propio `try`
+  (archivo, bitácora, captura manual) → capturas automáticas → simulacros → versión anterior por proyecto,
+  umbral de la mitad, choques de slugs, semilla, orden → validación contra el esquema de salida → escritura.
+  Falla de la lista, lista vacía, salida inválida o simulacro `falla_total` → código 1 sin escribir nada.
+- Opciones `--evento`, `--capturas si|no`, `--probar-alertas no|falla_total|falla_repo` y `--estado` (JSON para
+  las alertas). Capturas: todas si `capturas: si` o en la corrida programada de las 09 UTC (acepta hasta las
+  10:59 por atrasos del cron); en el resto, solo los proyectos cuya demo cambió. La falla simulada elige un
+  privado (para probar la redacción) y no cuenta para el umbral de la mitad.
+- Advertencias al issue solo de los tipos de §4.5; inglés faltante, etiquetas fuera del catálogo y bitácora sin
+  títulos van solo al resumen (`GITHUB_STEP_SUMMARY`). Todo sale por `imprimir()` / `REDACTOR`.
+- `config/perfil.yml` + `scripts/portfolio/perfil.py` → `perfil.json` (sale idéntico al de la Fase 1);
+  `cv_pdf` se completa solo cuando existen los dos PDF. `src/datos/huellas.json` vacío commiteado para que la
+  primera corrida no genere un commit solo por crearlo.
+- `test_generar_datos.py` con una API simulada (público completo, privado válido, privado con bitácora ilegible,
+  privado sin archivo): salida, orden, sin cambios en la segunda corrida (archivos sin tocar), versión anterior
+  ante falla, simulacros, lista vacía, token inválido, extras; ningún nombre privado en log, resumen ni estado.
+- Corrida en seco contra la API real (credencial de `gh`, salida a una carpeta temporal): 37 repos leídos,
+  ningún `PORTFOLIO.md` todavía → los 3 de la semilla; `proyectos.json` sale idéntico byte a byte al publicado.
+- `pytest`: 109 OK.
+
+**Pendiente**
+- Prueba con el token fine-grained de Ilán (paso 41): confirma que lee `PORTFOLIO.md` de privados por GraphQL y
+  que la API manda el vencimiento.
+
+---
+
 ## 17/11/2026 — Armado de proyectos.json con versión anterior por proyecto y escritura estable
 
 **Cambios**

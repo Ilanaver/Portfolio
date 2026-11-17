@@ -1,0 +1,43 @@
+# Perfil del portfolio: encabezado, sobre mí, estudios y contacto (ES/EN).
+# generar_datos.py lo convierte en src/datos/perfil.json (más `version` y `cv_pdf`, que se calculan solos).
+# Textos traducibles: { es: "...", en: "..." }; `en: null` muestra el español con la marca "ES" en /en/.
+# Fechas como texto entre comillas (AAAA-MM o AAAA-MM-DD).
+
+nombre: Ilán Averbuch
+
+titular:
+  es: Estudiante de Ingeniería en IA · Automatizaciones, bots y herramientas de datos
+  en: AI Engineering student · Automations, bots and data tools
+
+# Párrafos de "Sobre mí" (1 a 5).
+sobre_mi:
+  - es: >-
+      Estudio Ingeniería en Inteligencia Artificial en la UCEMA. Me gusta construir herramientas que resuelven
+      problemas concretos y que corren solas: scanners de mercado, bots de avisos y automatizaciones.
+    en: >-
+      I study AI Engineering at UCEMA. I like building tools that solve concrete problems and run on their own:
+      market scanners, alert bots and automations.
+  - es: >-
+      Trabajo con Python, React y servicios en la nube como GitHub Actions, Cloudflare, Vercel y Supabase. Cada
+      proyecto tiene su bitácora: anoto qué falló, por qué y cómo lo arreglé. Por eso este sitio tiene una sección
+      de problemas resueltos.
+    en: >-
+      I work with Python, React and cloud services such as GitHub Actions, Cloudflare, Vercel and Supabase. Every
+      project keeps a development log of what broke, why and how I fixed it, which is why this site has a section
+      on problems I solved.
+
+estudios:
+  - titulo:
+      es: Ingeniería en Inteligencia Artificial
+      en: AI Engineering
+    institucion: UCEMA
+    inicio: "2026-03"
+    fin: null
+    detalle:
+      es: 1er año, en curso
+      en: 1st year, in progress
+
+contacto:
+  email: ilan@averbuch.com.ar
+  github: https://github.com/Ilanaver
+  linkedin: null
