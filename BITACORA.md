@@ -5,6 +5,24 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Repo preparado para publicarse: plan solo local y autor sin mail personal
+
+**Problema**
+- El repo de GitHub es público y `PLAN.md` (commiteado desde el primer commit) nombra repos privados y
+  detalles internos. Los commits tenían como autor un mail personal.
+
+**Causa**
+- El plan se escribió como documento interno y se versionó junto con el código; el autor salía de la
+  configuración global de git.
+
+**Arreglo**
+- Con OK de Ilán, antes del primer push: `PLAN.md` sale de todo el historial (`git filter-branch
+  --index-filter`), queda en `.gitignore` y sigue en la copia local. Autor y committer de los 20 commits pasan
+  a la dirección noreply de GitHub, que queda configurada solo en este repo. README y CLAUDE.md aclaran que el
+  plan es local. Respaldo del historial anterior en un bundle fuera del repo.
+
+---
+
 ## 17/11/2026 — Inicio y páginas de proyecto pre-renderizados en el build
 
 **Cambios**

@@ -7,7 +7,7 @@ Sitio estático bilingüe (ES/EN) con los proyectos de Ilán, hecho con React + 
 - El botón "Descargar CV" imprime el inicio como CV (A4).
 
 Los datos viven en `src/datos/` (en la Fase 1 se cargan a mano; desde la Fase 2 los genera un GitHub Action
-leyendo el `PORTFOLIO.md` de cada repo). El diseño completo está en [PLAN.md](PLAN.md) y el historial en
+leyendo el `PORTFOLIO.md` de cada repo). El diseño completo está en `PLAN.md`, que vive solo en la copia local (no se publica), y el historial en
 [BITACORA.md](BITACORA.md).
 
 ## Correr en local

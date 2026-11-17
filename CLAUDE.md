@@ -1,6 +1,7 @@
 # CLAUDE.md — repo del portfolio
 
-Convenciones de este repo (ver el diseño completo en `PLAN.md`).
+Convenciones de este repo (ver el diseño completo en `PLAN.md`, que es solo local: está en `.gitignore` porque
+nombra repos privados; nunca commitearlo).
 
 ## Código
 - Variables, funciones y comentarios en castellano.

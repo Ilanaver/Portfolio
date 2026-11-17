@@ -8,3 +8,5 @@ __pycache__/
 .pytest_cache/
 # material de revisión local (capturas y PDF de los checkpoints)
 .revision/
+# plan de diseño: solo local (nombra repos privados)
+PLAN.md
