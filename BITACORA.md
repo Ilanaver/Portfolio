@@ -5,6 +5,20 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Encabezado con selector de idioma, botón de CV y secciones fijas
+
+**Cambios**
+- Paso 8: `Encabezado` (nombre, titular, links de correo y GitHub, navegación por secciones con scroll
+  horizontal, link "saltar al contenido"), `SelectorIdioma` ES | EN (44 px, `aria-current`), `BotonCV`
+  (`window.print()`; si existe `cv_pdf`, descarga el PDF), `SobreMi`, `Estudios`, `Contacto` y `Seccion`
+  (anclas por idioma). `TextoIdioma` + `MarcaSoloEspanol` para textos que en `/en/` caen al español.
+- `src/lib/textos.js` (texto por idioma con fallback, hitos según §3.4) y `src/lib/url.js` (anclas
+  `sobre-mi`↔`about`, etc., ruta en el otro idioma).
+- `.claude/launch.json` con los servidores de desarrollo y de vista previa.
+- Verificado en el navegador: `/es/` renderiza sin desborde horizontal a 1024 px.
+
+---
+
 ## 17/11/2026 — Tokens de diseño de cuaderno de ingeniería, claro y oscuro
 
 **Cambios**

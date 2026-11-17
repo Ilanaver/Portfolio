@@ -112,6 +112,11 @@ a {
   border-radius: 2px;
 }
 
+/* Elementos que solo existen para el CV impreso (ver impresion.css). */
+.solo-impresion {
+  display: none;
+}
+
 .rotulo {
   font-family: var(--font-mono);
   font-size: 0.75rem;
