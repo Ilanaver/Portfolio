@@ -5,6 +5,23 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Nombres de repos privados quitados del código antes de publicarlo
+
+**Problema**
+- Revisión previa al push de los pasos 21–40: comentarios y tests nombraban repos privados y proyectos locales
+  como ejemplos (docstring de `bitacora.py`, un comentario de `identidad.py` y dos tests).
+
+**Causa**
+- Se usaron los repos reales del plan como ejemplos de los formatos de bitácora y de slugs.
+
+**Arreglo**
+- Reemplazados por ejemplos genéricos y reescrito el historial local `7bed018..HEAD` (`git filter-branch
+  --tree-filter`), sin push de por medio: ningún commit de la Fase 2 contiene esos nombres (verificado sobre los
+  archivos y sobre el diff de todo el rango). Respaldo del historial anterior en un bundle fuera del repo.
+- `pytest`: 129 OK.
+
+---
+
 ## 17/11/2026 — Ficha bilingüe del propio portfolio
 
 **Cambios**
