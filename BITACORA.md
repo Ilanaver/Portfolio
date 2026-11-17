@@ -5,6 +5,22 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Cliente de la API de GitHub con reintentos y errores sin URLs
+
+**Cambios**
+- Paso 28: `scripts/portfolio/api_github.py`. GraphQL paginado (50 por página) con `id`, nombre, privado,
+  archivado, `createdAt`, `pushedAt`, `url`, dueño y el texto de `HEAD:PORTFOLIO.md`; REST genérico (lo usarán
+  alertas y keepalive) y `leer_archivo` en crudo para bitácoras y capturas manuales.
+- Reintentos (3, espera 2/4/8 s o la de `Retry-After`, tope 60 s) ante 5xx, 429, límite de uso (403 con
+  `x-ratelimit-remaining: 0` o límite secundario), timeout y errores de red. 401/404 no se reintentan.
+- Errores como `ErrorGitHub(tipo, código)` (`token_invalido`, `no_encontrado`, `timeout`, `error_graphql`, …),
+  lanzados `from None`: ni el mensaje ni la cadena de excepciones llevan la URL. Errores de GraphQL = falla.
+- Vencimiento del token desde `github-authentication-token-expiration` (→ `AAAA-MM-DD`).
+- Tests con sesión simulada (sin red). La consulta GraphQL se probó contra la API real con `gh` (solo
+  conteos): 37 repos en una página, ninguno con `PORTFOLIO.md` todavía. `pytest`: 67 OK.
+
+---
+
 ## 17/11/2026 — Claves opacas y filtro de redacción de logs, issues y mensajes
 
 **Cambios**
