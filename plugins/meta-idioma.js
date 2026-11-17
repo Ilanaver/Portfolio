@@ -46,7 +46,7 @@ function middlewareProyectos(servidor) {
     try {
       const plantilla = readFileSync(resolve(RAIZ, idioma, 'index.html'), 'utf8')
       const conMeta = transformar(plantilla)
-      const html = htmlDeProyecto(conMeta, proyecto, leerTraducciones(), idioma, false)
+      const html = htmlDeProyecto(conMeta, proyecto, leerTraducciones(), idioma)
       const final = await servidor.transformIndexHtml(pedido.url, html, '/' + idioma + '/index.html')
       respuesta.setHeader('Content-Type', 'text/html; charset=utf-8')
       respuesta.end(final)

@@ -68,7 +68,11 @@ export function crearTraductor(idioma) {
   }
 }
 
-export const IdiomaContexto = createContext({ idioma: 'es', t: crearTraductor('es') })
+export const IdiomaContexto = createContext({
+  idioma: 'es',
+  t: crearTraductor('es'),
+  rutas: { es: '/es/', en: '/en/' },
+})
 
 export function useIdioma() {
   return useContext(IdiomaContexto)

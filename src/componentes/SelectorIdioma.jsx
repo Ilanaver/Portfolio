@@ -1,17 +1,17 @@
 import { IDIOMAS, guardarIdioma, useIdioma } from '../i18n/index.js'
-import { rutaEnIdioma, urlEnIdioma } from '../lib/url.js'
+import { urlEnIdioma } from '../lib/url.js'
 
 // Selector ES | EN: va a la misma página en el otro idioma, con ?filtros y #ancla.
+// El href sale del contexto (no de window) para que el HTML pre-renderizado y el cliente coincidan.
 export default function SelectorIdioma() {
-  const { idioma, t } = useIdioma()
+  const { idioma, rutas, t } = useIdioma()
 
   function cambiar(evento, destino) {
     guardarIdioma(destino)
+    evento.preventDefault()
     if (destino === idioma) {
-      evento.preventDefault()
       return
     }
-    evento.preventDefault()
     window.location.assign(urlEnIdioma(window.location, destino))
   }
 
@@ -25,7 +25,7 @@ export default function SelectorIdioma() {
         return (
           <a
             key={opcion}
-            href={rutaEnIdioma(window.location.pathname, opcion)}
+            href={rutas[opcion]}
             hrefLang={opcion}
             lang={opcion}
             aria-current={actual ? 'page' : undefined}

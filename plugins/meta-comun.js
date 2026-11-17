@@ -185,46 +185,22 @@ export function metaDeProyecto(proyecto, traducciones, idioma) {
   })
 }
 
-// Contenido básico pre-renderizado (para quien no ejecuta JS: vistas previas, buscadores).
-export function contenidoPrevioDeProyecto(proyecto, traducciones, idioma) {
-  const nombre = textoEnIdioma(proyecto.nombre, idioma)
-  const lineas = []
-  lineas.push('<main class="contenido-previo">')
-  lineas.push('<p><a href="/' + idioma + '/">' + escaparHtml(traducir(traducciones, idioma, 'proyecto.ir_al_inicio')) + '</a></p>')
-  lineas.push('<h1>' + escaparHtml(nombre) + '</h1>')
-  lineas.push('<p>' + escaparHtml(textoEnIdioma(proyecto.descripcion, idioma)) + '</p>')
-  const enlaces = []
-  if (proyecto.links.demo) {
-    enlaces.push({ texto: traducir(traducciones, idioma, 'ficha.demo'), url: proyecto.links.demo })
-  }
-  if (proyecto.links.repo) {
-    enlaces.push({ texto: traducir(traducciones, idioma, 'ficha.repo'), url: proyecto.links.repo })
-  }
-  for (const otroLink of proyecto.links.otros) {
-    enlaces.push({ texto: textoEnIdioma(otroLink.texto, idioma), url: otroLink.url })
-  }
-  if (enlaces.length > 0) {
-    lineas.push('<ul>')
-    for (const enlace of enlaces) {
-      lineas.push('<li><a href="' + escaparHtml(enlace.url) + '">' + escaparHtml(enlace.texto) + '</a></li>')
-    }
-    lineas.push('</ul>')
-  }
-  lineas.push('</main>')
-  return lineas.join('')
-}
-
-// Ajusta un HTML de inicio (/es/ o /en/) para que sea la página de un proyecto.
-export function htmlDeProyecto(plantilla, proyecto, traducciones, idioma, conContenidoPrevio) {
+// Ajusta un HTML de inicio (/es/ o /en/) para que sea la página de un proyecto (atributos y meta).
+export function htmlDeProyecto(plantilla, proyecto, traducciones, idioma) {
   let html = plantilla.replace(
     /data-vista="inicio"/,
     'data-vista="proyecto" data-slug="' + escaparHtml(proyecto.slug) + '"',
   )
   html = html.replace(/<!--meta:inicio-->[\s\S]*?<!--meta:fin-->/, metaDeProyecto(proyecto, traducciones, idioma))
-  if (conContenidoPrevio) {
-    html = html.replace('<!--contenido-previo-->', contenidoPrevioDeProyecto(proyecto, traducciones, idioma))
-  }
   return html
+}
+
+// Inserta el HTML pre-renderizado por React en <div id="root">.
+export function conContenido(html, contenido) {
+  if (!html.includes('<!--contenido-previo-->')) {
+    throw new Error('La plantilla no tiene el marcador <!--contenido-previo-->')
+  }
+  return html.replace('<!--contenido-previo-->', () => contenido)
 }
 
 // Página mínima de redirección de un slug anterior al actual, en el mismo idioma.

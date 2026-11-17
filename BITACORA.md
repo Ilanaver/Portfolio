@@ -5,6 +5,40 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Inicio y páginas de proyecto pre-renderizados en el build
+
+**Cambios**
+- Desvío aprobado por Ilán (PLAN v5.2): `src/entrada-servidor.jsx` con `renderToString`; `npm run build` suma
+  `vite build --ssr src/entrada-servidor.jsx` (salida en `dist-servidor/`, ignorada por git) y
+  `paginas_proyecto.mjs` escribe el HTML completo del inicio (ES y EN) y de las 6 páginas de proyecto dentro de
+  `<div id="root">`. `main.jsx` hidrata con `hydrateRoot` si hay HTML previo y usa `createRoot` en desarrollo.
+- Para que servidor y cliente coincidan: el selector de idioma toma sus rutas del contexto (antes leía
+  `window.location`) y la lista de proyectos arranca sin filtros y aplica los de la URL en un `useEffect`.
+- `vite.config.js` separa las opciones del build del cliente y del de servidor.
+- Se quitó el contenido básico pre-renderizado de las páginas de proyecto: ahora va la página entera.
+- CSS en línea (`<style>`) en el inicio, las páginas de proyecto y el 404.
+- Verificado sobre `dist/`: sin errores de hidratación en consola en `/es/`, `/en/` (también con
+  `?estado=activo&tag=python`) y en páginas de proyecto de los dos idiomas; las fechas de `Intl` salen iguales
+  en Node y en el navegador ("sept 2026", "Sep 2026"); los filtros de la URL se aplican después de hidratar. El
+  modo desarrollo sigue funcionando.
+- Lighthouse móvil (vista previa local): `/` 95–96 (tres corridas), `/es/` 97, `/en/` 98, `/es/p/scanner-dca/`
+  97, `/en/p/rivot/` 97 en performance; accesibilidad 100 y SEO 100 en todas.
+
+**Problema**
+- Solo con el pre-renderizado, `/` daba 93 y el resto 95–96.
+
+**Causa**
+- Dos hojas CSS bloqueaban el primer pintado (~1 s estimado) y `/` suma el salto por idioma a `/es/` o `/en/`
+  (~0,6 s), que el plan pide así.
+
+**Arreglo**
+- CSS en línea en el post-build. El salto de `/` queda como está.
+
+**Pendiente**
+- La única consola con errores es el 404 de `/_vercel/insights/script.js`, esperado fuera de Vercel.
+
+---
+
 ## 17/11/2026 — Sitio revisado desde un Android real
 
 **Cambios**

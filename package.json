@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/paginas_proyecto.mjs",
+    "build": "vite build && vite build --ssr src/entrada-servidor.jsx && node scripts/paginas_proyecto.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

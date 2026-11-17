@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useIdioma } from '../i18n/index.js'
 import {
   escribirFiltros,
@@ -93,7 +93,14 @@ export default function ListaProyectos({ proyectos }) {
   const { t } = useIdioma()
   const estados = useMemo(() => estadosPresentes(proyectos), [proyectos])
   const grupos = useMemo(() => etiquetasPorCategoria(proyectos), [proyectos])
-  const [filtros, setFiltros] = useState(() => filtrosValidos(leerFiltros(window.location.search), estados, grupos))
+  // Arranca sin filtros (igual que el HTML pre-renderizado) y lee la URL después de hidratar.
+  const [filtros, setFiltros] = useState({ estados: [], etiquetas: [] })
+  useEffect(() => {
+    const desdeUrl = filtrosValidos(leerFiltros(window.location.search), estados, grupos)
+    if (desdeUrl.estados.length > 0 || desdeUrl.etiquetas.length > 0) {
+      setFiltros(desdeUrl)
+    }
+  }, [estados, grupos])
   const visibles = filtrarProyectos(proyectos, filtros)
 
   function cambiarFiltros(nuevos) {
