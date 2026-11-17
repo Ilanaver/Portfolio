@@ -5,6 +5,15 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Sitio revisado desde un Android real
+
+**Cambios**
+- Paso 19 cerrado: Ilán probó el sitio desde su Android por el túnel HTTPS y anda bien.
+- Túnel de Cloudflare y vista previa de `127.0.0.1:4174` apagados (los procesos `cloudflared` y `vite preview`
+  quedaban vivos al cortar la tarea; se cerraron a mano y se verificó que no queda nada escuchando).
+
+---
+
 ## 17/11/2026 — Túnel HTTPS temporal para probar el sitio desde el celular
 
 **Problema**
