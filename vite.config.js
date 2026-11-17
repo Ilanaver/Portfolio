@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { resolve } from 'node:path'
 import metaIdioma from './plugins/meta-idioma.js'
+import { urlSitio } from './plugins/meta-comun.js'
 
 const raiz = import.meta.dirname
 
@@ -17,6 +18,8 @@ const entradas = {
 export default defineConfig({
   appType: 'mpa',
   plugins: [react(), tailwindcss(), metaIdioma()],
+  // URL pública del sitio (se muestra en el CV impreso).
+  define: { __SITIO_URL__: JSON.stringify(urlSitio()) },
   build: {
     rollupOptions: { input: entradas },
   },

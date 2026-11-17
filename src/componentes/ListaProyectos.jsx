@@ -7,9 +7,12 @@ import {
   filtrarProyectos,
   leerFiltros,
 } from '../lib/filtros.js'
+import { nombreDe } from '../lib/textos.js'
+import { urlVisible } from '../lib/url.js'
 import Filtros from './Filtros.jsx'
 import Seccion from './Seccion.jsx'
-import TarjetaProyecto from './TarjetaProyecto.jsx'
+import TarjetaProyecto, { periodoDeProyecto } from './TarjetaProyecto.jsx'
+import { TextoIdioma } from './MarcaSoloEspanol.jsx'
 
 // Descarta claves de la URL que no existen en los datos (links viejos o mal escritos).
 function filtrosValidos(filtros, estados, grupos) {
@@ -31,6 +34,59 @@ function filtrosValidos(filtros, estados, grupos) {
     }
   }
   return resultado
+}
+
+// Versión del CV impreso: todos los proyectos (sin filtros); destacados con descripción y tecnologías,
+// el resto en una línea.
+function ProyectosCV({ proyectos }) {
+  const { idioma, t } = useIdioma()
+  const destacados = []
+  const otros = []
+  for (const proyecto of proyectos) {
+    if (proyecto.destacado) {
+      destacados.push(proyecto)
+    } else {
+      otros.push(proyecto)
+    }
+  }
+  return (
+    <div className="cv-proyectos solo-impresion">
+      {destacados.length > 0 ? <h3>{t('impresion.proyectos_destacados')}</h3> : null}
+      {destacados.map((proyecto) => {
+        const etiquetas = []
+        for (const etiqueta of proyecto.tecnologias) {
+          etiquetas.push(etiqueta.nombre)
+        }
+        for (const etiqueta of proyecto.servicios) {
+          etiquetas.push(etiqueta.nombre)
+        }
+        return (
+          <div key={proyecto.clave} className="cv-proyecto">
+            <p>
+              <span className="cv-proyecto__nombre">{nombreDe(proyecto, idioma)}</span>
+              {' · '}
+              <span className="cv-proyecto__meta">
+                {t('estados.' + proyecto.estado)} · {periodoDeProyecto(proyecto, idioma, t)}
+              </span>
+            </p>
+            <TextoIdioma valor={proyecto.descripcion} como="p" />
+            <p className="cv-proyecto__meta">{etiquetas.join(', ')}</p>
+            {proyecto.links.demo ? <p className="cv-proyecto__meta">{urlVisible(proyecto.links.demo)}</p> : null}
+          </div>
+        )
+      })}
+      {otros.length > 0 ? <h3>{t('impresion.otros_proyectos')}</h3> : null}
+      <ul className="cv-otros m-0 p-0">
+        {otros.map((proyecto) => (
+          <li key={proyecto.clave}>
+            <span className="cv-proyecto__nombre">{nombreDe(proyecto, idioma)}</span>
+            {' — '}
+            <TextoIdioma valor={proyecto.descripcion} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 export default function ListaProyectos({ proyectos }) {
@@ -63,6 +119,7 @@ export default function ListaProyectos({ proyectos }) {
           ))}
         </div>
       )}
+      <ProyectosCV proyectos={proyectos} />
     </Seccion>
   )
 }

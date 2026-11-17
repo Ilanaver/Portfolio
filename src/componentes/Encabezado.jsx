@@ -7,7 +7,8 @@ import { TextoIdioma } from './MarcaSoloEspanol.jsx'
 const SECCIONES = ['sobre_mi', 'proyectos', 'problemas', 'estudios', 'stack', 'contacto']
 
 function EnlacesContacto({ perfil }) {
-  const { t } = useIdioma()
+  const { idioma, t } = useIdioma()
+  const urlPortfolio = __SITIO_URL__ + rutaInicio(idioma)
   const enlaces = [
     { clave: 'correo', url: 'mailto:' + perfil.contacto.email, visible: perfil.contacto.email },
     { clave: 'github', url: perfil.contacto.github, visible: urlVisible(perfil.contacto.github) },
@@ -25,6 +26,9 @@ function EnlacesContacto({ perfil }) {
           </a>
         </li>
       ))}
+      <li className="solo-impresion list-none">
+        <a href={urlPortfolio}>{urlVisible(urlPortfolio)}</a>
+      </li>
     </ul>
   )
 }

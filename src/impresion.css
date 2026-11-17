@@ -1,1 +1,275 @@
-/* Hoja de impresión del CV (P4, §5.6). Se completa en el paso 15. */
+/* ------------------------------------------------------------------
+   Hoja de impresión: convierte el inicio en un CV A4 de 1–2 páginas (P4, §5.6).
+   La usa el botón "Descargar CV" (window.print) y, desde la Fase 2, Playwright para el PDF.
+   Sin capa a propósito: tiene que ganarles a las utilidades de Tailwind.
+   ------------------------------------------------------------------ */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 15mm;
+  }
+
+  :root {
+    --papel: #ffffff;
+    --superficie: #ffffff;
+    --tinta: #000000;
+    --tinta-suave: #333333;
+    --linea: #b5b5b5;
+    --acento: #000000;
+    --acento-tinta: #ffffff;
+    --acento-suave: #ffffff;
+    color-scheme: light;
+  }
+
+  html {
+    font-size: 9.5pt;
+    scroll-behavior: auto;
+  }
+
+  body,
+  .fondo-grilla {
+    background: #ffffff !important;
+    background-image: none !important;
+    color: #000000;
+    line-height: 1.4;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
+  a {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .solo-impresion {
+    display: block;
+  }
+
+  span.solo-impresion {
+    display: inline;
+  }
+
+  .solo-pantalla,
+  .controles,
+  .nav-secciones,
+  .filtros,
+  .grilla-proyectos,
+  .placeholder,
+  img,
+  .seccion--contacto,
+  a[href='#contenido'] {
+    display: none !important;
+  }
+
+  .pagina {
+    max-width: none;
+    padding: 0;
+  }
+
+  /* Encabezado del CV: nombre, titular y contacto con URLs visibles. */
+  .encabezado {
+    border-bottom: 1.5pt solid #000000;
+    padding-bottom: 6pt;
+  }
+
+  .encabezado > div {
+    padding-top: 0;
+    display: block;
+  }
+
+  .encabezado h1 {
+    font-size: 20pt;
+  }
+
+  .titular {
+    margin: 2pt 0 4pt;
+    color: #000000;
+  }
+
+  .enlaces-contacto {
+    gap: 0 14pt;
+    font-family: var(--font-mono);
+    font-size: 9pt;
+  }
+
+  .enlaces-contacto a {
+    min-height: 0;
+  }
+
+  /* Orden del CV: sobre mí, estudios, stack, proyectos, problemas. */
+  .contenido-inicio {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .seccion--sobre_mi {
+    order: 1;
+  }
+
+  .seccion--estudios {
+    order: 2;
+  }
+
+  .seccion--stack {
+    order: 3;
+  }
+
+  .seccion--proyectos {
+    order: 4;
+  }
+
+  .seccion--problemas {
+    order: 5;
+  }
+
+  .seccion {
+    padding: 8pt 0 2pt;
+  }
+
+  .seccion h2 {
+    font-size: 12pt;
+    margin-bottom: 5pt;
+    border-bottom: 0.5pt solid #b5b5b5;
+    padding-bottom: 2pt;
+  }
+
+  .seccion p,
+  .seccion li {
+    font-size: 10pt;
+  }
+
+  .seccion--sobre_mi p {
+    font-size: 10pt;
+    line-height: 1.45;
+  }
+
+  .seccion--sobre_mi > div,
+  .max-w-prose {
+    max-width: none;
+  }
+
+  .marco {
+    border: none;
+    padding: 0;
+  }
+
+  .seccion--stack > p,
+  .seccion--problemas > p {
+    display: none;
+  }
+
+  /* Stack: categorías en una línea de texto, sin conteos ni chips. */
+  .seccion--stack > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3pt 18pt;
+  }
+
+  .grupo-stack {
+    display: flex;
+    gap: 6pt;
+    align-items: baseline;
+  }
+
+  .grupo-stack h3 {
+    margin: 0;
+    min-width: 30mm;
+    font-size: 8pt;
+  }
+
+  .grupo-stack ul {
+    gap: 0;
+  }
+
+  .etiqueta-stack {
+    min-height: 0;
+    padding: 0;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 10pt;
+  }
+
+  .etiqueta-stack span {
+    display: none;
+  }
+
+  .grupo-stack li:not(:last-child)::after {
+    content: ',\00a0';
+  }
+
+  /* Proyectos (lista propia del CV, sin filtros). */
+  .cv-proyectos h3 {
+    margin: 6pt 0 3pt;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .cv-proyecto {
+    margin: 0 0 6pt;
+    break-inside: avoid;
+  }
+
+  .cv-proyecto p {
+    margin: 0;
+  }
+
+  .cv-proyecto__nombre {
+    font-weight: 600;
+  }
+
+  .cv-proyecto__meta {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    color: #333333;
+  }
+
+  .cv-otros li {
+    margin: 0 0 2pt;
+    list-style: none;
+  }
+
+  /* Problemas: solo los 3 más recientes. */
+  .lista-problemas {
+    gap: 5pt;
+  }
+
+  .lista-problemas > li:nth-child(n + 4) {
+    display: none;
+  }
+
+  .lista-problemas > li {
+    break-inside: avoid;
+  }
+
+  .lista-problemas > li > p {
+    margin-bottom: 2pt;
+  }
+
+  .lista-problemas a {
+    min-height: 0;
+  }
+
+  .lista-problemas dl {
+    grid-template-columns: 18mm 1fr;
+    gap: 0 6pt;
+  }
+
+  .rotulo {
+    font-size: 7.5pt;
+    color: #333333;
+  }
+
+  /* Página de proyecto impresa: sin controles, texto plano. */
+  .pagina-proyecto > p:first-child {
+    display: none;
+  }
+}

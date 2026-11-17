@@ -5,6 +5,32 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — CV imprimible en A4 desde el inicio, en los dos idiomas
+
+**Cambios**
+- Paso 15: `src/impresion.css` (`@media print`, sin capa para ganarle a Tailwind): A4 con márgenes de
+  12 × 15 mm, colores en tinta, sin grilla; oculta selector, botones, navegación, filtros, tarjetas,
+  capturas y placeholders. Orden del CV: encabezado con correo, GitHub y URL del portfolio en texto; sobre mí;
+  estudios; stack en una línea por categoría; proyectos (destacados con descripción y tecnologías, el resto
+  en una línea, sin filtros); los 3 problemas más recientes.
+- `ProyectosCV` (solo impresión) en `ListaProyectos`; la URL del sitio llega al front con `define`
+  (`__SITIO_URL__`).
+- Verificado imprimiendo a PDF con Edge headless: ES y EN entran en 1 página A4.
+
+**Problema**
+- La primera versión ocupaba 2 páginas (el tercer problema pasaba sola a la segunda).
+
+**Causa**
+- Cuerpo a 10 pt con márgenes de 14 × 16 mm.
+
+**Arreglo**
+- Cuerpo a 9,5 pt y márgenes de 12 × 15 mm: entra en 1 página en los dos idiomas.
+
+**Pendiente**
+- En local la URL del portfolio sale `localhost:4173`; en Vercel toma sola el dominio de producción.
+
+---
+
 ## 17/11/2026 — Sección de stack calculada desde los proyectos
 
 **Cambios**
