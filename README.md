@@ -1,6 +1,7 @@
 # Portfolio / CV web de Ilán
 
 Sitio estático bilingüe (ES/EN) con los proyectos de Ilán, hecho con React + Vite + Tailwind.
+En producción: https://portfolio-eight-blond-udezm8x9wj.vercel.app
 
 - `/es/` y `/en/`: inicio con proyectos, problemas resueltos, estudios, stack y contacto.
 - `/es/p/<slug>/` y `/en/p/<slug>/`: página propia de cada proyecto.

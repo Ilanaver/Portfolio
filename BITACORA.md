@@ -5,6 +5,20 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Sitio publicado en Vercel con su URL definitiva
+
+**Cambios**
+- Paso 20 cerrado: Ilán conectó el repo a Vercel y activó Web Analytics (incluido en Hobby sin costo). El
+  primer deploy de producción (`ae8dc98`) quedó en estado READY.
+- URL base fija en `plugins/meta-comun.js` (`URL_PRODUCCION`), usada en canonical, hreflang, Open Graph y en la
+  URL que muestra el CV impreso. Se confirmó con la API de Vercel que es el dominio de producción del proyecto
+  (no la URL de un deploy). Se puede forzar otra con `SITIO_URL`. Antes se tomaba de
+  `VERCEL_PROJECT_PRODUCTION_URL` y en local salía `localhost:4173`.
+- README con el link al sitio.
+- `validar_datos.py` OK; `npm run build` OK, sin `localhost` en el HTML generado.
+
+---
+
 ## 17/11/2026 — Primer push del portfolio a GitHub
 
 **Cambios**

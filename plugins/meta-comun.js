@@ -5,16 +5,17 @@ import { resolve } from 'node:path'
 
 export const RAIZ = resolve(import.meta.dirname, '..')
 
-// URL pública del sitio para canonical, hreflang y Open Graph.
-// En Vercel se toma sola del dominio de producción; se puede forzar con SITIO_URL.
+// Dominio de producción en Vercel. Si algún día hay dominio propio, se cambia acá (en el mismo commit).
+export const URL_PRODUCCION = 'https://portfolio-eight-blond-udezm8x9wj.vercel.app'
+
+// URL pública del sitio para canonical, hreflang y Open Graph (y la URL que muestra el CV impreso).
+// Es la misma en local, en previews y en producción: los links canónicos siempre apuntan al sitio publicado.
+// Se puede forzar con la variable SITIO_URL (por ejemplo, para probar un dominio nuevo).
 export function urlSitio() {
   if (process.env.SITIO_URL) {
     return process.env.SITIO_URL.replace(/\/$/, '')
   }
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return 'https://' + process.env.VERCEL_PROJECT_PRODUCTION_URL
-  }
-  return 'http://localhost:4173'
+  return URL_PRODUCCION
 }
 
 export function leerJson(rutaRelativa) {
