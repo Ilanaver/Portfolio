@@ -5,6 +5,19 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Catálogo de etiquetas y normalización de tecnologías
+
+**Cambios**
+- Paso 26: `config/etiquetas.yml` con 43 etiquetas (las 19 publicadas hoy más el stack de los repos de §7.1:
+  C#, SQL, Next.js, Node.js, Neon, Playwright, etc.), cada una con categoría y alias. `categoria: null` =
+  conocida pero sin categoría (Google Calendar y pytest, como hoy en el sitio).
+- `scripts/portfolio/etiquetas.py`: comparación sin mayúsculas ni espacios repetidos, sin repetidos por nombre
+  canónico; fuera del catálogo → tal cual y sin categoría, y se devuelve aparte para la advertencia. El catálogo
+  falla si un alias se repite o una categoría no existe.
+- Test de que las 19 etiquetas publicadas hoy salen idénticas al normalizarlas. `pytest`: 51 OK.
+
+---
+
 ## 17/11/2026 — Parser de bitácoras que solo lee fecha y título
 
 **Cambios**

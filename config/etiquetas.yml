@@ -1,0 +1,64 @@
+# Catálogo de etiquetas (§2.6): nombre canónico → categoría + alias.
+# Las etiquetas de `tecnologias` y `servicios` se normalizan con este archivo (sin distinguir mayúsculas
+# ni espacios repetidos). Una etiqueta fuera del catálogo se publica tal cual, sin categoría ("Otros"),
+# y genera una advertencia en el resumen de la corrida.
+# Categorías: lenguaje, frontend, backend, datos, infra, automatizacion, mensajeria, ia.
+# categoria: null = conocida pero sin categoría (aparece en "Otros").
+
+# lenguajes
+Python: { categoria: lenguaje, alias: [python3, py] }
+JavaScript: { categoria: lenguaje, alias: [js, javascript es6] }
+TypeScript: { categoria: lenguaje, alias: [ts] }
+C#: { categoria: lenguaje, alias: [csharp, c sharp] }
+HTML: { categoria: lenguaje, alias: [html5] }
+CSS: { categoria: lenguaje, alias: [css3] }
+SQL: { categoria: lenguaje, alias: [t-sql, tsql] }
+
+# frontend
+React: { categoria: frontend, alias: [reactjs, react.js] }
+Vite: { categoria: frontend, alias: [vitejs] }
+Tailwind: { categoria: frontend, alias: [tailwindcss, tailwind css] }
+Next.js: { categoria: frontend, alias: [nextjs, next] }
+Recharts: { categoria: frontend, alias: [] }
+Remotion: { categoria: frontend, alias: [] }
+
+# backend
+Node.js: { categoria: backend, alias: [node, nodejs] }
+Express: { categoria: backend, alias: [expressjs, express.js] }
+ASP.NET: { categoria: backend, alias: [asp.net core, aspnet, .net] }
+FastAPI: { categoria: backend, alias: [] }
+Flask: { categoria: backend, alias: [] }
+
+# datos
+Supabase: { categoria: datos, alias: [] }
+Neon: { categoria: datos, alias: [neon postgres, neon-postgres] }
+PostgreSQL: { categoria: datos, alias: [postgres] }
+SQL Server: { categoria: datos, alias: [sqlserver, mssql] }
+Cloudflare KV: { categoria: datos, alias: [workers kv, kv] }
+Yahoo Finance: { categoria: datos, alias: [yfinance] }
+pandas: { categoria: datos, alias: [] }
+Google Sheets: { categoria: datos, alias: [sheets] }
+Notion: { categoria: datos, alias: [] }
+
+# infra
+Vercel: { categoria: infra, alias: [] }
+Cloudflare Pages: { categoria: infra, alias: [pages, cf pages] }
+Cloudflare Workers: { categoria: infra, alias: [workers, cf workers] }
+Docker: { categoria: infra, alias: [] }
+
+# automatización
+GitHub Actions: { categoria: automatizacion, alias: [actions, gh actions] }
+Make.com: { categoria: automatizacion, alias: [make, integromat] }
+Playwright: { categoria: automatizacion, alias: [] }
+
+# mensajería
+Telegram: { categoria: mensajeria, alias: [telegram bot, telegram bot api] }
+WhatsApp: { categoria: mensajeria, alias: [] }
+
+# IA
+Anthropic API: { categoria: ia, alias: [claude api, anthropic] }
+OpenAI API: { categoria: ia, alias: [openai] }
+
+# sin categoría
+Google Calendar: { categoria: null, alias: [google calendar api] }
+pytest: { categoria: null, alias: [] }
