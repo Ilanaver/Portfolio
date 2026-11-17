@@ -5,6 +5,22 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Claves opacas y filtro de redacción de logs, issues y mensajes
+
+**Cambios**
+- Paso 27: `scripts/portfolio/identidad.py`. Clave opaca = prefijo + 8 hex de `sha256(id de nodo)`:
+  `priv-` en privados, `pub-` en públicos y `extra-<slug>` en proyectos sin repo. Se verificó con `gh` que la
+  fórmula reproduce las 3 claves publicadas en la Fase 1 y que los 37 repos dan 37 claves distintas.
+- Decisión sobre `pub-` (pendiente del paso 4): mismo cálculo que en privados, porque el id de nodo no cambia si
+  el repo se renombra; así la versión anterior de un proyecto (§4.3) se encuentra aunque cambie nombre o slug.
+- `Redactor`: reemplaza (sin distinguir mayúsculas, los textos más largos primero) nombre del repo privado,
+  `dueño/repo`, slug, slugs anteriores, nombre ES/EN y URL de demo por la clave; tapa siempre tokens con forma
+  de PAT de GitHub, token de bot de Telegram y encabezados `Authorization`. `imprimir()` y un gancho de
+  excepciones que imprime los tracebacks no previstos ya redactados.
+- Tests con un repo privado de prueba, incluido un traceback real en un subproceso. `pytest`: 58 OK.
+
+---
+
 ## 17/11/2026 — Catálogo de etiquetas y normalización de tecnologías
 
 **Cambios**
