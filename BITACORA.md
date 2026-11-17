@@ -5,6 +5,27 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Armado de proyectos.json con versión anterior por proyecto y escritura estable
+
+**Cambios**
+- Paso 32: `scripts/portfolio/salida.py`. Armado campo por campo (lista blanca del esquema de salida: nada de
+  `visible`, `captura_auto` ni `aprobada`); link al repo solo si es `auto` y público; etiquetas normalizadas.
+- §4.3: falla de un proyecto → su última versión publicada, buscada por clave opaca (si no tenía, no entra), con
+  advertencia por tipo; más de la mitad de los intentados con falla → `ErrorFallaTotal` (exactamente la mitad no).
+- Choques de slugs (actuales y anteriores): vuelve a su versión anterior el proyecto que introdujo el choque
+  (nuevo o con slugs cambiados); si no tenía versión, sale.
+- Semilla: los 3 proyectos de la Fase 1 pasan a `config/proyectos_semilla.json` (transitorio, se borra en el paso
+  44); se suman solo si ningún repo publicó su clave ni su slug.
+- Orden: destacados, activos, `ultima_actividad` descendente, desempate por slug. Escritura con claves
+  ordenadas, sangría 2, LF y sin fecha; si el contenido no cambió, el archivo no se toca. Limpieza de WebP
+  huérfanos en `public/proyectos/`. Huellas de capturas manuales en `src/datos/huellas.json`.
+- `src/datos/proyectos.json` reescrito con ese formato: mismo contenido (verificado), solo cambia la sangría,
+  para que la primera corrida del bot no traiga un diff de formato.
+- Tests: esquema, privado, falla con y sin versión anterior, umbral de la mitad, choques, semilla, orden,
+  escritura idéntica byte a byte y limpieza de imágenes. `validar_datos.py` OK. `pytest`: 100 OK.
+
+---
+
 ## 17/11/2026 — Lectura de proyectos sin repo
 
 **Cambios**

@@ -88,21 +88,54 @@
         "es": "Pasó a ser un scanner diario de ~3.400 tickers con veredictos mensual y semanal, usuarios con watchlist propia, mensajes por Telegram y un dashboard. El mayor problema fue la ventana en la que Yahoo republica la vela diaria: obligó a rediseñar los horarios y los controles de la corrida."
       },
       "servicios": [
-        { "categoria": "automatizacion", "nombre": "GitHub Actions" },
-        { "categoria": "infra", "nombre": "Cloudflare Pages" },
-        { "categoria": "infra", "nombre": "Cloudflare Workers" },
-        { "categoria": "datos", "nombre": "Cloudflare KV" },
-        { "categoria": "mensajeria", "nombre": "Telegram" }
+        {
+          "categoria": "automatizacion",
+          "nombre": "GitHub Actions"
+        },
+        {
+          "categoria": "infra",
+          "nombre": "Cloudflare Pages"
+        },
+        {
+          "categoria": "infra",
+          "nombre": "Cloudflare Workers"
+        },
+        {
+          "categoria": "datos",
+          "nombre": "Cloudflare KV"
+        },
+        {
+          "categoria": "mensajeria",
+          "nombre": "Telegram"
+        }
       ],
       "slug": "scanner-dca",
       "slugs_anteriores": [],
       "tecnologias": [
-        { "categoria": "lenguaje", "nombre": "Python" },
-        { "categoria": "frontend", "nombre": "React" },
-        { "categoria": "frontend", "nombre": "Vite" },
-        { "categoria": "frontend", "nombre": "Tailwind" },
-        { "categoria": "lenguaje", "nombre": "TypeScript" },
-        { "categoria": null, "nombre": "pytest" }
+        {
+          "categoria": "lenguaje",
+          "nombre": "Python"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "React"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Vite"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Tailwind"
+        },
+        {
+          "categoria": "lenguaje",
+          "nombre": "TypeScript"
+        },
+        {
+          "categoria": null,
+          "nombre": "pytest"
+        }
       ],
       "ultima_actividad": "2026-11"
     },
@@ -184,17 +217,38 @@
         "es": "Mira dos fuentes independientes de la API pública del club, las noticias de entradas y las ventas programadas, porque ninguna llega siempre primero (una venta abrió 56 horas antes que su noticia). Las dos pasan por el mismo control de duplicados; el aviso sale por Telegram y el evento se crea en Google Calendar. Está pensado para no fallar en silencio: alertas ante errores, latido semanal y respaldo si el LLM no responde."
       },
       "servicios": [
-        { "categoria": "automatizacion", "nombre": "GitHub Actions" },
-        { "categoria": "datos", "nombre": "Supabase" },
-        { "categoria": "mensajeria", "nombre": "Telegram" },
-        { "categoria": "automatizacion", "nombre": "Make.com" },
-        { "categoria": null, "nombre": "Google Calendar" },
-        { "categoria": "ia", "nombre": "Anthropic API" }
+        {
+          "categoria": "automatizacion",
+          "nombre": "GitHub Actions"
+        },
+        {
+          "categoria": "datos",
+          "nombre": "Supabase"
+        },
+        {
+          "categoria": "mensajeria",
+          "nombre": "Telegram"
+        },
+        {
+          "categoria": "automatizacion",
+          "nombre": "Make.com"
+        },
+        {
+          "categoria": null,
+          "nombre": "Google Calendar"
+        },
+        {
+          "categoria": "ia",
+          "nombre": "Anthropic API"
+        }
       ],
       "slug": "rivot",
       "slugs_anteriores": [],
       "tecnologias": [
-        { "categoria": "lenguaje", "nombre": "Python" }
+        {
+          "categoria": "lenguaje",
+          "nombre": "Python"
+        }
       ],
       "ultima_actividad": "2026-10"
     },
@@ -286,19 +340,46 @@
         "es": "Quedó una web en Vercel con dos vistas: Análisis (reporte completo de un ticker, con proyección por escenarios) y Escaneo (el semáforo de hasta 15 tickers). Las funciones en Python comparten el motor con la consola; los datos de Yahoo Finance se cachean en Supabase y el login es opcional. Lo más difícil: Yahoo a veces bloquea las IPs de datacenter, lo que pidió reintentos, caché y errores claros."
       },
       "servicios": [
-        { "categoria": "infra", "nombre": "Vercel" },
-        { "categoria": "datos", "nombre": "Supabase" },
-        { "categoria": "datos", "nombre": "Yahoo Finance" }
+        {
+          "categoria": "infra",
+          "nombre": "Vercel"
+        },
+        {
+          "categoria": "datos",
+          "nombre": "Supabase"
+        },
+        {
+          "categoria": "datos",
+          "nombre": "Yahoo Finance"
+        }
       ],
       "slug": "ibit",
       "slugs_anteriores": [],
       "tecnologias": [
-        { "categoria": "lenguaje", "nombre": "Python" },
-        { "categoria": "lenguaje", "nombre": "JavaScript" },
-        { "categoria": "frontend", "nombre": "React" },
-        { "categoria": "frontend", "nombre": "Vite" },
-        { "categoria": "frontend", "nombre": "Tailwind" },
-        { "categoria": "frontend", "nombre": "Recharts" }
+        {
+          "categoria": "lenguaje",
+          "nombre": "Python"
+        },
+        {
+          "categoria": "lenguaje",
+          "nombre": "JavaScript"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "React"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Vite"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Tailwind"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Recharts"
+        }
       ],
       "ultima_actividad": "2026-09"
     }
