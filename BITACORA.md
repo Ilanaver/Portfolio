@@ -5,6 +5,20 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Filtros por estado y etiqueta guardados en la URL
+
+**Cambios**
+- Paso 11: `Filtros` (chips con `aria-pressed`, 44 px, agrupados por estado y por categoría; barra fija con
+  scroll horizontal en celular, en varias líneas en escritorio; contador con `aria-live`; "Limpiar filtros").
+  `ListaProyectos` lee los filtros de la URL al cargar, descarta claves inexistentes y escribe con
+  `history.replaceState` (`?tag=telegram,vercel&estado=activo`), conservando el `#ancla`.
+- Criterio: dentro de etiquetas y dentro de estados, cualquiera de las elegidas (O); entre estado y
+  etiquetas, las dos condiciones (Y).
+- Verificado en el navegador: `?tag=telegram,inexistente` → 2 proyectos; + Vercel → 3; los cambios quedan en
+  la URL; "Limpiar" vuelve a `/es/#proyectos`.
+
+---
+
 ## 17/11/2026 — Tarjetas de proyecto con placeholder de ficha técnica
 
 **Cambios**
