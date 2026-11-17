@@ -10,7 +10,7 @@ function Chip({ activo, onClick, children }) {
       type="button"
       aria-pressed={activo}
       onClick={onClick}
-      className={'chip-filtro inline-flex min-h-tactil shrink-0 items-center whitespace-nowrap border px-3 font-mono text-sm ' + clases}
+      className={'chip-filtro inline-flex min-h-tactil shrink-0 md:min-h-9 md:px-2.5 items-center whitespace-nowrap border px-3 font-mono text-sm ' + clases}
     >
       {children}
     </button>

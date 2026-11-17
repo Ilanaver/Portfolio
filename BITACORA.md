@@ -5,6 +5,27 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Sección de stack calculada desde los proyectos
+
+**Cambios**
+- Paso 14: `Stack` agrupa tecnologías y servicios por categoría (con "Otros" para las que no tienen) y
+  muestra cuántos proyectos usan cada una; cada etiqueta lleva a `?tag=<clave>#proyectos` (lista filtrada).
+- Chips de filtro más bajos en escritorio (36 px); en celular siguen en 44 px.
+
+---
+
+## 17/11/2026 — Sección "Problemas que resolví" desde los hitos de arreglo
+
+**Cambios**
+- Paso 13: `ProblemasResueltos` junta los hitos `arreglo` de todos los proyectos (más nuevos arriba), con el
+  proyecto y link a su página. Si el texto tiene la forma "problema → causa → arreglo", se muestra en tres
+  renglones rotulados (Problema / Causa / Arreglo, con mayúscula inicial); si no, tal cual. En `/en/` usa los
+  Milestones `[fix]` o, si faltan, los Hitos marcados "ES". Si no hay arreglos, la sección y su link en la
+  navegación no aparecen.
+- Verificado en `/en/`: 6 arreglos de los 3 proyectos, en orden de fecha.
+
+---
+
 ## 17/11/2026 — Página propia de cada proyecto con línea de tiempo
 
 **Cambios**

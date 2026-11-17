@@ -113,7 +113,10 @@
   },
   "problemas": {
     "intro": "Real problems that came up in my projects: what happened, why, and how I fixed it.",
-    "en_proyecto": "in {nombre}"
+    "en_proyecto": "in {nombre}",
+    "problema": "Problem",
+    "causa": "Cause",
+    "arreglo": "Fix"
   },
   "stack": {
     "intro": "What I've used in my projects, with the number of projects each tool appears in.",

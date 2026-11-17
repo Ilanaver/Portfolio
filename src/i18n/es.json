@@ -113,7 +113,10 @@
   },
   "problemas": {
     "intro": "Problemas reales que aparecieron en mis proyectos: qué pasó, por qué y cómo lo arreglé.",
-    "en_proyecto": "en {nombre}"
+    "en_proyecto": "en {nombre}",
+    "problema": "Problema",
+    "causa": "Causa",
+    "arreglo": "Arreglo"
   },
   "stack": {
     "intro": "Lo que usé en mis proyectos, con la cantidad de proyectos en que aparece cada herramienta.",
