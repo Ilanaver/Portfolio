@@ -5,6 +5,25 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Esquema de salida y validador de datos
+
+**Cambios**
+- Paso 4: `config/esquema_salida.json` (JSON Schema 2020-12, `additionalProperties: false` en todo): textos
+  `{es, en}`, clave opaca, `origen`, `ultima_actividad` mensual, `slugs_anteriores`, imagen opcional
+  (`manual`/`auto`, archivos por idioma), hitos `hito`/`arreglo`, bitácora solo fecha + título, `cv_pdf`.
+  Reglas extra: `terminado` exige `fecha_fin`, `activo` la prohíbe, un repo privado no puede tener
+  `links.repo`, un proyecto extra no tiene repo ni bitácora.
+- `scripts/validar_datos.py`: esquema + paridad de claves `es.json`/`en.json` + slugs únicos entre actuales y
+  anteriores + claves opacas únicas. `requirements.txt` con `jsonschema==4.26.0`.
+- Prueba: 10 casos inválidos armados en memoria (link de repo en privado, `terminado` sin fin, campo extra,
+  slug anterior que choca, `http://`, cuerpo de bitácora, etc.): los 10 se detectan.
+
+**Pendiente**
+- La clave de repos públicos (`pub-` + 8 hex) no está definida en el plan; el esquema la acepta y se confirma
+  en la Fase 2.
+
+---
+
 ## 17/11/2026 — Textos de interfaz en archivos de traducción ES/EN
 
 **Cambios**

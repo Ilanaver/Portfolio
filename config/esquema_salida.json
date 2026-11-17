@@ -1,0 +1,286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://portfolio.local/esquema_salida.json",
+  "title": "Salida del portfolio: src/datos/proyectos.json y src/datos/perfil.json (lista blanca)",
+  "$defs": {
+    "texto_corto": { "type": "string", "minLength": 1 },
+    "texto_es_en": {
+      "description": "Texto traducible. 'en' null = se muestra el español con la marca 'solo en español'.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["es", "en"],
+      "properties": {
+        "es": { "$ref": "#/$defs/texto_corto" },
+        "en": { "oneOf": [{ "$ref": "#/$defs/texto_corto" }, { "type": "null" }] }
+      }
+    },
+    "texto_es_en_completo": {
+      "description": "Texto con las dos versiones siempre presentes (ej. nombre, que sin traducción repite el español).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["es", "en"],
+      "properties": {
+        "es": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "en": { "type": "string", "minLength": 1, "maxLength": 60 }
+      }
+    },
+    "descripcion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["es", "en"],
+      "properties": {
+        "es": { "type": "string", "minLength": 1, "maxLength": 160 },
+        "en": { "oneOf": [{ "type": "string", "minLength": 1, "maxLength": 160 }, { "type": "null" }] }
+      }
+    },
+    "fecha": {
+      "description": "AAAA-MM-DD o AAAA-MM",
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01]))?$"
+    },
+    "dia": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"
+    },
+    "mes": {
+      "description": "Nivel mes (AAAA-MM): evita un deploy diario por pushes sin cambio visible.",
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$"
+    },
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$", "minLength": 1, "maxLength": 60 },
+    "url_https": { "type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 300 },
+    "url_https_o_null": { "oneOf": [{ "$ref": "#/$defs/url_https" }, { "type": "null" }] },
+    "categoria": {
+      "enum": ["lenguaje", "frontend", "backend", "datos", "infra", "automatizacion", "mensajeria", "ia", null]
+    },
+    "etiqueta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nombre", "categoria"],
+      "properties": {
+        "nombre": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "categoria": { "$ref": "#/$defs/categoria" }
+      }
+    },
+    "hito": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fecha", "texto", "tipo"],
+      "properties": {
+        "fecha": { "$ref": "#/$defs/dia" },
+        "texto": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "tipo": { "enum": ["hito", "arreglo"] }
+      }
+    },
+    "lista_hitos": { "type": "array", "items": { "$ref": "#/$defs/hito" }, "maxItems": 60 },
+    "entrada_bitacora": {
+      "description": "De la bitácora se publica SOLO fecha + título; nunca el cuerpo.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fecha", "titulo"],
+      "properties": {
+        "fecha": { "$ref": "#/$defs/dia" },
+        "titulo": { "type": "string", "minLength": 1, "maxLength": 100 }
+      }
+    },
+    "archivos_imagen": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["1200", "600"],
+      "properties": {
+        "1200": { "type": "string", "pattern": "^/proyectos/[a-z0-9-]+-1200\\.webp$" },
+        "600": { "type": "string", "pattern": "^/proyectos/[a-z0-9-]+-600\\.webp$" }
+      }
+    },
+    "imagen": {
+      "description": "Captura manual o automática. Si hay una sola imagen, 'es' y 'en' apuntan a los mismos archivos.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origen", "alt", "ancho", "alto", "archivos"],
+      "properties": {
+        "origen": { "enum": ["manual", "auto"] },
+        "alt": {
+          "description": "Solo capturas manuales; las automáticas arman el alt desde i18n.",
+          "oneOf": [{ "$ref": "#/$defs/texto_es_en" }, { "type": "null" }]
+        },
+        "ancho": { "type": "integer", "minimum": 1 },
+        "alto": { "type": "integer", "minimum": 1 },
+        "archivos": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["es", "en"],
+          "properties": {
+            "es": { "$ref": "#/$defs/archivos_imagen" },
+            "en": { "$ref": "#/$defs/archivos_imagen" }
+          }
+        }
+      }
+    },
+    "link_otro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["texto", "url"],
+      "properties": {
+        "texto": { "$ref": "#/$defs/texto_es_en" },
+        "url": { "$ref": "#/$defs/url_https" }
+      }
+    },
+    "proyecto": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clave", "origen", "es_privado", "slug", "slugs_anteriores", "nombre", "descripcion", "estado",
+        "fecha_inicio", "fecha_fin", "ultima_actividad", "destacado", "tecnologias", "servicios", "links",
+        "imagen", "idea_original", "resultado", "hitos", "bitacora"
+      ],
+      "properties": {
+        "clave": {
+          "description": "Clave opaca: priv-/pub- + 8 hex de sha256(id de nodo de GitHub), o extra-<slug>.",
+          "type": "string",
+          "pattern": "^((priv|pub)-[0-9a-f]{8}|extra-[a-z0-9-]+)$"
+        },
+        "origen": { "enum": ["repo", "extra"] },
+        "es_privado": { "type": "boolean" },
+        "slug": { "$ref": "#/$defs/slug" },
+        "slugs_anteriores": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/slug" },
+          "uniqueItems": true,
+          "maxItems": 10
+        },
+        "nombre": { "$ref": "#/$defs/texto_es_en_completo" },
+        "descripcion": { "$ref": "#/$defs/descripcion" },
+        "estado": { "enum": ["activo", "terminado", "pausado"] },
+        "fecha_inicio": { "$ref": "#/$defs/fecha" },
+        "fecha_fin": { "oneOf": [{ "$ref": "#/$defs/fecha" }, { "type": "null" }] },
+        "ultima_actividad": { "$ref": "#/$defs/mes" },
+        "destacado": { "type": "boolean" },
+        "tecnologias": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/etiqueta" },
+          "minItems": 1,
+          "maxItems": 15
+        },
+        "servicios": { "type": "array", "items": { "$ref": "#/$defs/etiqueta" }, "maxItems": 15 },
+        "links": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["demo", "repo", "otros"],
+          "properties": {
+            "demo": { "$ref": "#/$defs/url_https_o_null" },
+            "repo": { "$ref": "#/$defs/url_https_o_null" },
+            "otros": { "type": "array", "items": { "$ref": "#/$defs/link_otro" }, "maxItems": 3 }
+          }
+        },
+        "imagen": { "oneOf": [{ "$ref": "#/$defs/imagen" }, { "type": "null" }] },
+        "idea_original": { "$ref": "#/$defs/texto_es_en" },
+        "resultado": { "$ref": "#/$defs/texto_es_en" },
+        "hitos": {
+          "description": "es = ## Hitos; en = ## Milestones (null → fallback al español con marca).",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["es", "en"],
+          "properties": {
+            "es": { "$ref": "#/$defs/lista_hitos" },
+            "en": { "oneOf": [{ "$ref": "#/$defs/lista_hitos" }, { "type": "null" }] }
+          }
+        },
+        "bitacora": {
+          "description": "Solo con mostrar_bitacora: true; solo fecha + título; solo se muestra en /es/.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/entrada_bitacora" },
+          "maxItems": 30
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "estado": { "const": "terminado" } } },
+          "then": { "properties": { "fecha_fin": { "$ref": "#/$defs/fecha" } } }
+        },
+        {
+          "if": { "properties": { "estado": { "const": "activo" } } },
+          "then": { "properties": { "fecha_fin": { "type": "null" } } }
+        },
+        {
+          "description": "Un repo privado nunca publica el link a su repo.",
+          "if": { "properties": { "es_privado": { "const": true } } },
+          "then": { "properties": { "links": { "properties": { "repo": { "type": "null" } } } } }
+        },
+        {
+          "description": "Un proyecto sin repo no tiene link a repo ni bitácora.",
+          "if": { "properties": { "origen": { "const": "extra" } } },
+          "then": {
+            "properties": {
+              "links": { "properties": { "repo": { "type": "null" } } },
+              "bitacora": { "maxItems": 0 }
+            }
+          }
+        }
+      ]
+    },
+    "archivo_proyectos": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "proyectos"],
+      "properties": {
+        "version": { "const": 1 },
+        "proyectos": { "type": "array", "items": { "$ref": "#/$defs/proyecto" } }
+      }
+    },
+    "estudio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["titulo", "institucion", "inicio", "fin", "detalle"],
+      "properties": {
+        "titulo": { "$ref": "#/$defs/texto_es_en" },
+        "institucion": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "inicio": { "$ref": "#/$defs/fecha" },
+        "fin": { "oneOf": [{ "$ref": "#/$defs/fecha" }, { "type": "null" }] },
+        "detalle": { "oneOf": [{ "$ref": "#/$defs/texto_es_en" }, { "type": "null" }] }
+      }
+    },
+    "archivo_perfil": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "nombre", "titular", "sobre_mi", "estudios", "contacto", "cv_pdf"],
+      "properties": {
+        "version": { "const": 1 },
+        "nombre": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "titular": { "$ref": "#/$defs/texto_es_en" },
+        "sobre_mi": {
+          "description": "Párrafos.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/texto_es_en" },
+          "minItems": 1,
+          "maxItems": 5
+        },
+        "estudios": { "type": "array", "items": { "$ref": "#/$defs/estudio" }, "minItems": 1 },
+        "contacto": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["email", "github", "linkedin"],
+          "properties": {
+            "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$" },
+            "github": { "$ref": "#/$defs/url_https" },
+            "linkedin": { "$ref": "#/$defs/url_https_o_null" }
+          }
+        },
+        "cv_pdf": {
+          "description": "null en la Fase 1 (el botón imprime); desde la Fase 2 lo completa generar_cv.py.",
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["es", "en"],
+              "properties": {
+                "es": { "const": "/cv/cv-es.pdf" },
+                "en": { "const": "/cv/cv-en.pdf" }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
