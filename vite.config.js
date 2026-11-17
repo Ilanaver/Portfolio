@@ -20,6 +20,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), metaIdioma()],
   // URL pública del sitio (se muestra en el CV impreso).
   define: { __SITIO_URL__: JSON.stringify(urlSitio()) },
+  // Vista previa de dist/ por túnel HTTPS temporal (pruebas desde el celular en redes con aislamiento).
+  preview: { allowedHosts: ['.trycloudflare.com'] },
   build: {
     rollupOptions: { input: entradas },
   },

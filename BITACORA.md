@@ -5,6 +5,28 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Túnel HTTPS temporal para probar el sitio desde el celular
+
+**Problema**
+- Desde el Android no abría `http://10.201.1.189:5174/es/`.
+
+**Causa**
+- No era el servidor ni el firewall: Vite escuchaba en `::` (IPv4 e IPv6), respondía 200 por la IP de LAN
+  desde la PC, y el Firewall de Windows permite Node.js en red Pública sin reglas de bloqueo. La red es el
+  Wi-Fi de la facultad, que casi seguro aísla a los clientes entre sí (AP isolation).
+
+**Arreglo**
+- Túnel temporal de Cloudflare (`npx cloudflared tunnel --url …`, sin cuenta) hacia `vite preview` de `dist/`
+  en `127.0.0.1:4174`, **no** hacia el servidor de desarrollo: ese sirve cualquier archivo del proyecto
+  (`/PLAN.md`, `/BITACORA.md`, `.revision/` daban 200) y el túnel lo habría hecho público. Por el túnel,
+  `/es/` y `/en/p/rivot/` dan 200; `/PLAN.md`, `/BITACORA.md`, `.revision/…` y `src/datos/…` dan 404.
+- `vite.config.js`: `preview.allowedHosts: ['.trycloudflare.com']` para que la vista previa acepte ese host.
+
+**Pendiente**
+- El túnel muestra el último `npm run build`, no los cambios en vivo. Se apaga cuando termine la prueba.
+
+---
+
 ## 17/11/2026 — Servidor de desarrollo accesible desde la red local para probar en celular
 
 **Cambios**
