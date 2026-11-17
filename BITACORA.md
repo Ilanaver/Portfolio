@@ -5,6 +5,26 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Página propia de cada proyecto con línea de tiempo
+
+**Cambios**
+- Paso 12: vista `PaginaProyecto` (volver con el historial si se llegó desde el sitio, captura o placeholder
+  grande, ficha técnica, idea original vs. resultado lado a lado en escritorio, línea de tiempo) y
+  `LineaDeTiempo` (en `/es/` hitos + bitácora juntos con ancla `#bitacora`; en `/en/` Milestones o Hitos
+  marcados, y el enlace "+ N development log entries (in Spanish)").
+- `scripts/paginas_proyecto.mjs` (post-build): `dist/<idioma>/p/<slug>/index.html` con `data-vista`,
+  `data-slug`, meta propio (title, descripción, OG con su captura o la imagen por defecto, hreflang,
+  canonical) y contenido básico pre-renderizado; páginas de redirección para `slugs_anteriores` (meta refresh +
+  canonical + noindex + `location.replace` que conserva `?query` y `#ancla` + link visible).
+- En desarrollo, el plugin arma `/<idioma>/p/<slug>/` al vuelo con un middleware.
+- `main.jsx`/`App.jsx` eligen la vista según `data-vista`.
+- Verificado: el build genera 6 páginas; `/en/p/rivot/` muestra la idea original en español con la marca "ES".
+
+**Pendiente**
+- Probar una redirección de slug anterior y la bitácora en la línea de tiempo con datos de prueba (paso 18).
+
+---
+
 ## 17/11/2026 — Filtros por estado y etiqueta guardados en la URL
 
 **Cambios**
