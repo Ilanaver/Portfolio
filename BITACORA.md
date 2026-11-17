@@ -5,6 +5,19 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Proyecto Vite + React + Tailwind con entradas por idioma
+
+**Cambios**
+- Paso 2: Vite 8.3.8, React 19.3.1, Tailwind 4.3.5 (`@tailwindcss/vite`), versiones fijas. Entradas `/`,
+  `/es/`, `/en/` y `404.html` (con `appType: 'mpa'`); `npm run build` = `vite build` + `paginas_proyecto.mjs`
+  (por ahora vacío). `.gitattributes` con `eol=lf` para que Windows no convierta los finales de línea.
+- `/` elige idioma con un script en línea (elección guardada → idioma del navegador) y, sin JS, va a `/es/`.
+
+**Pendiente**
+- Plugin `meta-idioma` y textos del 404 desde i18n (pasos 3 y 9).
+
+---
+
 ## 17/11/2026 — Capturas automáticas desactivadas por defecto en repos privados
 
 **Cambios**

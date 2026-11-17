@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es" data-idioma="es" data-vista="raiz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!--meta-idioma-->
+    <script>
+      // Elige idioma: la elección guardada; si no hay, el idioma del navegador.
+      (function () {
+        var idioma = null
+        try {
+          idioma = window.localStorage.getItem('idioma')
+        } catch (error) {
+          idioma = null
+        }
+        if (idioma !== 'es' && idioma !== 'en') {
+          var preferido = (navigator.languages && navigator.languages[0]) || navigator.language || ''
+          idioma = preferido.toLowerCase().indexOf('es') === 0 ? 'es' : 'en'
+        }
+        window.location.replace('/' + idioma + '/' + window.location.search + window.location.hash)
+      })()
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=/es/" /></noscript>
+  </head>
+  <body>
+    <noscript>
+      <p><a href="/es/">{{es:raiz.ir_es}}</a> · <a href="/en/" lang="en">{{en:raiz.ir_en}}</a></p>
+    </noscript>
+  </body>
+</html>
