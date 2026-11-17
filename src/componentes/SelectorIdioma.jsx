@@ -29,11 +29,11 @@ export default function SelectorIdioma() {
             hrefLang={opcion}
             lang={opcion}
             aria-current={actual ? 'page' : undefined}
-            aria-label={t('idioma.' + opcion + '_nombre')}
             onClick={(evento) => cambiar(evento, opcion)}
             className={'flex min-h-tactil min-w-tactil items-center justify-center px-3 no-underline ' + clases}
           >
             {t('idioma.' + opcion + '_corto')}
+            <span className="sr-only"> ({t('idioma.' + opcion + '_nombre')})</span>
           </a>
         )
       })}

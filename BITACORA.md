@@ -5,6 +5,37 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Caché por carpeta en Vercel y build completo verificado
+
+**Cambios**
+- Paso 18: `vercel.json` con framework Vite, `npm run build`, salida `dist`, `trailingSlash: true` y caché por
+  carpeta: `/assets/` 1 año inmutable; `/proyectos/` 1 día + `stale-while-revalidate` de 7 días; `/cv/` sin
+  caché (revalida siempre).
+- Verificación del build servido desde `dist/` con un slug anterior de prueba (`slug-de-prueba`) y 2 entradas
+  de bitácora de prueba en Scanner DCA: `/es/p/slug-de-prueba/?tag=x#bitacora` → `/es/p/scanner-dca/?tag=x#bitacora`
+  y `/en/p/slug-de-prueba/?a=1#y` → `/en/p/scanner-dca/?a=1#y`; en `/es/` la línea de tiempo mezcla hitos y
+  bitácora con ancla `#bitacora`; en `/en/` aparece "+ 2 development log entries (in Spanish)" con link a
+  `/es/p/scanner-dca/#bitacora`; una ruta inexistente da 404 y `404.html` tiene los dos idiomas. Los datos de
+  prueba se sacaron y se volvió a generar `dist/` (0 redirecciones).
+- Lighthouse móvil (vista previa local): accesibilidad 100, SEO 100 y buenas prácticas 96 en `/es/`, `/en/` y
+  `/es/p/scanner-dca/`; performance 91 / 92 / 98.
+- Selector de idioma: el nombre accesible pasa a "ES (Español)" en vez de `aria-label="Español"`
+  (Lighthouse marcaba que no coincidía con el texto visible).
+
+**Problema**
+- Performance del inicio en 91–92, debajo del objetivo de 95 del plan (§5.8).
+
+**Causa**
+- El inicio se dibuja recién cuando carga el JS (~84 kB gzip con React): primer pintado en 2,2 s con la red
+  móvil simulada.
+
+**Pendiente**
+- Decisión de Ilán: pre-renderizar el inicio y las páginas de proyecto en el build (`react-dom/server`) para
+  que el HTML llegue armado. Es un desvío del plan (§5.1 pide solo contenido básico en las páginas de
+  proyecto), así que no se hizo sin su OK.
+
+---
+
 ## 17/11/2026 — Ajustes de celular y accesibilidad en inicio y páginas de proyecto
 
 **Cambios**
