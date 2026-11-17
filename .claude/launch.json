@@ -8,6 +8,12 @@
       "port": 5173
     },
     {
+      "name": "portfolio-dev-red",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--host", "--port", "5174", "--strictPort"],
+      "port": 5174
+    },
+    {
       "name": "portfolio-preview",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview", "--", "--port", "4173", "--strictPort"],

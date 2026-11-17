@@ -5,6 +5,18 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Servidor de desarrollo accesible desde la red local para probar en celular
+
+**Cambios**
+- Paso 19 (preparación): configuración `portfolio-dev-red` en `.claude/launch.json` (`vite --host`, puerto
+  5174) para abrir el sitio desde un Android en la misma red Wi-Fi. Material de revisión del checkpoint
+  (capturas, CV impreso, textos) en `.revision/`, fuera del repo.
+
+**Pendiente**
+- Que Ilán pruebe desde su Android y confirme (el paso 19 queda abierto hasta entonces).
+
+---
+
 ## 17/11/2026 — Caché por carpeta en Vercel y build completo verificado
 
 **Cambios**
