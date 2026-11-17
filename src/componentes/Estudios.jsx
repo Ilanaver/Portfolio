@@ -15,7 +15,7 @@ export default function Estudios({ perfil }) {
   const { idioma, t } = useIdioma()
   return (
     <Seccion clave="estudios">
-      <ul className="m-0 space-y-3 p-0">
+      <ul className="m-0 flex flex-col gap-3 p-0">
         {perfil.estudios.map((estudio, indice) => (
           <li key={indice} className="marco list-none p-4">
             <p className="m-0 text-lg font-medium">

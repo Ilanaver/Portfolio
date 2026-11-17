@@ -65,6 +65,9 @@
   --spacing-tactil: 2.75rem;
 }
 
+/* Estilos propios dentro de una capa: las utilidades de Tailwind siempre les ganan. */
+@layer components {
+
 /* ------------------------------------------------------------------
    Base
    ------------------------------------------------------------------ */
@@ -145,16 +148,23 @@ a {
   aspect-ratio: 16 / 10;
   container-type: inline-size;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 4cqi;
-  padding: 6cqi;
   background-color: color-mix(in oklab, var(--acento) 7%, var(--superficie));
   background-image:
     linear-gradient(color-mix(in oklab, var(--acento) 16%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in oklab, var(--acento) 16%, transparent) 1px, transparent 1px);
-  background-size: 6.25cqi 6.25cqi;
+  /* 16 × 10 celdas cuadradas */
+  background-size: 6.25% 10%;
+}
+
+/* Las unidades cqi se resuelven contra el contenedor ancestro: el relleno va en un hijo. */
+.placeholder__interior {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 3.5cqi;
+  padding: 6cqi;
 }
 
 .placeholder__estado {
@@ -287,4 +297,5 @@ a {
   max-width: 60rem;
   margin: 0 auto;
   padding: 2rem 1rem;
+}
 }

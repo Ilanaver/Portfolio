@@ -5,6 +5,35 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Tarjetas de proyecto con placeholder de ficha técnica
+
+**Cambios**
+- Paso 10: `TarjetaProyecto` (toda la tarjeta lleva a la página del proyecto; los links externos quedan por
+  encima), `FichaTecnica` con campos rotulados en mono, `PlaceholderCaptura` (16:10, grilla marcada, nombre
+  en Plex Mono que se achica según el largo, hasta 4 tecnologías + "+N", estado en la esquina,
+  `aria-hidden`), `Captura` lista para WebP 600/1200 con `width`/`height` fijos, `ImagenProyecto` (captura o
+  placeholder), `IndicadorEstado`, `Etiqueta`. Los destacados ocupan dos columnas en escritorio.
+- `src/lib/filtros.js`: claves de etiqueta, agrupado por categoría con conteo, filtros en la URL.
+
+**Problema**
+- Las clases propias de CSS les ganaban a las utilidades de Tailwind (ej. color de links).
+- En el placeholder, el nombre y los chips quedaban corridos y la grilla salía gigante.
+- Los párrafos de "Sobre mí" salían pegados.
+
+**Causa**
+- Los estilos sin capa tienen prioridad sobre `@layer utilities` de Tailwind v4.
+- Las unidades `cqi` de un elemento se resuelven contra su contenedor *ancestro*, no contra sí mismo.
+- `space-y-*` pierde contra `m-0` de los hijos.
+
+**Arreglo**
+- Estilos propios dentro de `@layer components`. Relleno del placeholder en un hijo `placeholder__interior`
+  y grilla con porcentajes (16 × 10). `flex flex-col gap-*` en vez de `space-y-*`.
+
+**Pendiente**
+- `Captura` se prueba con la primera captura real en la Fase 2 (según el plan).
+
+---
+
 ## 17/11/2026 — Meta por idioma, hreflang y cambio de idioma que conserva filtros y ancla
 
 **Cambios**
