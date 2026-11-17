@@ -5,6 +5,23 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Lectura y validación del archivo estándar PORTFOLIO.md
+
+**Cambios**
+- Paso 23: `scripts/portfolio/archivo_estandar.py`. Frontmatter YAML con un cargador que deja las fechas como
+  texto; validación contra `esquema_portfolio.json`; secciones `## Idea original`/`## Original idea`,
+  `## Resultado`/`## Outcome`, `## Hitos`/`## Milestones` (cualquier otra se ignora); hitos
+  `- AAAA-MM-DD — texto` con marca `[arreglo]`/`[fix]`, más nuevos primero; comentarios HTML fuera.
+- Defaults: `slug` desde el nombre del repo (minúsculas, lo que no sea `[a-z0-9]` → guion), `fecha_inicio` =
+  `createdAt`, `nombre_en` = `nombre`; repo privado → `links.repo` null y `captura_auto` false salvo valor
+  explícito.
+- Inglés faltante = advertencia por tipo (`falta_ingles:descripcion_en`, etc.), sin texto del repo. Errores con
+  tipo `no_valida` y detalle aparte (el detalle solo se muestra en local o en repos públicos).
+- Tests: válido completo, sin inglés, privado, los 7 inválidos del plan y 5 más (sin frontmatter, sin cierre,
+  fecha imposible, sin idea original, YAML roto). `pytest`: 34 OK.
+
+---
+
 ## 17/11/2026 — Esquema del archivo estándar PORTFOLIO.md y de proyectos sin repo
 
 **Cambios**
