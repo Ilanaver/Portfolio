@@ -5,6 +5,23 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Ficha bilingüe del propio portfolio
+
+**Cambios**
+- Paso 40: `PORTFOLIO.md` en la raíz: `visible: true`, `mostrar_bitacora: true` (publica fecha + título de las
+  10 entradas más nuevas de esta bitácora, solo en `/es/`), slug `portfolio`, `links.demo` = el propio sitio
+  (repo público → captura automática; el inicio redirige por idioma, así que salen dos capturas, ES y EN),
+  descripción, idea original, resultado y dos hitos (uno de tipo arreglo) en los dos idiomas.
+- Valida sin advertencias y el proyecto armado pasa el esquema de salida. Títulos de bitácora revisados: ninguno
+  tiene nombres de terceros, montos, URLs ni secretos.
+- `actualizar-datos.yml`: también corre con push a `PORTFOLIO.md` y `BITACORA.md`.
+
+**Pendiente**
+- Textos de la ficha (descripción, idea, resultado, hitos) para que Ilán los apruebe en el checkpoint 2. Se
+  publica recién cuando el Action lea este archivo de la rama `main` en GitHub (después del push).
+
+---
+
 ## 17/11/2026 — Workflow de actualización automática con commit solo si cambió algo
 
 **Cambios**

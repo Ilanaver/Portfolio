@@ -24,6 +24,8 @@ on:
       - 'config/**'
       - 'scripts/**'
       - 'plantillas/**'
+      - 'PORTFOLIO.md' # la ficha del propio portfolio
+      - 'BITACORA.md' # sus títulos se publican (mostrar_bitacora: true)
   repository_dispatch:
     types: [proyecto-actualizado]
 
