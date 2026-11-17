@@ -5,6 +5,19 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Auditoría local de repos, claves opacas y aprobación de capturas
+
+**Cambios**
+- Paso 37: `scripts/auditar_repos.py` (solo local, usa `gh`; avisa en la salida que nombra privados). Tabla clave
+  opaca → repo con visibilidad, si tiene `PORTFOLIO.md`, si valida (con el detalle), si es visible, inglés
+  faltante, slug, `captura_auto`, bitácora y estado de la captura manual (pública, aprobada, SIN APROBAR o
+  CAMBIÓ con los dos hashes). Proyectos extra con validación y aviso de desactualizado.
+- `--hash-imagen <repo>`: descarga la captura a una carpeta temporal, muestra tipo real y tamaño y da el hash de
+  12 caracteres para `imagen.aprobada`, con el recordatorio de revisarla antes.
+- Corrida real: 37 repos, ninguno con `PORTFOLIO.md` todavía. Tests con `gh` simulado. `pytest`: 129 OK.
+
+---
+
 ## 17/11/2026 — Chequeo semanal de links caídos
 
 **Cambios**
