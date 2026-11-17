@@ -5,6 +5,29 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Capturas automáticas con Playwright y comparación de píxeles calibrada
+
+**Cambios**
+- Paso 30: `config/capturas.yml` (ventana 1280×800, escala 1, red quieta + 2 s, tope 30 s, `es-AR`/`en-US`,
+  comparación a 320 px en grises, diferencia > 24 niveles en más del 1,5 %, hora de la corrida diaria) y
+  `scripts/portfolio/capturas_auto.py`: dos capturas por proyecto (locale + `Accept-Language`, tema claro,
+  animaciones desactivadas); HTTP ≥ 400, redirección a otro dominio (se ignora `www.`), tope o error del
+  navegador → `ErrorCaptura` por motivo, sin la URL; una sola imagen si ES y EN no se ven distintas; solo se
+  reescribe la variante que cambió de forma visible contra el WebP publicado; mismo WebP sin metadatos.
+- Tests contra páginas locales servidas por un servidor HTTP del test: fija → sin cambio (y sin escribir), cambio
+  chico invisible → sin cambio, cambio visible → reemplazo, bilingüe → dos imágenes, HTTP 500 y redirección
+  afuera → error sin archivos, sitio caído → error por tipo. Chromium de Playwright instalado en local.
+- Calibración con 3 páginas reales públicas (inicio del portfolio, una página de proyecto y la demo pública de
+  Proyecto_BD): ruido entre dos capturas iguales 0,000 %; captura nueva contra el WebP publicado 0,000 %;
+  inicio del portfolio ES vs EN 6,9 % (→ dos imágenes); página de proyecto en un solo idioma 0,000 %; en las
+  páginas locales, cambio de un dígito 0,002 % y rediseño 99 %. Los umbrales del plan quedan como están.
+- `pytest`: 83 OK.
+
+**Pendiente**
+- Si una demo con contenido en vivo (precios, relojes) supera el 1,5 % cada día, se ajusta en `capturas.yml`.
+
+---
+
 ## 17/11/2026 — Capturas manuales: aprobación por hash, sin metadatos y en WebP
 
 **Cambios**

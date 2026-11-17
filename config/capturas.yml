@@ -1,0 +1,27 @@
+# Capturas automáticas (§2.4). Se ajustan acá, sin tocar el código.
+
+# Ventana del navegador (px) y escala.
+ventana:
+  ancho: 1280
+  alto: 800
+escala: 1
+
+# Espera: red quieta + este extra; tope total por página.
+espera_extra_ms: 2000
+tope_ms: 30000
+
+# Idioma del navegador para cada versión (locale + Accept-Language).
+idiomas:
+  es: es-AR
+  en: en-US
+
+# Comparación "¿cambió de forma visible?": las dos imágenes se reducen a `ancho` px en escala de grises y se
+# cuentan los píxeles con diferencia > `umbral_nivel` (de 255). Si son más del `porcentaje_cambio` %, cambió.
+# La misma regla decide si ES y EN son iguales (una sola imagen) o distintas (dos).
+comparacion:
+  ancho: 320
+  umbral_nivel: 24
+  porcentaje_cambio: 1.5
+
+# Hora UTC de la corrida diaria que saca las capturas (cron '23 */6 * * *' → 03, 09, 15, 21).
+hora_utc_diaria: 9
