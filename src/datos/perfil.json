@@ -1,0 +1,39 @@
+{
+  "contacto": {
+    "email": "ilan@averbuch.com.ar",
+    "github": "https://github.com/Ilanaver",
+    "linkedin": null
+  },
+  "cv_pdf": null,
+  "estudios": [
+    {
+      "detalle": {
+        "en": "1st year, in progress",
+        "es": "1er año, en curso"
+      },
+      "fin": null,
+      "inicio": "2026-03",
+      "institucion": "UCEMA",
+      "titulo": {
+        "en": "AI Engineering",
+        "es": "Ingeniería en Inteligencia Artificial"
+      }
+    }
+  ],
+  "nombre": "Ilán Averbuch",
+  "sobre_mi": [
+    {
+      "en": "I study AI Engineering at UCEMA. I like building tools that solve concrete problems and run on their own: market scanners, alert bots and automations.",
+      "es": "Estudio Ingeniería en Inteligencia Artificial en la UCEMA. Me gusta construir herramientas que resuelven problemas concretos y que corren solas: scanners de mercado, bots de avisos y automatizaciones."
+    },
+    {
+      "en": "I work with Python, React and cloud services such as GitHub Actions, Cloudflare, Vercel and Supabase. Every project keeps a development log of what broke, why and how I fixed it, which is why this site has a section on problems I solved.",
+      "es": "Trabajo con Python, React y servicios en la nube como GitHub Actions, Cloudflare, Vercel y Supabase. Cada proyecto tiene su bitácora: anoto qué falló, por qué y cómo lo arreglé. Por eso este sitio tiene una sección de problemas resueltos."
+    }
+  ],
+  "titular": {
+    "en": "AI Engineering student · Automations, bots and data tools",
+    "es": "Estudiante de Ingeniería en IA · Automatizaciones, bots y herramientas de datos"
+  },
+  "version": 1
+}

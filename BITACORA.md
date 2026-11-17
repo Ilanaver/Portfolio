@@ -5,6 +5,23 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Datos iniciales: tres proyectos y perfil en ES/EN
+
+**Cambios**
+- Paso 5: `src/datos/proyectos.json` a mano con Scanner DCA, Rivot e ibit. Textos ES/EN redactados desde sus
+  README y el historial de commits; hitos con arreglos (2 por proyecto); sin imagen (placeholder);
+  `slugs_anteriores: []`; claves opacas calculadas local con `gh` (sha256 del id de nodo). Rivot queda a
+  propósito sin `Original idea` en inglés para ver el fallback.
+- Paso 6: `src/datos/perfil.json` (titular, sobre mí en dos párrafos, estudios, contacto, `cv_pdf: null`).
+- `validar_datos.py`: OK.
+
+**Pendiente**
+- Para revisar en el checkpoint: todos los textos; las causas de dos arreglos inferidas de los commits (Rivot
+  14/10 e ibit 02/08); la fecha de inicio en la UCEMA (puse 2026-03); ibit y Rivot como `activo`; nombre en
+  inglés "DCA Scanner".
+
+---
+
 ## 17/11/2026 — Esquema de salida y validador de datos
 
 **Cambios**
