@@ -5,6 +5,19 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Primer push del portfolio a GitHub
+
+**Cambios**
+- Paso 20 (parte de Claude): remote `origin` y primer push de `main` al repo público (raíz..`ae8dc98`,
+  21 commits). Antes del push: `validar_datos.py` OK y `npm run build` OK (2 inicios y 6 páginas de proyecto
+  pre-renderizados).
+
+**Pendiente**
+- Ilán: conectar Vercel y activar Web Analytics (paso 20). Después, checkpoint de la Fase 1 con el link.
+- Esta entrada sube en el próximo push.
+
+---
+
 ## 17/11/2026 — Repo preparado para publicarse: plan solo local y autor sin mail personal
 
 **Problema**
