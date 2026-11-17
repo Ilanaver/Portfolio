@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://portfolio.local/esquema_portfolio.json",
+  "title": "Frontmatter de PORTFOLIO.md (versión 1) y de los proyectos sin repo (config/proyectos_extra/*.md)",
+  "description": "Las reglas que dependen del contexto (privado/público, slug actual dentro de slugs_anteriores, imagen.aprobada obligatoria en privados) las aplica archivo_estandar.py.",
+  "$defs": {
+    "texto_1_60": { "type": "string", "minLength": 1, "maxLength": 60 },
+    "texto_1_160": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "texto_1_150": { "type": "string", "minLength": 1, "maxLength": 150 },
+    "fecha": {
+      "description": "AAAA-MM-DD o AAAA-MM",
+      "type": "string",
+      "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12][0-9]|3[01]))?$"
+    },
+    "mes": { "type": "string", "pattern": "^[0-9]{4}-(0[1-9]|1[0-2])$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9-]+$", "minLength": 1, "maxLength": 60 },
+    "slugs_anteriores": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/slug" },
+      "uniqueItems": true,
+      "maxItems": 10
+    },
+    "url_https": { "type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 300 },
+    "nombre_etiqueta": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "ruta_relativa_imagen": {
+      "description": "Ruta relativa dentro del repo, sin '/' inicial ni '..'. PNG, JPG o WebP.",
+      "type": "string",
+      "maxLength": 200,
+      "pattern": "^(?!/)(?!.*\\.\\.)[A-Za-z0-9._/ -]+\\.(png|jpg|jpeg|webp|PNG|JPG|JPEG|WEBP)$"
+    },
+    "ruta_relativa_md": {
+      "type": "string",
+      "maxLength": 200,
+      "pattern": "^(?!/)(?!.*\\.\\.)[A-Za-z0-9._/ -]+\\.md$"
+    },
+    "link_otro": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["texto", "url"],
+      "properties": {
+        "texto": { "$ref": "#/$defs/texto_1_60" },
+        "texto_en": { "$ref": "#/$defs/texto_1_60" },
+        "url": { "$ref": "#/$defs/url_https" }
+      }
+    },
+    "imagen": {
+      "description": "Solo capturas manuales. 'aprobada' = primeros 12 caracteres del SHA-256 del archivo revisado por Ilán.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["archivo", "alt"],
+      "properties": {
+        "archivo": { "$ref": "#/$defs/ruta_relativa_imagen" },
+        "alt": { "$ref": "#/$defs/texto_1_150" },
+        "alt_en": { "$ref": "#/$defs/texto_1_150" },
+        "aprobada": { "oneOf": [{ "type": "string", "pattern": "^[0-9a-f]{12}$" }, { "type": "null" }] }
+      }
+    },
+    "bitacora": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "archivo": { "$ref": "#/$defs/ruta_relativa_md" },
+        "max_entradas": { "type": "integer", "minimum": 1, "maximum": 30 }
+      }
+    },
+    "campos_comunes": {
+      "description": "Campos con el mismo tipo en repos y proyectos sin repo.",
+      "version": { "const": 1 },
+      "visible": { "type": "boolean" },
+      "nombre": { "$ref": "#/$defs/texto_1_60" },
+      "nombre_en": { "$ref": "#/$defs/texto_1_60" },
+      "slug": { "$ref": "#/$defs/slug" },
+      "slugs_anteriores": { "$ref": "#/$defs/slugs_anteriores" },
+      "descripcion": { "$ref": "#/$defs/texto_1_160" },
+      "descripcion_en": { "$ref": "#/$defs/texto_1_160" },
+      "estado": { "enum": ["activo", "terminado", "pausado"] },
+      "fecha_inicio": { "$ref": "#/$defs/fecha" },
+      "fecha_fin": { "oneOf": [{ "$ref": "#/$defs/fecha" }, { "type": "null" }] },
+      "destacado": { "type": "boolean" },
+      "tecnologias": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/nombre_etiqueta" },
+        "minItems": 1,
+        "maxItems": 15
+      },
+      "servicios": { "type": "array", "items": { "$ref": "#/$defs/nombre_etiqueta" }, "maxItems": 15 },
+      "captura_auto": { "type": "boolean" }
+    },
+    "reglas_de_estado": {
+      "allOf": [
+        {
+          "description": "terminado exige fecha_fin.",
+          "if": { "properties": { "estado": { "const": "terminado" } }, "required": ["estado"] },
+          "then": { "required": ["fecha_fin"], "properties": { "fecha_fin": { "$ref": "#/$defs/fecha" } } }
+        },
+        {
+          "description": "activo prohíbe fecha_fin (puede faltar o ser null).",
+          "if": { "properties": { "estado": { "const": "activo" } }, "required": ["estado"] },
+          "then": { "properties": { "fecha_fin": { "type": "null" } } }
+        }
+      ]
+    },
+    "portfolio_repo": {
+      "description": "PORTFOLIO.md en la raíz de un repo.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "visible", "mostrar_bitacora", "nombre", "descripcion", "estado", "tecnologias"],
+      "properties": {
+        "version": { "$ref": "#/$defs/campos_comunes/version" },
+        "visible": { "$ref": "#/$defs/campos_comunes/visible" },
+        "mostrar_bitacora": { "type": "boolean" },
+        "nombre": { "$ref": "#/$defs/campos_comunes/nombre" },
+        "nombre_en": { "$ref": "#/$defs/campos_comunes/nombre_en" },
+        "slug": { "$ref": "#/$defs/campos_comunes/slug" },
+        "slugs_anteriores": { "$ref": "#/$defs/campos_comunes/slugs_anteriores" },
+        "descripcion": { "$ref": "#/$defs/campos_comunes/descripcion" },
+        "descripcion_en": { "$ref": "#/$defs/campos_comunes/descripcion_en" },
+        "estado": { "$ref": "#/$defs/campos_comunes/estado" },
+        "fecha_inicio": { "$ref": "#/$defs/campos_comunes/fecha_inicio" },
+        "fecha_fin": { "$ref": "#/$defs/campos_comunes/fecha_fin" },
+        "destacado": { "$ref": "#/$defs/campos_comunes/destacado" },
+        "tecnologias": { "$ref": "#/$defs/campos_comunes/tecnologias" },
+        "servicios": { "$ref": "#/$defs/campos_comunes/servicios" },
+        "links": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "demo": { "oneOf": [{ "$ref": "#/$defs/url_https" }, { "type": "null" }] },
+            "repo": { "enum": ["auto", null] },
+            "otros": { "type": "array", "items": { "$ref": "#/$defs/link_otro" }, "maxItems": 3 }
+          }
+        },
+        "captura_auto": { "$ref": "#/$defs/campos_comunes/captura_auto" },
+        "imagen": { "oneOf": [{ "$ref": "#/$defs/imagen" }, { "type": "null" }] },
+        "bitacora": { "$ref": "#/$defs/bitacora" }
+      },
+      "allOf": [{ "$ref": "#/$defs/reglas_de_estado" }]
+    },
+    "proyecto_extra": {
+      "description": "Proyecto sin repo (§2.5): slug, fecha_inicio y ultima_actividad obligatorios; sin repo ni bitácora; imagen dentro de imagenes/.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version", "visible", "mostrar_bitacora", "nombre", "slug", "descripcion", "estado", "fecha_inicio",
+        "ultima_actividad", "tecnologias"
+      ],
+      "properties": {
+        "version": { "$ref": "#/$defs/campos_comunes/version" },
+        "visible": { "$ref": "#/$defs/campos_comunes/visible" },
+        "mostrar_bitacora": { "const": false },
+        "nombre": { "$ref": "#/$defs/campos_comunes/nombre" },
+        "nombre_en": { "$ref": "#/$defs/campos_comunes/nombre_en" },
+        "slug": { "$ref": "#/$defs/campos_comunes/slug" },
+        "slugs_anteriores": { "$ref": "#/$defs/campos_comunes/slugs_anteriores" },
+        "descripcion": { "$ref": "#/$defs/campos_comunes/descripcion" },
+        "descripcion_en": { "$ref": "#/$defs/campos_comunes/descripcion_en" },
+        "estado": { "$ref": "#/$defs/campos_comunes/estado" },
+        "fecha_inicio": { "$ref": "#/$defs/campos_comunes/fecha_inicio" },
+        "fecha_fin": { "$ref": "#/$defs/campos_comunes/fecha_fin" },
+        "ultima_actividad": { "$ref": "#/$defs/mes" },
+        "destacado": { "$ref": "#/$defs/campos_comunes/destacado" },
+        "tecnologias": { "$ref": "#/$defs/campos_comunes/tecnologias" },
+        "servicios": { "$ref": "#/$defs/campos_comunes/servicios" },
+        "links": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "demo": { "oneOf": [{ "$ref": "#/$defs/url_https" }, { "type": "null" }] },
+            "repo": { "type": "null" },
+            "otros": { "type": "array", "items": { "$ref": "#/$defs/link_otro" }, "maxItems": 3 }
+          }
+        },
+        "captura_auto": { "$ref": "#/$defs/campos_comunes/captura_auto" },
+        "imagen": {
+          "oneOf": [
+            {
+              "allOf": [
+                { "$ref": "#/$defs/imagen" },
+                { "properties": { "archivo": { "type": "string", "pattern": "^imagenes/" } } }
+              ]
+            },
+            { "type": "null" }
+          ]
+        }
+      },
+      "allOf": [{ "$ref": "#/$defs/reglas_de_estado" }]
+    }
+  }
+}

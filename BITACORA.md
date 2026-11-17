@@ -5,6 +5,21 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Esquema del archivo estándar PORTFOLIO.md y de proyectos sin repo
+
+**Cambios**
+- Paso 22: `config/esquema_portfolio.json` (JSON Schema 2020-12) con dos definiciones: `portfolio_repo` y
+  `proyecto_extra`. `additionalProperties: false` en todo (un campo mal escrito es error, no se ignora). Campos
+  `_en` opcionales, `captura_auto`, `imagen.*` opcional (`aprobada` = 12 hex), `slugs_anteriores`, `bitacora.*`;
+  `terminado` exige `fecha_fin` y `activo` la prohíbe; rutas relativas sin `/` inicial ni `..`.
+- Proyectos sin repo (§2.5): `slug`, `fecha_inicio` y `ultima_actividad` obligatorios, `links.repo` solo `null`,
+  `mostrar_bitacora` solo `false`, sin `bitacora` y con la imagen dentro de `imagenes/`.
+- Las reglas que dependen del contexto (privado/público, slug actual dentro de `slugs_anteriores`, `aprobada`
+  obligatoria en privados) quedan para `archivo_estandar.py`.
+- `test_esquema_portfolio.py`: 2 válidos y 17 inválidos. `pytest`: 20 OK.
+
+---
+
 ## 17/11/2026 — Arranque de la Fase 2: paquete de scripts y pytest
 
 **Cambios**
