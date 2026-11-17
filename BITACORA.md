@@ -5,6 +5,18 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Tokens de diseño de cuaderno de ingeniería, claro y oscuro
+
+**Cambios**
+- Paso 7: `src/index.css` con variables de color (papel, tinta, línea, un acento azul, estados) para claro y
+  oscuro según el sistema, expuestas a Tailwind con `@theme inline`; IBM Plex Sans (400/500/600) y Mono
+  (400/500) auto-hosteadas con Fontsource, solo el subconjunto latino; grilla de fondo de 24 px; clases del
+  placeholder 16:10 (tamaños con unidades de contenedor `cqi`), de la línea de tiempo (círculo = hito,
+  rombo = arreglo, guion = bitácora) y de la página 404.
+- Contraste del texto principal y del acento sobre el fondo ≥ 7:1 en los dos temas.
+
+---
+
 ## 17/11/2026 — Datos iniciales: tres proyectos y perfil en ES/EN
 
 **Cambios**
