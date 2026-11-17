@@ -5,6 +5,24 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Alertas por issue y por Telegram con el mismo texto
+
+**Cambios**
+- Paso 34: `scripts/portfolio/alertas.py`, `scripts/portfolio/telegram.py` y la entrada
+  `scripts/enviar_alertas.py` (paso final del workflow, `if: always()`).
+- Issues con etiqueta propia (se crea si falta), uno abierto por tipo: `alerta-actualizacion` (abre o comenta
+  "Volvió a fallar" con la corrida y el paso que falló; se cierra solo con "Resuelto en la corrida X"),
+  `alerta-datos` (lista ordenada de advertencias; se edita solo si cambia, comparando una huella oculta en el
+  cuerpo; se cierra cuando no hay advertencias), `alerta-token` (≤ 14 días; título con la fecha; pasos de
+  renovación; se cierra con una fecha > 14 días). La misma lógica de lista sirve para `alerta-links`.
+- Telegram solo cuando un issue se abre, cambia, vuelve a fallar o se resuelve. Si falta configurarlo o falla
+  el envío: `::warning::` sin token ni chat, y el job no falla. Todo título, cuerpo, comentario y mensaje pasa
+  por el filtro de redacción.
+- Tests con la API de issues y Telegram simuladas, incluido un repo privado registrado que no aparece en ningún
+  issue, comentario ni mensaje. `pytest`: 116 OK.
+
+---
+
 ## 17/11/2026 — Generador de datos de punta a punta y perfil desde YAML
 
 **Cambios**
