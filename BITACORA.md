@@ -5,6 +5,18 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Lectura de proyectos sin repo
+
+**Cambios**
+- Paso 31: `scripts/portfolio/proyectos_extra.py`. Lee `config/proyectos_extra/*.md` (la carpeta puede no
+  existir) con el mismo parser que `PORTFOLIO.md` y el esquema `proyecto_extra`; clave `extra-<slug>`; el nombre
+  del archivo tiene que coincidir con el slug (clave estable); la captura manual se lee solo de `imagenes/`
+  (se rechaza `..` que salga de la carpeta); `esta_desactualizado()` para el aviso de `auditar_repos.py`
+  (activo con `ultima_actividad` de hace más de 6 meses).
+- Fixtures: un proyecto extra inventado con imagen y uno con el nombre de archivo equivocado. `pytest`: 89 OK.
+
+---
+
 ## 17/11/2026 — Capturas automáticas con Playwright y comparación de píxeles calibrada
 
 **Cambios**
