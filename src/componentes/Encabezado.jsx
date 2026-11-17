@@ -78,7 +78,7 @@ export default function Encabezado({ perfil, esInicio, haySeccionProblemas }) {
             <h1 className="m-0 text-3xl font-semibold leading-tight sm:text-4xl">{perfil.nombre}</h1>
           ) : (
             <p className="m-0 text-2xl font-semibold leading-tight">
-              <a href={rutaInicio(idioma)} className="text-tinta no-underline hover:text-acento">
+              <a href={rutaInicio(idioma)} className="inline-flex min-h-tactil items-center text-tinta no-underline hover:text-acento">
                 {perfil.nombre}
               </a>
             </p>

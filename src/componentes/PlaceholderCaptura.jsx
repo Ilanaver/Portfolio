@@ -32,7 +32,7 @@ export default function PlaceholderCaptura({ nombre, tecnologias, estado, classN
         <IndicadorEstado estado={estado} />
       </span>
       <div className="placeholder__interior">
-        <p className="placeholder__nombre" style={{ fontSize: 'clamp(1.125rem, ' + tamanoNombre(nombre) + 'cqi, 4rem)' }}>
+        <p className="placeholder__nombre" style={{ fontSize: 'clamp(0.875rem, ' + tamanoNombre(nombre) + 'cqi, 4rem)' }}>
           {nombre}
         </p>
         <ul className="placeholder__chips">

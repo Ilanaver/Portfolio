@@ -5,6 +5,36 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Ajustes de celular y accesibilidad en inicio y páginas de proyecto
+
+**Cambios**
+- Paso 17: revisión a 360 y 412 px en `/es/`, `/en/` y tres páginas de proyecto en los dos idiomas: sin scroll
+  horizontal (`scrollWidth` = 360) y sin elementos que se salgan, salvo la barra de filtros, que scrollea a
+  propósito.
+- Táctiles: el nombre en el encabezado de las páginas de proyecto pasa a 44 px (medía 31). Los nombres de las
+  tarjetas miden menos, pero el área táctil es la tarjeta entera.
+- Placeholder con nombres largos: piso de letra 14 px (era 18); con 48 y 63 caracteres entra en 2 líneas sin
+  cortarse.
+- Accesibilidad: un `h1` por página y `h2`/`h3` en orden; foco visible de 2 px; `lang="es"` en todo texto que
+  cae al español en `/en/`; `aria-pressed` en filtros, `aria-current` en el idioma activo, `aria-live` en el
+  contador; placeholder y marcadores decorativos con `aria-hidden`; contraste ≥ 7:1 en texto principal.
+
+**Problema**
+- Las capturas de Edge headless a 360/412 px salían cortadas a la derecha y una salió en blanco.
+
+**Causa**
+- Edge headless no baja de ~500 px de ancho de ventana. La captura en blanco coincidió con el servidor de
+  desarrollo recargando por un cambio de datos.
+
+**Arreglo**
+- Capturas con la página dentro de un iframe del ancho pedido; las mediciones se hicieron en el navegador
+  integrado con el viewport emulado a 360 px.
+
+**Pendiente**
+- Prueba real desde el Android de Ilán (paso 19).
+
+---
+
 ## 17/11/2026 — Analítica de visitas sin cookies
 
 **Cambios**
