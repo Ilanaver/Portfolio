@@ -1,0 +1,38 @@
+# Chequeo semanal de links caídos (P11, §4.1 y §4.5).
+# No usa el token de lectura: solo lee src/datos/proyectos.json y src/datos/perfil.json publicados.
+name: chequear-links
+
+on:
+  schedule:
+    - cron: '41 12 * * 1' # lunes 12:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: chequear-links
+  cancel-in-progress: false
+
+jobs:
+  chequear:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Chequear links e informar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_TOKEN_ALERTAS: ${{ secrets.TELEGRAM_TOKEN_ALERTAS }}
+          TELEGRAM_CHAT_ALERTAS: ${{ secrets.TELEGRAM_CHAT_ALERTAS }}
+        run: python -X utf8 scripts/chequear_links.py

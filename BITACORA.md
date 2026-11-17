@@ -5,6 +5,21 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Chequeo semanal de links caídos
+
+**Cambios**
+- Paso 36: `scripts/chequear_links.py` y `.github/workflows/chequear-links.yml` (lunes 12:41 UTC +
+  `workflow_dispatch`; `contents: read`, `issues: write`; sin token de lectura).
+- Revisa demo, repo y otros links de cada proyecto y GitHub/LinkedIn del perfil, desde el JSON publicado. GET
+  con timeout de 15 s; 2 reintentos ante error de red, timeout o 5xx; 4xx no se reintenta; 403/429 van a una
+  lista aparte de "no verificables" que no abre el issue.
+- Issue `Links caídos` (`alerta-links`) con la misma lógica de lista que las advertencias (se edita solo si
+  cambia, se cierra cuando todo responde) + Telegram. Públicos con su URL; privados solo como
+  `priv-… — link_caido (link demo — HTTP 404)`, y sus textos se registran en el filtro de redacción.
+- Tests con sesión HTTP simulada. Corrida local real (`--sin-issues`): 2 links, ninguno caído. `pytest`: 124 OK.
+
+---
+
 ## 17/11/2026 — CV en PDF generado con la hoja de impresión del sitio
 
 **Cambios**
