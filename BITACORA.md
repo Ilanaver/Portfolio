@@ -5,6 +5,22 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Capturas manuales: aprobación por hash, sin metadatos y en WebP
+
+**Cambios**
+- Paso 29: `scripts/portfolio/imagenes.py`. Tipo real por los bytes iniciales (PNG, JPEG, WebP; la extensión no
+  cuenta), ≤ 5 MB, ancho ≥ 800 px, orientación EXIF aplicada. En privados solo se procesa si `aprobada` ==
+  primeros 12 del SHA-256 del archivo; si no, `imagen_sin_aprobar` y no se escribe nada.
+- Metadatos: se copian solo los píxeles a una imagen nueva (sin EXIF, GPS, ICC ni XMP) y se guarda WebP
+  (calidad 82) en 1200 y 600 px de ancho, sin agrandar las que miden entre 800 y 1200. Helpers compartidos con
+  las capturas automáticas (variantes por idioma `<slug>-es-…`/`-en-…`).
+- Sin reproceso si la huella del origen coincide con la anterior y los WebP existen (la huella se guardará en
+  `src/datos/huellas.json`, paso 32).
+- Tests: tipo real, >5 MB, angosta, privado sin aprobar / con hash viejo / aprobado, EXIF con GPS eliminado,
+  sin reescritura si no cambió, salida idéntica byte a byte. `pytest`: 77 OK.
+
+---
+
 ## 17/11/2026 — Cliente de la API de GitHub con reintentos y errores sin URLs
 
 **Cambios**
