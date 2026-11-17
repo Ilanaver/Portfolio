@@ -1,0 +1,9 @@
+node_modules/
+.venv/
+dist/
+.env*
+__pycache__/
+*.pyc
+.pytest_cache/
+# material de revisión local (capturas y PDF de los checkpoints)
+.revision/
