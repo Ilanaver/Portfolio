@@ -5,6 +5,36 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Workflow de actualización automática con commit solo si cambió algo
+
+**Cambios**
+- Paso 39: `.github/workflows/actualizar-datos.yml`. Disparadores: cron `23 */6 * * *`, `workflow_dispatch`
+  (inputs `probar_alertas`: no/falla_total/falla_repo y `capturas`: no/si, entre comillas para que YAML no los
+  lea como booleanos), push a `config/**`, `scripts/**` y `plantillas/**` en `main`, y `repository_dispatch`
+  `proyecto-actualizado`. `permissions: contents/issues/actions: write`; `concurrency` sin cancelar.
+- Pasos: Python 3.12 → `generar_datos.py` (inputs pasados por variables de entorno, no interpolados en el
+  script) → `generar_cv.py --chequear` → Node 24 + `npm ci` + `generar_cv.py` solo si cambió la huella →
+  commit como `github-actions[bot]` "datos: actualización automática (N proyectos)" solo si `git status
+  --porcelain` de `src/datos/`, `public/proyectos/` y `public/cv/` no está vacío (si el push choca, `pull
+  --rebase` y reintento) → alertas (`if: always()`, con el resultado de cada paso) → keepalive con
+  `PUT …/workflows/<archivo>/enable` para los dos workflows programados.
+- Chromium se instala solo cuando la corrida lo necesita: `capturas_auto.abrir_navegador()` lo descarga si no
+  está (con `--with-deps` en Linux) y reintenta.
+- Simulación local de la secuencia en un clon temporal, dos veces: la primera commitea los 2 PDF, `huella.txt` y
+  `cv_pdf` en `perfil.json`; la segunda termina en "Sin cambios en los datos: no hay commit ni deploy".
+
+**Problema**
+- En la simulación, el paso de commit falló con `fatal: pathspec 'public/proyectos' did not match any files`.
+
+**Causa**
+- `git add` con una ruta que todavía no existe (sin capturas, `public/proyectos/` no se crea) corta el comando
+  entero.
+
+**Arreglo**
+- `git add` por carpeta, solo para las que existen.
+
+---
+
 ## 17/11/2026 — Verificación automática en cada push y PR
 
 **Cambios**

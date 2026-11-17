@@ -1,0 +1,130 @@
+# Actualización automática de los datos del portfolio (§4.1–4.5).
+# Lee los repos con el token de SOLO LECTURA, arma src/datos/*.json, capturas y CV en PDF, y commitea solo si
+# cambió algo (sin cambios → sin commit y sin deploy de Vercel). Alertas por issue + Telegram al final.
+name: actualizar-datos
+
+on:
+  schedule:
+    - cron: '23 */6 * * *' # 03:23, 09:23 (capturas automáticas), 15:23 y 21:23 UTC
+  workflow_dispatch:
+    inputs:
+      probar_alertas:
+        description: 'Simular una falla para probar las alertas'
+        type: choice
+        options: ['no', 'falla_total', 'falla_repo']
+        default: 'no'
+      capturas:
+        description: 'Forzar las capturas automáticas'
+        type: choice
+        options: ['no', 'si']
+        default: 'no'
+  push:
+    branches: [main]
+    paths:
+      - 'config/**'
+      - 'scripts/**'
+      - 'plantillas/**'
+  repository_dispatch:
+    types: [proyecto-actualizado]
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: actualizar-datos
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ESTADO: ${{ runner.temp }}/estado.json
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependencias
+        id: instalar
+        run: pip install -r requirements.txt
+
+      # Chromium se instala solo si esta corrida saca capturas (scripts/portfolio/capturas_auto.py).
+      - name: Generar datos
+        id: datos
+        env:
+          GH_TOKEN_LECTURA: ${{ secrets.GH_TOKEN_LECTURA }}
+          TOKEN_VENCE: ${{ vars.TOKEN_VENCE }}
+          EVENTO: ${{ github.event_name }}
+          CAPTURAS: ${{ inputs.capturas || 'no' }}
+          PROBAR_ALERTAS: ${{ inputs.probar_alertas || 'no' }}
+        run: >-
+          python -X utf8 scripts/generar_datos.py
+          --evento "$EVENTO" --capturas "$CAPTURAS" --probar-alertas "$PROBAR_ALERTAS" --estado "$ESTADO"
+
+      - name: ¿Hay que regenerar el CV?
+        id: cv_chequeo
+        run: python -X utf8 scripts/generar_cv.py --chequear
+
+      - uses: actions/setup-node@v4
+        if: steps.cv_chequeo.outputs.regenerar == 'true'
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Dependencias de Node
+        if: steps.cv_chequeo.outputs.regenerar == 'true'
+        run: npm ci
+
+      # Si falla, conserva los PDF anteriores, deja una advertencia y sale con 0.
+      - name: Generar CV en PDF
+        id: cv
+        if: steps.cv_chequeo.outputs.regenerar == 'true'
+        run: python -X utf8 scripts/generar_cv.py --estado "$ESTADO"
+
+      - name: Commit y push (solo si cambió algo)
+        id: commit
+        run: |
+          if [ -z "$(git status --porcelain -- src/datos/ public/proyectos/ public/cv/)" ]; then
+            echo "Sin cambios en los datos: no hay commit ni deploy."
+            exit 0
+          fi
+          cantidad=$(jq -r '.proyectos' "$ESTADO")
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Solo las carpetas que existen: git add falla con una ruta inexistente (ej. sin capturas todavía).
+          for carpeta in src/datos public/proyectos public/cv; do
+            if [ -e "$carpeta" ]; then git add -A -- "$carpeta"; fi
+          done
+          git commit -m "datos: actualización automática (${cantidad} proyectos)"
+          if ! git push; then
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push
+          fi
+
+      - name: Alertas (issues + Telegram)
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_TOKEN_ALERTAS: ${{ secrets.TELEGRAM_TOKEN_ALERTAS }}
+          TELEGRAM_CHAT_ALERTAS: ${{ secrets.TELEGRAM_CHAT_ALERTAS }}
+          TOKEN_VENCE: ${{ vars.TOKEN_VENCE }}
+          PASOS: >-
+            instalar=${{ steps.instalar.outcome }},datos=${{ steps.datos.outcome }},cv=${{ steps.cv.outcome }},commit=${{ steps.commit.outcome }}
+        run: python -X utf8 scripts/enviar_alertas.py --estado "$ESTADO" --pasos "$PASOS"
+
+      # Keepalive: GitHub desactiva los cron de un repo público tras 60 días sin actividad. No commitea nada.
+      - name: Keepalive de los workflows programados
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for flujo in actualizar-datos.yml chequear-links.yml; do
+            gh api -X PUT "repos/${GITHUB_REPOSITORY}/actions/workflows/${flujo}/enable" \
+              || echo "::warning::No se pudo reactivar ${flujo}"
+          done

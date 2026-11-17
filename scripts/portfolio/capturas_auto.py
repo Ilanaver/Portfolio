@@ -10,6 +10,8 @@ Los errores salen por tipo, nunca con el texto de Playwright (incluye la URL).
 """
 
 import io
+import subprocess
+import sys
 from contextlib import contextmanager
 from urllib.parse import urlsplit
 
@@ -46,13 +48,36 @@ def cargar_config(ruta=RUTA_CONFIG):
 # ------------------------------------------------------------------ navegador
 
 
+def instalar_chromium():
+    """`playwright install chromium` (con dependencias del sistema en Linux, como en el runner de Actions)."""
+    comando = [sys.executable, "-m", "playwright", "install"]
+    if sys.platform.startswith("linux"):
+        comando.append("--with-deps")
+    comando.append("chromium")
+    subprocess.run(comando, check=True, capture_output=True)
+
+
+def lanzar_chromium(playwright):
+    """Lanza Chromium; si no está instalado, lo instala una vez y reintenta. Así el Action solo lo descarga
+    en las corridas que sacan capturas o generan el PDF (§4.2)."""
+    from playwright.sync_api import Error as ErrorPlaywright
+
+    try:
+        return playwright.chromium.launch()
+    except ErrorPlaywright as error:
+        if "Executable doesn't exist" not in str(error):
+            raise
+    instalar_chromium()
+    return playwright.chromium.launch()
+
+
 @contextmanager
 def abrir_navegador():
     """Chromium headless de Playwright. Se importa acá para que el resto del paquete no dependa de él."""
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as playwright:
-        navegador = playwright.chromium.launch()
+        navegador = lanzar_chromium(playwright)
         try:
             yield navegador
         finally:
