@@ -5,6 +5,29 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Meta por idioma, hreflang y cambio de idioma que conserva filtros y ancla
+
+**Cambios**
+- Paso 9: plugin `plugins/meta-idioma.js` (`transformIndexHtml`) con `<title>`, descripción, Open Graph,
+  `hreflang` es/en/x-default y `canonical` para `/`, `/es/` y `/en/` (`/` canónica a `/es/`); reemplaza los
+  textos `{{es:clave}}` de `404.html` y del `<noscript>` de `/`. Helpers compartidos en
+  `plugins/meta-comun.js` (también los usará `paginas_proyecto.mjs`).
+- La URL del sitio sale de `SITIO_URL` o, en Vercel, de `VERCEL_PROJECT_PRODUCTION_URL` (sin configurar nada).
+- Imágenes Open Graph por defecto `public/og-es.png` y `og-en.png` (1200×630), generadas con Edge headless.
+- Verificado en el navegador: `/?tag=python#sobre-mi` → `/es/?tag=python#sobre-mi` (navegador en `es-419`);
+  el selector lleva a `/en/?tag=python#about` y guarda `idioma=en`.
+
+**Problema**
+- El primer build falló: `Falta la clave de traducción: raiz.ir_es`.
+
+**Causa**
+- El `<noscript>` de `index.html` usaba claves que no existían en los archivos de traducción.
+
+**Arreglo**
+- Pasa a usar `raiz.ir` en cada idioma. El build falla a propósito ante una clave faltante.
+
+---
+
 ## 17/11/2026 — Encabezado con selector de idioma, botón de CV y secciones fijas
 
 **Cambios**
