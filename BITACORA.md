@@ -5,6 +5,30 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — Parser de bitácoras que solo lee fecha y título
+
+**Cambios**
+- Paso 25: `scripts/portfolio/bitacora.py`. Solo mira encabezados `##`/`###` (fuera de bloques de código) que
+  empiezan con fecha válida: formato único `DD/MM/AAAA — Título`, A `DD/MM/AAAA (día)` (sin título → no se
+  publica), B `AAAA-MM-DD — Título` y C `### AAAA-MM-DD — Título`. Al título solo se le quita el formato
+  Markdown y se recorta a 100 caracteres. Más nuevas primero, hasta `max_entradas`. Bitácora sin títulos →
+  advertencia `bitacora_sin_titulos`.
+- Fixtures inventados de los 4 formatos con marcas `CUERPO_*`, un token falso, una URL y un monto en el cuerpo;
+  test de que nada de eso aparece en la salida. `pytest`: 46 OK.
+
+---
+
+## 17/11/2026 — Plantillas bilingües de PORTFOLIO.md y BITACORA.md
+
+**Cambios**
+- Paso 24: `plantillas/PORTFOLIO.md` con los comentarios de §2.3 (`visible: false`, `mostrar_bitacora: false`,
+  `slugs_anteriores: []`, `captura_auto` comentado con la regla de privados, `imagen` comentada con el aviso de
+  aprobación por hash) y las secciones en inglés incluidas y vacías. `plantillas/BITACORA.md` en formato único.
+- `test_plantillas.py`: el template completado valida con los defaults seguros; sin completar también parsea; el
+  template de bitácora no produce entradas.
+
+---
+
 ## 17/11/2026 — Lectura y validación del archivo estándar PORTFOLIO.md
 
 **Cambios**
