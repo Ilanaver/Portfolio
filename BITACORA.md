@@ -5,6 +5,25 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 17/11/2026 — CV en PDF generado con la hoja de impresión del sitio
+
+**Cambios**
+- Paso 35: `scripts/generar_cv.py`. Huella SHA-256 de `src/**`, `es/`, `en/`, `index.html`, `plugins/**` y
+  `package-lock.json` (sin `src/datos/huellas.json`; finales de línea normalizados a LF). Si coincide con
+  `public/cv/huella.txt` y los dos PDF existen, no hace nada. Modo `--chequear` que escribe
+  `regenerar=true|false` en `GITHUB_OUTPUT` para que el workflow instale Node solo cuando hace falta.
+- Si cambió: `npm run build`, servidor HTTP local sobre `dist/`, Playwright abre `/es/` y `/en/` (espera red
+  quieta y fuentes) y genera los PDF A4 con el tamaño de página del CSS; se escriben a `.tmp` y recién al
+  final reemplazan a los publicados; `cv_pdf` en `perfil.json`; la huella se calcula después de tocar el perfil
+  para que la corrida siguiente no regenere otra vez.
+- Si falla: se borran los temporales, quedan los PDF anteriores, `::warning::` y advertencia `cv_pdf_fallido`
+  en el estado (va al issue de advertencias); sale con 0.
+- El botón "Descargar CV" ya bajaba el PDF cuando existe `cv_pdf` (con impresión como respaldo) desde el paso 8.
+- Prueba local en una carpeta temporal: build + 2 PDF en ~11 s, 1 página A4 cada uno, mismo contenido que el
+  CV impreso; la segunda verificación da `regenerar=false`. Tests de huella, decisión y falla. `pytest`: 120 OK.
+
+---
+
 ## 17/11/2026 — Alertas por issue y por Telegram con el mismo texto
 
 **Cambios**
