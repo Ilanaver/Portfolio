@@ -5,6 +5,31 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 18/11/2026 — Primera corrida automática publicada y test aislado del resumen de Actions
+
+**Cambios**
+- Corrida 44311588368 de `actualizar-datos` (push de `c5eb67c`) en verde en 1 min: leyó los repos con el token
+  fine-grained, sacó la captura del propio portfolio (dos imágenes: ES y EN), generó el CV en PDF y el bot
+  commiteó `d4c592b` "datos: actualización automática (4 proyectos)". Alertas: sin issues (`sin_cambios` en
+  falla, datos y token); keepalive sin advertencias.
+
+**Problema**
+- `verificar` (run 44311588422) falló: `test_probar_falla_total_no_escribe` esperaba "Falla total" en el log y
+  lo encontró vacío. En local pasaba.
+
+**Causa**
+- En Actions existe `GITHUB_STEP_SUMMARY`: `escribir_resumen()` escribe en ese archivo y no en la salida.
+
+**Arreglo**
+- Fixture `autouse` en `test_generar_datos.py` que quita `GITHUB_STEP_SUMMARY`. Probado en local con la
+  variable definida: 129 OK.
+
+**Pendiente**
+- El CV generado en el runner ocupa 2 páginas (la segunda solo con el tercer problema resuelto); en Windows con 3
+  proyectos entraba en 1. Para decidir en el checkpoint 2.
+
+---
+
 ## 18/11/2026 — Workflow de actualización corregido: ruta temporal fuera del contexto del job
 
 **Problema**

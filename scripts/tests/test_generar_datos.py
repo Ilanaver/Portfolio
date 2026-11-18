@@ -76,6 +76,12 @@ def cliente_de_prueba():
     return ClienteFalso(repos, archivos)
 
 
+@pytest.fixture(autouse=True)
+def sin_resumen_de_actions(monkeypatch):
+    # En Actions existe GITHUB_STEP_SUMMARY: el resumen iría a ese archivo y no al log que miran los tests.
+    monkeypatch.delenv("GITHUB_STEP_SUMMARY", raising=False)
+
+
 @pytest.fixture
 def rutas(tmp_path):
     (tmp_path / "extras").mkdir()
