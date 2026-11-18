@@ -5,6 +5,17 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 18/11/2026 — Checkpoint 2 aprobado y hito de la actualización automática
+
+**Cambios**
+- Ilán aprobó el checkpoint 2: llegaron los 4 mensajes de Telegram (advertencias, falla y los dos resueltos) y
+  los textos del `PORTFOLIO.md` del portfolio.
+- `PORTFOLIO.md`: hito del 18/11 en `## Hitos` y `## Milestones` sobre la actualización automática (sincronización
+  cada 6 h con GitHub Actions, capturas con Playwright, CV en PDF y avisos por Telegram e issues).
+- CV de 2 páginas: decisión de Ilán, no se toca el diseño ni la paginación (va a subir su propio CV más adelante).
+
+---
+
 ## 18/11/2026 — Pruebas de la Fase 2 en GitHub: datos, capturas, CV, alertas y links
 
 **Cambios**

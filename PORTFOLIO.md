@@ -46,9 +46,11 @@ the demos, builds the PDF CV and publishes only when something changed. Private 
 logs or alerts.
 
 ## Hitos
+- 2026-11-18 — Actualización automática: un GitHub Action sincroniza los repos cada 6 h, saca capturas con Playwright, genera el CV en PDF y avisa por Telegram e issues.
 - 2026-11-17 — Primera versión publicada: sitio bilingüe con tres proyectos cargados a mano.
 - 2026-11-17 — [arreglo] Inicio lento en celular (Lighthouse 91) → el contenido se dibujaba recién al cargar React → páginas pre-renderizadas en el build y CSS en línea: 98–100.
 
 ## Milestones
+- 2026-11-18 — Automatic updates: a GitHub Action syncs the repos every 6 hours, takes screenshots with Playwright, builds the PDF CV and sends alerts via Telegram and issues.
 - 2026-11-17 — First version live: bilingual site with three projects loaded by hand.
 - 2026-11-17 — [fix] Slow home page on mobile (Lighthouse 91) → content only rendered once React loaded → pages pre-rendered at build time and inline CSS: 98–100.
