@@ -42,10 +42,12 @@ jobs:
   actualizar:
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    env:
-      ESTADO: ${{ runner.temp }}/estado.json
     steps:
       - uses: actions/checkout@v4
+
+      # El contexto `runner` no existe en el env del job: la ruta se arma en un paso con $RUNNER_TEMP.
+      - name: Ruta del estado de la corrida
+        run: echo "ESTADO=${RUNNER_TEMP}/estado.json" >> "$GITHUB_ENV"
 
       - uses: actions/setup-python@v5
         with:

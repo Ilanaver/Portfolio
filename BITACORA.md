@@ -5,6 +5,22 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 18/11/2026 — Workflow de actualización corregido: ruta temporal fuera del contexto del job
+
+**Problema**
+- Primer push de la Fase 2 (`a20a8db..f1d7fa8`): `actualizar-datos` falló en 0 s, sin jobs (run 44311305393),
+  con "Invalid workflow file: (Line: 46, Col: 15): Unrecognized named-value: 'runner'".
+
+**Causa**
+- `env: ESTADO: ${{ runner.temp }}/estado.json` a nivel de job: el contexto `runner` solo existe dentro de los
+  pasos. La simulación local corría los scripts, no el YAML, así que no lo detectó.
+
+**Arreglo**
+- Un paso inicial escribe `ESTADO=$RUNNER_TEMP/estado.json` en `$GITHUB_ENV`. Los tres workflows pasan
+  `actionlint` sin observaciones (se usa local, no queda en `requirements`).
+
+---
+
 ## 17/11/2026 — Nombres de repos privados quitados del código antes de publicarlo
 
 **Problema**
