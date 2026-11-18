@@ -143,6 +143,14 @@
       "bitacora": [
         {
           "fecha": "2026-11-18",
+          "titulo": "Checkpoint 2 aprobado y hito de la actualización automática"
+        },
+        {
+          "fecha": "2026-11-18",
+          "titulo": "Pruebas de la Fase 2 en GitHub: datos, capturas, CV, alertas y links"
+        },
+        {
+          "fecha": "2026-11-18",
           "titulo": "Primera corrida automática publicada y test aislado del resumen de Actions"
         },
         {
@@ -172,14 +180,6 @@
         {
           "fecha": "2026-11-17",
           "titulo": "Chequeo semanal de links caídos"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "CV en PDF generado con la hoja de impresión del sitio"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Alertas por issue y por Telegram con el mismo texto"
         }
       ],
       "clave": "pub-1ddb2727",
@@ -195,6 +195,11 @@
       "hitos": {
         "en": [
           {
+            "fecha": "2026-11-18",
+            "texto": "Automatic updates: a GitHub Action syncs the repos every 6 hours, takes screenshots with Playwright, builds the PDF CV and sends alerts via Telegram and issues.",
+            "tipo": "hito"
+          },
+          {
             "fecha": "2026-11-17",
             "texto": "First version live: bilingual site with three projects loaded by hand.",
             "tipo": "hito"
@@ -206,6 +211,11 @@
           }
         ],
         "es": [
+          {
+            "fecha": "2026-11-18",
+            "texto": "Actualización automática: un GitHub Action sincroniza los repos cada 6 h, saca capturas con Playwright, genera el CV en PDF y avisa por Telegram e issues.",
+            "tipo": "hito"
+          },
           {
             "fecha": "2026-11-17",
             "texto": "Primera versión publicada: sitio bilingüe con tres proyectos cargados a mano.",
