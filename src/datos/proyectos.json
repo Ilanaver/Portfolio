@@ -143,6 +143,10 @@
       "bitacora": [
         {
           "fecha": "2026-11-18",
+          "titulo": "Primera corrida automática publicada y test aislado del resumen de Actions"
+        },
+        {
+          "fecha": "2026-11-18",
           "titulo": "Workflow de actualización corregido: ruta temporal fuera del contexto del job"
         },
         {
@@ -176,10 +180,6 @@
         {
           "fecha": "2026-11-17",
           "titulo": "Alertas por issue y por Telegram con el mismo texto"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Generador de datos de punta a punta y perfil desde YAML"
         }
       ],
       "clave": "pub-1ddb2727",
