@@ -5,6 +5,36 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 18/11/2026 — Pruebas de la Fase 2 en GitHub: datos, capturas, CV, alertas y links
+
+**Cambios**
+- Paso 41: Ilán cargó `GH_TOKEN_LECTURA`, `TELEGRAM_TOKEN_ALERTAS`, `TELEGRAM_CHAT_ALERTAS` y la variable
+  `TOKEN_VENCE` (2027-11-16).
+- Paso 42, en orden:
+  1. Datos + captura + PDF: lo hizo la corrida del push 44311588368 (la demo del portfolio era nueva, así que
+     tocaba captura): commit del bot `d4c592b` con la captura del portfolio en ES y EN, los 2 PDF y `cv_pdf`;
+     Vercel lo desplegó (success). Un push posterior de la bitácora generó `2ea4c89` (títulos + PDF), también
+     desplegado.
+  2. Corrida manual con `capturas: si` (44312350705): "captura sin cambio visible", `regenerar=false`, sin
+     commit ni deploy.
+  3. `falla_repo` (44312525565): el proyecto quedó igual, issue #1 "Advertencias en los datos" + Telegram (sin
+     `::warning` de envío). Hoy el único repo con `PORTFOLIO.md` es público, así que la redacción de privados
+     en vivo queda para la Fase 3 (en tests sí está cubierta).
+  4. `falla_total` (44312657049): job en rojo en "Generar datos", sin commit, issue #2 "Falló la actualización
+     del portfolio" + Telegram.
+  5. Corrida normal (44312810211): #1 y #2 cerrados solos ("Sin pendientes…" / "Resuelto en la corrida…") +
+     Telegram de resuelto.
+  6. `chequear-links` (44312954961): 4 links, ninguno caído ni no verificable; sin issue.
+- Producción: `/es/`, `/en/`, `/es/p/portfolio/` y `/en/p/portfolio/` 200 con la ficha, la captura (WebP
+  ES/EN 200, Open Graph con la captura) y la bitácora con ancla; `/cv/cv-es.pdf` y `/cv/cv-en.pdf` 200
+  `application/pdf` y el botón apunta al PDF de cada idioma. Los 3 workflows quedan activos.
+
+**Pendiente**
+- Checkpoint 2: OK de Ilán, textos del `PORTFOLIO.md` del portfolio, confirmar que llegaron los mensajes de
+  Telegram y decidir el CV de 2 páginas. Esta entrada sube en el próximo push.
+
+---
+
 ## 18/11/2026 — Primera corrida automática publicada y test aislado del resumen de Actions
 
 **Cambios**
