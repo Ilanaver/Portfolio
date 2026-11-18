@@ -4,7 +4,10 @@
     "github": "https://github.com/Ilanaver",
     "linkedin": null
   },
-  "cv_pdf": null,
+  "cv_pdf": {
+    "en": "/cv/cv-en.pdf",
+    "es": "/cv/cv-es.pdf"
+  },
   "estudios": [
     {
       "detalle": {

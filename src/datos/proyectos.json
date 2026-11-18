@@ -140,6 +140,167 @@
       "ultima_actividad": "2026-11"
     },
     {
+      "bitacora": [
+        {
+          "fecha": "2026-11-18",
+          "titulo": "Workflow de actualización corregido: ruta temporal fuera del contexto del job"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Nombres de repos privados quitados del código antes de publicarlo"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Ficha bilingüe del propio portfolio"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Workflow de actualización automática con commit solo si cambió algo"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Verificación automática en cada push y PR"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Auditoría local de repos, claves opacas y aprobación de capturas"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Chequeo semanal de links caídos"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "CV en PDF generado con la hoja de impresión del sitio"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Alertas por issue y por Telegram con el mismo texto"
+        },
+        {
+          "fecha": "2026-11-17",
+          "titulo": "Generador de datos de punta a punta y perfil desde YAML"
+        }
+      ],
+      "clave": "pub-1ddb2727",
+      "descripcion": {
+        "en": "This site. Bilingual and static; it updates itself by reading a standard file from each repo, with automatic screenshots and a PDF CV.",
+        "es": "Este sitio. Bilingüe y estático; se actualiza solo leyendo un archivo estándar de cada repo, con capturas y CV en PDF automáticos."
+      },
+      "destacado": false,
+      "es_privado": false,
+      "estado": "activo",
+      "fecha_fin": null,
+      "fecha_inicio": "2026-11-17",
+      "hitos": {
+        "en": [
+          {
+            "fecha": "2026-11-17",
+            "texto": "First version live: bilingual site with three projects loaded by hand.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-17",
+            "texto": "Slow home page on mobile (Lighthouse 91) → content only rendered once React loaded → pages pre-rendered at build time and inline CSS: 98–100.",
+            "tipo": "arreglo"
+          }
+        ],
+        "es": [
+          {
+            "fecha": "2026-11-17",
+            "texto": "Primera versión publicada: sitio bilingüe con tres proyectos cargados a mano.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-17",
+            "texto": "Inicio lento en celular (Lighthouse 91) → el contenido se dibujaba recién al cargar React → páginas pre-renderizadas en el build y CSS en línea: 98–100.",
+            "tipo": "arreglo"
+          }
+        ]
+      },
+      "idea_original": {
+        "en": "A site with my projects and my CV that doesn't need manual updates: each repo describes its own project in a standard file and the site builds itself from that.",
+        "es": "Un sitio con mis proyectos y mi CV que no haya que actualizar a mano: cada repo describe su propio proyecto en un archivo estándar y el sitio se arma solo a partir de eso."
+      },
+      "imagen": {
+        "alt": null,
+        "alto": 750,
+        "ancho": 1200,
+        "archivos": {
+          "en": {
+            "1200": "/proyectos/portfolio-en-1200.webp",
+            "600": "/proyectos/portfolio-en-600.webp"
+          },
+          "es": {
+            "1200": "/proyectos/portfolio-es-1200.webp",
+            "600": "/proyectos/portfolio-es-600.webp"
+          }
+        },
+        "origen": "auto"
+      },
+      "links": {
+        "demo": "https://portfolio-eight-blond-udezm8x9wj.vercel.app/",
+        "otros": [],
+        "repo": "https://github.com/Ilanaver/Portfolio"
+      },
+      "nombre": {
+        "en": "Portfolio and CV",
+        "es": "Portfolio y CV"
+      },
+      "origen": "repo",
+      "resultado": {
+        "en": "A static site in Spanish and English, with a page per project, a section on problems I solved and a print-ready CV. A GitHub Action reads every repo's PORTFOLIO.md every few hours with a read-only token, takes screenshots of the demos, builds the PDF CV and publishes only when something changed. Private repos never show up by name in logs or alerts.",
+        "es": "Un sitio estático en español e inglés, con una página por proyecto, una sección de problemas resueltos y el CV listo para imprimir. Un GitHub Action lee cada pocas horas el PORTFOLIO.md de cada repo con un token de solo lectura, saca capturas de las demos, genera el CV en PDF y publica solo si algo cambió. Los repos privados nunca aparecen por nombre en logs ni avisos."
+      },
+      "servicios": [
+        {
+          "categoria": "automatizacion",
+          "nombre": "GitHub Actions"
+        },
+        {
+          "categoria": "infra",
+          "nombre": "Vercel"
+        },
+        {
+          "categoria": "mensajeria",
+          "nombre": "Telegram"
+        }
+      ],
+      "slug": "portfolio",
+      "slugs_anteriores": [],
+      "tecnologias": [
+        {
+          "categoria": "frontend",
+          "nombre": "React"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Vite"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Tailwind"
+        },
+        {
+          "categoria": "lenguaje",
+          "nombre": "JavaScript"
+        },
+        {
+          "categoria": "lenguaje",
+          "nombre": "Python"
+        },
+        {
+          "categoria": "automatizacion",
+          "nombre": "Playwright"
+        },
+        {
+          "categoria": null,
+          "nombre": "pytest"
+        }
+      ],
+      "ultima_actividad": "2026-11"
+    },
+    {
       "bitacora": [],
       "clave": "priv-707ce47d",
       "descripcion": {
