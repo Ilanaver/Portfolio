@@ -140,6 +140,137 @@
       "ultima_actividad": "2026-11"
     },
     {
+      "bitacora": [],
+      "clave": "priv-5197b2eb",
+      "descripcion": {
+        "en": "Web-based technical analysis for stocks: a Python engine gives a single verdict, scenarios and a plan, with a watchlist and charts.",
+        "es": "Análisis técnico de acciones en la web: un motor en Python da un veredicto único, escenarios y un plan, con watchlist y gráficos."
+      },
+      "destacado": false,
+      "es_privado": true,
+      "estado": "activo",
+      "fecha_fin": null,
+      "fecha_inicio": "2026-06-20",
+      "hitos": {
+        "en": [
+          {
+            "fecha": "2026-08-07",
+            "texto": "Wrong stop-loss in the plan → it was measured against the current price instead of the entry price → it is now measured against the entry.",
+            "tipo": "arreglo"
+          },
+          {
+            "fecha": "2026-08-02",
+            "texto": "Scan view: the traffic light for up to 15 watchlist tickers at once.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-08-02",
+            "texto": "Analysis crashed for stocks with fewer than 50 sessions → the 50-day average returned NaN with no guard → NaN guard added.",
+            "tipo": "arreglo"
+          },
+          {
+            "fecha": "2026-06-28",
+            "texto": "Optional magic-link login and personal watchlist; without an account, everything stays in the browser.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-06-20",
+            "texto": "First version: the engine as Python functions on Vercel, Supabase cache and a React frontend with scenario projections.",
+            "tipo": "hito"
+          }
+        ],
+        "es": [
+          {
+            "fecha": "2026-08-07",
+            "texto": "Stop-loss del plan mal calculado → se medía contra el precio actual y no contra el de entrada → ahora se mide contra la entrada.",
+            "tipo": "arreglo"
+          },
+          {
+            "fecha": "2026-08-02",
+            "texto": "Vista de Escaneo: el semáforo de hasta 15 tickers de la watchlist de una vez.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-08-02",
+            "texto": "El análisis se rompía con acciones de menos de 50 ruedas → la media de 50 daba NaN sin control → guarda para NaN.",
+            "tipo": "arreglo"
+          },
+          {
+            "fecha": "2026-06-28",
+            "texto": "Login opcional con magic link y watchlist personal; sin cuenta, todo queda en el navegador.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-06-20",
+            "texto": "Primera versión: el motor en funciones Python en Vercel, caché en Supabase y frontend React con proyección por escenarios.",
+            "tipo": "hito"
+          }
+        ]
+      },
+      "idea_original": {
+        "en": "Bring the technical analysis engine that already ran in the console to the web without touching its math: a full report per ticker, with a chart and a watchlist.",
+        "es": "Llevar a la web el motor de análisis técnico que ya corría en consola, sin tocar su matemática: un reporte completo por ticker, con gráfico y watchlist."
+      },
+      "imagen": null,
+      "links": {
+        "demo": "https://ibit-eosin.vercel.app",
+        "otros": [],
+        "repo": null
+      },
+      "nombre": {
+        "en": "ibit",
+        "es": "ibit"
+      },
+      "origen": "repo",
+      "resultado": {
+        "en": "A web app on Vercel with two views: Analysis (full report for one ticker, with scenario projections) and Scan (the traffic light for up to 15 tickers). The Python functions share the engine with the console version; Yahoo Finance data is cached in Supabase and login is optional. The hardest part: Yahoo sometimes blocks datacenter IPs, which required retries, a cache and clear error messages.",
+        "es": "Quedó una web en Vercel con dos vistas: Análisis (reporte completo de un ticker, con proyección por escenarios) y Escaneo (el semáforo de hasta 15 tickers). Las funciones en Python comparten el motor con la consola; los datos de Yahoo Finance se cachean en Supabase y el login es opcional. Lo más difícil: Yahoo a veces bloquea las IPs de datacenter, lo que pidió reintentos, caché y errores claros."
+      },
+      "servicios": [
+        {
+          "categoria": "infra",
+          "nombre": "Vercel"
+        },
+        {
+          "categoria": "datos",
+          "nombre": "Supabase"
+        },
+        {
+          "categoria": "datos",
+          "nombre": "Yahoo Finance"
+        }
+      ],
+      "slug": "ibit",
+      "slugs_anteriores": [],
+      "tecnologias": [
+        {
+          "categoria": "lenguaje",
+          "nombre": "Python"
+        },
+        {
+          "categoria": "lenguaje",
+          "nombre": "JavaScript"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "React"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Vite"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Tailwind"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Recharts"
+        }
+      ],
+      "ultima_actividad": "2026-11"
+    },
+    {
       "bitacora": [
         {
           "fecha": "2026-11-18",
@@ -369,7 +500,7 @@
         ]
       },
       "idea_original": {
-        "en": null,
+        "en": "A bot that alerts me as soon as River announces ticket sales for a match, so I don't miss the sale.",
         "es": "Un bot que me avise apenas River anuncie la venta de entradas de un partido, para no perderme la venta."
       },
       "imagen": null,
@@ -421,138 +552,7 @@
           "nombre": "Python"
         }
       ],
-      "ultima_actividad": "2026-10"
-    },
-    {
-      "bitacora": [],
-      "clave": "priv-5197b2eb",
-      "descripcion": {
-        "en": "Web-based technical analysis for stocks: a Python engine gives a single verdict, scenarios and a plan, with a watchlist and charts.",
-        "es": "Análisis técnico de acciones en la web: un motor en Python da un veredicto único, escenarios y un plan, con watchlist y gráficos."
-      },
-      "destacado": false,
-      "es_privado": true,
-      "estado": "activo",
-      "fecha_fin": null,
-      "fecha_inicio": "2026-06-20",
-      "hitos": {
-        "en": [
-          {
-            "fecha": "2026-08-07",
-            "texto": "Wrong stop-loss in the plan → it was measured against the current price instead of the entry price → it is now measured against the entry.",
-            "tipo": "arreglo"
-          },
-          {
-            "fecha": "2026-08-02",
-            "texto": "Scan view: the traffic light for up to 15 watchlist tickers at once.",
-            "tipo": "hito"
-          },
-          {
-            "fecha": "2026-08-02",
-            "texto": "Analysis crashed for stocks with fewer than 50 sessions → the 50-day average returned NaN with no guard → NaN guard added.",
-            "tipo": "arreglo"
-          },
-          {
-            "fecha": "2026-06-28",
-            "texto": "Optional magic-link login and personal watchlist; without an account, everything stays in the browser.",
-            "tipo": "hito"
-          },
-          {
-            "fecha": "2026-06-20",
-            "texto": "First version: the engine as Python functions on Vercel, Supabase cache and a React frontend with scenario projections.",
-            "tipo": "hito"
-          }
-        ],
-        "es": [
-          {
-            "fecha": "2026-08-07",
-            "texto": "Stop-loss del plan mal calculado → se medía contra el precio actual y no contra el de entrada → ahora se mide contra la entrada.",
-            "tipo": "arreglo"
-          },
-          {
-            "fecha": "2026-08-02",
-            "texto": "Vista de Escaneo: el semáforo de hasta 15 tickers de la watchlist de una vez.",
-            "tipo": "hito"
-          },
-          {
-            "fecha": "2026-08-02",
-            "texto": "El análisis se rompía con acciones de menos de 50 ruedas → la media de 50 daba NaN sin control → guarda para NaN.",
-            "tipo": "arreglo"
-          },
-          {
-            "fecha": "2026-06-28",
-            "texto": "Login opcional con magic link y watchlist personal; sin cuenta, todo queda en el navegador.",
-            "tipo": "hito"
-          },
-          {
-            "fecha": "2026-06-20",
-            "texto": "Primera versión: el motor en funciones Python en Vercel, caché en Supabase y frontend React con proyección por escenarios.",
-            "tipo": "hito"
-          }
-        ]
-      },
-      "idea_original": {
-        "en": "Bring the technical analysis engine that already ran in the console to the web without touching its math: a full report per ticker, with a chart and a watchlist.",
-        "es": "Llevar a la web el motor de análisis técnico que ya corría en consola, sin tocar su matemática: un reporte completo por ticker, con gráfico y watchlist."
-      },
-      "imagen": null,
-      "links": {
-        "demo": "https://ibit-eosin.vercel.app",
-        "otros": [],
-        "repo": null
-      },
-      "nombre": {
-        "en": "ibit",
-        "es": "ibit"
-      },
-      "origen": "repo",
-      "resultado": {
-        "en": "A web app on Vercel with two views: Analysis (full report for one ticker, with scenario projections) and Scan (the traffic light for up to 15 tickers). The Python functions share the engine with the console version; Yahoo Finance data is cached in Supabase and login is optional. The hardest part: Yahoo sometimes blocks datacenter IPs, which required retries, a cache and clear error messages.",
-        "es": "Quedó una web en Vercel con dos vistas: Análisis (reporte completo de un ticker, con proyección por escenarios) y Escaneo (el semáforo de hasta 15 tickers). Las funciones en Python comparten el motor con la consola; los datos de Yahoo Finance se cachean en Supabase y el login es opcional. Lo más difícil: Yahoo a veces bloquea las IPs de datacenter, lo que pidió reintentos, caché y errores claros."
-      },
-      "servicios": [
-        {
-          "categoria": "infra",
-          "nombre": "Vercel"
-        },
-        {
-          "categoria": "datos",
-          "nombre": "Supabase"
-        },
-        {
-          "categoria": "datos",
-          "nombre": "Yahoo Finance"
-        }
-      ],
-      "slug": "ibit",
-      "slugs_anteriores": [],
-      "tecnologias": [
-        {
-          "categoria": "lenguaje",
-          "nombre": "Python"
-        },
-        {
-          "categoria": "lenguaje",
-          "nombre": "JavaScript"
-        },
-        {
-          "categoria": "frontend",
-          "nombre": "React"
-        },
-        {
-          "categoria": "frontend",
-          "nombre": "Vite"
-        },
-        {
-          "categoria": "frontend",
-          "nombre": "Tailwind"
-        },
-        {
-          "categoria": "frontend",
-          "nombre": "Recharts"
-        }
-      ],
-      "ultima_actividad": "2026-09"
+      "ultima_actividad": "2026-11"
     }
   ],
   "version": 1
