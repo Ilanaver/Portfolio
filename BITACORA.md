@@ -5,6 +5,25 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 19/11/2026 — Primeros tres proyectos leídos de sus repos y semilla eliminada
+
+**Cambios**
+- Paso 43 (aprobado por Ilán): `PORTFOLIO.md` en los tres repos privados de la Fase 1, con los textos ya
+  publicados y la "Original idea" en inglés del proyecto que no la tenía. Push a cada repo; en el que tiene
+  bitácora, entrada en su formato propio (sin migrarlo); en los otros dos no se creó bitácora. Su `tests` quedó
+  en verde y no se disparó ningún otro workflow (uno de ellos se redesplegó en Vercel, sin cambios).
+- Corrida manual 44624109375 en verde: el Action leyó los tres archivos sin advertencias ni issues; el log no
+  tiene ningún nombre privado ni clave. Commit del bot `9e47e54`: solo cambian la "Original idea" en inglés
+  nueva y `ultima_actividad` de dos proyectos (2026-09/10 → 2026-11, porque sale del último push y el último
+  push fue el del `PORTFOLIO.md`), que reordena los activos.
+- Paso 44 del plan: borrados `config/proyectos_semilla.json`, `leer_semilla`, `sumar_semilla` y su uso en
+  `generar_datos.py`. Los tests de `salida.py` usan ahora `scripts/tests/fixtures/proyectos_publicados.json`
+  (los mismos tres proyectos, públicos y válidos); el test integral ya no espera proyectos de la semilla.
+- Corrida en seco contra la API real sin semilla: `proyectos.json` sale idéntico byte a byte al publicado.
+  `pytest`: 128 OK. `validar_datos.py` OK.
+
+---
+
 ## 18/11/2026 — Checkpoint 2 aprobado y hito de la actualización automática
 
 **Cambios**

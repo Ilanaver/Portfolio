@@ -4,8 +4,6 @@
 - Falla de un proyecto → queda su última versión publicada (buscada por clave opaca); si no tenía, no entra.
 - Más de la mitad de los proyectos intentados fallan → falla total (sin escribir nada).
 - Choque de slugs → el proyecto que lo introdujo vuelve a su versión anterior (o sale si es nuevo).
-- Semilla (transitoria, Fase 2 → fin de Fase 3): proyectos de config/proyectos_semilla.json cuyo slug y clave
-  no publicó ningún repo.
 - Orden: destacados, activos, después ultima_actividad descendente (desempate por slug).
 - Escritura determinística: claves ordenadas, sangría 2, UTF-8, sin fecha de generación; si el contenido no
   cambió, el archivo no se toca.
@@ -13,12 +11,11 @@
 
 import json
 
-from portfolio import CARPETA_CONFIG, CARPETA_DATOS, CARPETA_PUBLIC
+from portfolio import CARPETA_DATOS, CARPETA_PUBLIC
 from portfolio.etiquetas import normalizar_lista
 
 RUTA_PROYECTOS = CARPETA_DATOS / "proyectos.json"
 RUTA_HUELLAS = CARPETA_DATOS / "huellas.json"
-RUTA_SEMILLA = CARPETA_CONFIG / "proyectos_semilla.json"
 CARPETA_IMAGENES = CARPETA_PUBLIC / "proyectos"
 VERSION = 1
 
@@ -71,13 +68,6 @@ def proyectos_anteriores(ruta=RUTA_PROYECTOS):
     for proyecto in datos.get("proyectos", []):
         anteriores[proyecto["clave"]] = proyecto
     return anteriores
-
-
-def leer_semilla(ruta=RUTA_SEMILLA):
-    datos = leer_json(ruta, None)
-    if datos is None:
-        return []
-    return list(datos.get("proyectos", []))
 
 
 # ------------------------------------------------------------------ armado (lista blanca)
@@ -262,29 +252,7 @@ def resolver_slugs(proyectos, anteriores, nombres_publicos):
     return proyectos, advertencias
 
 
-# ------------------------------------------------------------------ semilla y orden
-
-
-def sumar_semilla(proyectos, semilla):
-    """Suma los proyectos de la semilla cuyo slug y clave no publicó ningún repo ni extra."""
-    slugs = set()
-    claves = set()
-    for proyecto in proyectos:
-        claves.add(proyecto["clave"])
-        for slug in slugs_de(proyecto):
-            slugs.add(slug)
-    resultado = list(proyectos)
-    for proyecto in semilla:
-        if proyecto["clave"] in claves:
-            continue
-        ocupado = False
-        for slug in slugs_de(proyecto):
-            if slug in slugs:
-                ocupado = True
-        if ocupado:
-            continue
-        resultado.append(proyecto)
-    return resultado
+# ------------------------------------------------------------------ orden
 
 
 def clave_de_orden(proyecto):

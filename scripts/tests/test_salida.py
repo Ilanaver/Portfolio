@@ -1,4 +1,4 @@
-"""salida.py: lista blanca, versión anterior ante falla, slugs, semilla, orden y escritura estable (paso 32)."""
+"""salida.py: lista blanca, versión anterior ante falla, slugs, orden y escritura estable (paso 32)."""
 
 import copy
 import json
@@ -13,13 +13,11 @@ from portfolio.salida import (
     ErrorFallaTotal,
     armar_proyecto,
     escribir_proyectos,
-    leer_semilla,
     limpiar_imagenes,
     ordenar,
     proyectos_anteriores,
     resolver_resultados,
     resolver_slugs,
-    sumar_semilla,
 )
 
 from tests.utiles import FIXTURES
@@ -38,8 +36,9 @@ def catalogo():
 
 
 @pytest.fixture(scope="module")
-def semilla():
-    return leer_semilla()
+def publicados():
+    """Tres proyectos publicados reales (válidos contra el esquema de salida)."""
+    return json.loads((FIXTURES / "proyectos_publicados.json").read_text(encoding="utf-8"))["proyectos"]
 
 
 def fuente_desde_fixture(clave="pub-0000aaaa", es_privado=False):
@@ -74,9 +73,9 @@ def test_armado_privado_sin_link_al_repo(catalogo):
     assert errores_de_esquema([proyecto]) == []
 
 
-def test_semilla_valida(semilla):
-    assert len(semilla) == 3
-    assert errores_de_esquema(semilla) == []
+def test_fixture_valida(publicados):
+    assert len(publicados) == 3
+    assert errores_de_esquema(publicados) == []
 
 
 def anteriores_de(proyectos):
@@ -86,82 +85,74 @@ def anteriores_de(proyectos):
     return anteriores
 
 
-def test_falla_de_un_repo_mantiene_su_version_anterior(semilla):
-    anteriores = anteriores_de(semilla)
-    actualizado = copy.deepcopy(semilla[1])
+def test_falla_de_un_repo_mantiene_su_version_anterior(publicados):
+    anteriores = anteriores_de(publicados)
+    actualizado = copy.deepcopy(publicados[1])
     actualizado["descripcion"]["es"] = "Descripción nueva."
     resultados = [
-        {"clave": semilla[0]["clave"], "estado": "fallo", "tipo": "no_se_pudo_leer", "detalle": "HTTP 502", "nombre_publico": None},
-        {"clave": semilla[1]["clave"], "estado": "ok", "proyecto": actualizado},
-        {"clave": semilla[2]["clave"], "estado": "ok", "proyecto": semilla[2]},
+        {"clave": publicados[0]["clave"], "estado": "fallo", "tipo": "no_se_pudo_leer", "detalle": "HTTP 502", "nombre_publico": None},
+        {"clave": publicados[1]["clave"], "estado": "ok", "proyecto": actualizado},
+        {"clave": publicados[2]["clave"], "estado": "ok", "proyecto": publicados[2]},
     ]
     proyectos, advertencias = resolver_resultados(resultados, anteriores)
-    assert proyectos[0] == semilla[0]  # idéntico a lo publicado (incluida su imagen)
+    assert proyectos[0] == publicados[0]  # idéntico a lo publicado (incluida su imagen)
     assert proyectos[1]["descripcion"]["es"] == "Descripción nueva."
     assert advertencias == [{
-        "clave": semilla[0]["clave"],
+        "clave": publicados[0]["clave"],
         "nombre": None,
         "tipo": "no_se_pudo_leer",
         "detalle": "HTTP 502; se mantiene la versión anterior",
     }]
 
 
-def test_falla_de_un_proyecto_nuevo_no_entra(semilla):
+def test_falla_de_un_proyecto_nuevo_no_entra(publicados):
     resultados = [
         {"clave": "pub-nuevo000", "estado": "fallo", "tipo": "no_valida", "nombre_publico": "Nuevo"},
-        {"clave": semilla[0]["clave"], "estado": "ok", "proyecto": semilla[0]},
-        {"clave": semilla[1]["clave"], "estado": "ok", "proyecto": semilla[1]},
+        {"clave": publicados[0]["clave"], "estado": "ok", "proyecto": publicados[0]},
+        {"clave": publicados[1]["clave"], "estado": "ok", "proyecto": publicados[1]},
     ]
     proyectos, advertencias = resolver_resultados(resultados, {})
     assert len(proyectos) == 2
     assert advertencias[0]["detalle"] == "proyecto nuevo: no entra"
 
 
-def test_mas_de_la_mitad_es_falla_total(semilla):
+def test_mas_de_la_mitad_es_falla_total(publicados):
     resultados = [
         {"clave": "a", "estado": "fallo", "tipo": "timeout"},
         {"clave": "b", "estado": "fallo", "tipo": "timeout"},
-        {"clave": semilla[0]["clave"], "estado": "ok", "proyecto": semilla[0]},
+        {"clave": publicados[0]["clave"], "estado": "ok", "proyecto": publicados[0]},
     ]
     with pytest.raises(ErrorFallaTotal):
-        resolver_resultados(resultados, anteriores_de(semilla))
+        resolver_resultados(resultados, anteriores_de(publicados))
     # Exactamente la mitad no es falla total.
-    resolver_resultados(resultados[1:], anteriores_de(semilla))
+    resolver_resultados(resultados[1:], anteriores_de(publicados))
 
 
-def test_choque_de_slug_revierte_al_que_lo_introdujo(semilla):
-    anteriores = anteriores_de(semilla)
-    cambiado = copy.deepcopy(semilla[1])
-    cambiado["slug"] = semilla[0]["slug"]  # roba el slug de otro
-    nuevo = copy.deepcopy(semilla[2])
+def test_choque_de_slug_revierte_al_que_lo_introdujo(publicados):
+    anteriores = anteriores_de(publicados)
+    cambiado = copy.deepcopy(publicados[1])
+    cambiado["slug"] = publicados[0]["slug"]  # roba el slug de otro
+    nuevo = copy.deepcopy(publicados[2])
     nuevo["clave"] = "pub-nuevo111"
     nuevo["slug"] = "otro"
-    nuevo["slugs_anteriores"] = [semilla[2]["slug"]]  # choca con un slug actual
-    proyectos, advertencias = resolver_slugs([semilla[0], cambiado, semilla[2], nuevo], anteriores, {"pub-nuevo111": "Nuevo"})
-    assert proyectos == [semilla[0], semilla[1], semilla[2]]
+    nuevo["slugs_anteriores"] = [publicados[2]["slug"]]  # choca con un slug actual
+    proyectos, advertencias = resolver_slugs([publicados[0], cambiado, publicados[2], nuevo], anteriores, {"pub-nuevo111": "Nuevo"})
+    assert proyectos == [publicados[0], publicados[1], publicados[2]]
     tipos = []
     for item in advertencias:
         tipos.append((item["clave"], item["tipo"], item["detalle"]))
-    assert (semilla[1]["clave"], "slug_repetido", "se mantiene la versión anterior") in tipos
+    assert (publicados[1]["clave"], "slug_repetido", "se mantiene la versión anterior") in tipos
     assert ("pub-nuevo111", "slug_repetido", "proyecto nuevo: no entra") in tipos
 
 
-def test_semilla_solo_suma_lo_que_ningun_repo_publico(semilla):
-    publicado_por_repo = copy.deepcopy(semilla[0])
-    publicado_por_repo["descripcion"]["es"] = "Desde el repo."
-    resultado = sumar_semilla([publicado_por_repo], semilla)
-    assert len(resultado) == 3
-    assert resultado[0]["descripcion"]["es"] == "Desde el repo."
-
-
-def test_orden(semilla):
-    a = copy.deepcopy(semilla[0])
+def test_orden(publicados):
+    a = copy.deepcopy(publicados[0])
     a.update({"clave": "x1", "slug": "a", "destacado": False, "estado": "terminado", "ultima_actividad": "2026-11"})
-    b = copy.deepcopy(semilla[0])
+    b = copy.deepcopy(publicados[0])
     b.update({"clave": "x2", "slug": "b", "destacado": False, "estado": "activo", "ultima_actividad": "2025-01"})
-    c = copy.deepcopy(semilla[0])
+    c = copy.deepcopy(publicados[0])
     c.update({"clave": "x3", "slug": "c", "destacado": True, "estado": "pausado", "ultima_actividad": "2024-01"})
-    d = copy.deepcopy(semilla[0])
+    d = copy.deepcopy(publicados[0])
     d.update({"clave": "x4", "slug": "d", "destacado": False, "estado": "activo", "ultima_actividad": "2026-02"})
     orden = []
     for proyecto in ordenar([a, b, c, d]):
@@ -169,22 +160,22 @@ def test_orden(semilla):
     assert orden == ["c", "d", "b", "a"]
 
 
-def test_escritura_deterministica_byte_a_byte(semilla, tmp_path):
+def test_escritura_deterministica_byte_a_byte(publicados, tmp_path):
     ruta_a = tmp_path / "a.json"
     ruta_b = tmp_path / "b.json"
-    assert escribir_proyectos(ordenar(semilla), ruta_a) is True
-    assert escribir_proyectos(ordenar(list(reversed(semilla))), ruta_b) is True
+    assert escribir_proyectos(ordenar(publicados), ruta_a) is True
+    assert escribir_proyectos(ordenar(list(reversed(publicados))), ruta_b) is True
     assert ruta_a.read_bytes() == ruta_b.read_bytes()
     assert b"\r\n" not in ruta_a.read_bytes()
     marca = ruta_a.stat().st_mtime_ns
-    assert escribir_proyectos(ordenar(semilla), ruta_a) is False  # sin cambios → no se toca
+    assert escribir_proyectos(ordenar(publicados), ruta_a) is False  # sin cambios → no se toca
     assert ruta_a.stat().st_mtime_ns == marca
-    assert proyectos_anteriores(ruta_a)[semilla[0]["clave"]] == semilla[0]
+    assert proyectos_anteriores(ruta_a)[publicados[0]["clave"]] == publicados[0]
     assert json.loads(ruta_a.read_text(encoding="utf-8"))["version"] == 1
 
 
-def test_limpiar_imagenes_borra_solo_las_huerfanas(semilla, tmp_path):
-    proyecto = copy.deepcopy(semilla[0])
+def test_limpiar_imagenes_borra_solo_las_huerfanas(publicados, tmp_path):
+    proyecto = copy.deepcopy(publicados[0])
     proyecto["imagen"] = {
         "origen": "auto",
         "alt": None,

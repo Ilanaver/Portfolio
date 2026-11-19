@@ -121,11 +121,9 @@ def test_corrida_completa(rutas, monkeypatch):
     slugs = []
     for proyecto in datos["proyectos"]:
         slugs.append(proyecto["slug"])
-    # Orden: destacado activo (scanner-dca), destacado terminado (inventado), después activos por fecha.
-    # El privado de bitácora ilegible no tenía versión anterior: no entra.
-    assert slugs[:2] == ["scanner-dca", "proyecto-inventado"]
-    assert set(slugs) == {"proyecto-inventado", "scanner-dca", "rivot", "ibit", "solo-espanol"}
-    inventado = datos["proyectos"][1]
+    # Orden: el destacado (inventado) primero. El privado de bitácora ilegible no tenía versión anterior: no entra.
+    assert slugs == ["proyecto-inventado", "solo-espanol"]
+    inventado = datos["proyectos"][0]
     assert inventado["bitacora"][0] == {"fecha": "2026-02-03", "titulo": "Tercera entrada con link"}
     assert inventado["imagen"]["origen"] == "manual"
     assert (rutas["imagenes"] / "proyecto-inventado-1200.webp").exists()
@@ -186,8 +184,8 @@ def test_falla_de_un_repo_mantiene_su_version(rutas):
     estado, log = correr(cliente, rutas)
     assert estado["resultado"] == "ok"
     despues = json.loads(rutas["proyectos"].read_text(encoding="utf-8"))
-    assert despues["proyectos"][1] == antes["proyectos"][1]  # el público roto queda igual
-    assert despues["proyectos"][1]["slug"] == "proyecto-inventado"
+    assert despues["proyectos"][0] == antes["proyectos"][0]  # el público roto queda igual
+    assert despues["proyectos"][0]["slug"] == "proyecto-inventado"
     descripciones = []
     for proyecto in despues["proyectos"]:
         descripciones.append(proyecto["descripcion"]["es"])

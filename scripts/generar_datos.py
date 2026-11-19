@@ -38,13 +38,11 @@ from portfolio.salida import (
     escribir_huellas,
     escribir_proyectos,
     leer_huellas,
-    leer_semilla,
     limpiar_imagenes,
     ordenar,
     proyectos_anteriores,
     resolver_resultados,
     resolver_slugs,
-    sumar_semilla,
 )
 
 import validar_datos
@@ -55,7 +53,6 @@ RUTAS_POR_DEFECTO = {
     "huellas": CARPETA_DATOS / "huellas.json",
     "imagenes": CARPETA_PUBLIC / "proyectos",
     "cv": CARPETA_PUBLIC / "cv",
-    "semilla": CARPETA_CONFIG / "proyectos_semilla.json",
     "extras": CARPETA_CONFIG / "proyectos_extra",
     "perfil_yml": CARPETA_CONFIG / "perfil.yml",
     "esquema_salida": CARPETA_CONFIG / "esquema_salida.json",
@@ -447,7 +444,7 @@ def ejecutar(cliente, opciones, rutas=None, ahora=None, abrir=abrir_navegador):
             nombres[resultado["clave"]] = resultado.get("nombre_publico")
         proyectos, advertencias = resolver_slugs(proyectos, anteriores, nombres)
         corrida.advertencias.extend(advertencias)
-        proyectos = ordenar(sumar_semilla(proyectos, leer_semilla(rutas["semilla"])))
+        proyectos = ordenar(proyectos)
 
         perfil = armar_perfil(rutas["perfil_yml"], rutas["cv"])
         errores = errores_de_salida(proyectos, perfil, rutas["esquema_salida"])
