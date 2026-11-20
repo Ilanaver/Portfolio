@@ -274,6 +274,10 @@
       "bitacora": [
         {
           "fecha": "2026-11-20",
+          "titulo": "Cierre de la Fase 3: seis proyectos publicados y regla global del portfolio"
+        },
+        {
+          "fecha": "2026-11-20",
           "titulo": "Proyectos terminados muestran su fecha de fin como última actividad"
         },
         {
@@ -307,10 +311,6 @@
         {
           "fecha": "2026-11-17",
           "titulo": "Nombres de repos privados quitados del código antes de publicarlo"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Ficha bilingüe del propio portfolio"
         }
       ],
       "clave": "pub-1ddb2727",
