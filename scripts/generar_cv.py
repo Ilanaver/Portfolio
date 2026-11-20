@@ -7,6 +7,10 @@
 3. Si falla: se conservan los PDF anteriores, se avisa (::warning:: + advertencia en el estado) y sale con 0:
    el resto de los datos se publica igual.
 
+Modo "CV propio": si existen config/cv/cv-es.pdf y config/cv/cv-en.pdf (los CV que arma Ilán aparte), no se
+genera nada: se copian tal cual (mismos bytes, sin tocar metadatos) a public/cv/, se completa `cv_pdf` y se borra
+huella.txt (no aplica). Pasa en los dos modos de uso, así el workflow no instala Node ni Chromium para el CV.
+
 Uso:
   python -X utf8 scripts/generar_cv.py --chequear     → imprime y escribe en GITHUB_OUTPUT regenerar=true|false
   python -X utf8 scripts/generar_cv.py [--estado RUTA] [--carpeta-cv RUTA] [--sin-build]
@@ -23,7 +27,7 @@ import threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-from portfolio import RAIZ
+from portfolio import CARPETA_CONFIG, RAIZ
 from portfolio.capturas_auto import abrir_navegador
 from portfolio.identidad import imprimir, instalar_gancho_de_excepciones
 from portfolio.perfil import CARPETA_CV, CV_PDF, RUTA_PERFIL_JSON
@@ -34,6 +38,43 @@ ORIGENES_DE_LA_HUELLA = ["src", "es", "en", "index.html", "plugins", "package-lo
 EXCLUIDOS_DE_LA_HUELLA = {"src/datos/huellas.json"}
 IDIOMAS = ("es", "en")
 TOPE_MS = 30000
+CARPETA_CV_PROPIO = CARPETA_CONFIG / "cv"
+
+
+# ------------------------------------------------------------------ CV propio
+
+
+def archivos_cv_propio(carpeta_origen):
+    """{idioma: ruta} si están los dos PDF propios; None si no hay ninguno. Con uno solo, avisa y no los usa."""
+    encontrados = {}
+    for idioma in IDIOMAS:
+        ruta = carpeta_origen / ("cv-" + idioma + ".pdf")
+        if ruta.exists():
+            encontrados[idioma] = ruta
+    if len(encontrados) == len(IDIOMAS):
+        return encontrados
+    if encontrados:
+        imprimir("::warning::Hay un solo CV propio en config/cv/ (faltan los dos idiomas): se sigue generando el CV")
+    return None
+
+
+def copiar_cv_propio(origenes, carpeta_cv, ruta_perfil):
+    """Copia byte a byte los PDF propios (solo si cambiaron) y deja `cv_pdf` en el perfil. Devuelve True si copió."""
+    carpeta_cv.mkdir(parents=True, exist_ok=True)
+    copio = False
+    for idioma in IDIOMAS:
+        contenido = origenes[idioma].read_bytes()
+        destino = carpeta_cv / ("cv-" + idioma + ".pdf")
+        if destino.exists() and destino.read_bytes() == contenido:
+            continue
+        destino.write_bytes(contenido)
+        copio = True
+    huella = carpeta_cv / "huella.txt"
+    if huella.exists():
+        huella.unlink()
+    if ruta_perfil.exists():
+        actualizar_perfil(ruta_perfil)
+    return copio
 
 
 # ------------------------------------------------------------------ huella
@@ -209,7 +250,16 @@ def main():
     parser.add_argument("--carpeta-cv", dest="carpeta_cv", default=str(CARPETA_CV))
     parser.add_argument("--perfil", default=str(RUTA_PERFIL_JSON))
     parser.add_argument("--sin-build", dest="sin_build", action="store_true")
+    parser.add_argument("--cv-propio", dest="cv_propio", default=str(CARPETA_CV_PROPIO))
     opciones = parser.parse_args()
+    origenes = archivos_cv_propio(Path(opciones.cv_propio))
+    if origenes is not None:
+        copio = copiar_cv_propio(origenes, Path(opciones.carpeta_cv), Path(opciones.perfil))
+        imprimir("CV propio: " + ("copiado a public/cv/" if copio else "sin cambios"))
+        if opciones.chequear:
+            imprimir("regenerar=false")
+            escribir_salida_de_github("regenerar", "false")
+        return 0
     if opciones.chequear:
         valor = "true" if hay_que_regenerar(Path(opciones.carpeta_cv)) else "false"
         imprimir("regenerar=" + valor)

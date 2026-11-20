@@ -78,3 +78,60 @@ def test_falla_anota_advertencia_y_conserva(tmp_path, capsys):
     advertencias = json.loads(estado.read_text(encoding="utf-8"))["advertencias"]
     assert advertencias[0]["tipo"] == "cv_pdf_fallido"
     assert "::warning::" in capsys.readouterr().out
+
+
+# ------------------------------------------------------------------ modo CV propio
+
+
+def armar_cv_propio(tmp_path, idiomas=("es", "en")):
+    origen = tmp_path / "config_cv"
+    origen.mkdir()
+    for idioma in idiomas:
+        # Bytes de PDF con metadatos: se tienen que copiar idénticos, sin tocar nada.
+        (origen / ("cv-" + idioma + ".pdf")).write_bytes(b"%PDF-1.7 /Title (CV " + idioma.encode() + b") %%EOF")
+    perfil = tmp_path / "perfil.json"
+    perfil.write_text(json.dumps({"version": 1, "cv_pdf": None}), encoding="utf-8")
+    return origen, perfil
+
+
+def test_cv_propio_se_copia_byte_a_byte_y_completa_el_perfil(tmp_path):
+    origen, perfil = armar_cv_propio(tmp_path)
+    carpeta_cv = tmp_path / "public_cv"
+    carpeta_cv.mkdir()
+    (carpeta_cv / "huella.txt").write_text("vieja\n", encoding="utf-8")
+    origenes = generar_cv.archivos_cv_propio(origen)
+    assert generar_cv.copiar_cv_propio(origenes, carpeta_cv, perfil) is True
+    for idioma in ("es", "en"):
+        assert (carpeta_cv / ("cv-" + idioma + ".pdf")).read_bytes() == (origen / ("cv-" + idioma + ".pdf")).read_bytes()
+    assert not (carpeta_cv / "huella.txt").exists()
+    assert json.loads(perfil.read_text(encoding="utf-8"))["cv_pdf"] == {"es": "/cv/cv-es.pdf", "en": "/cv/cv-en.pdf"}
+
+
+def test_cv_propio_sin_cambios_no_reescribe(tmp_path):
+    origen, perfil = armar_cv_propio(tmp_path)
+    carpeta_cv = tmp_path / "public_cv"
+    origenes = generar_cv.archivos_cv_propio(origen)
+    generar_cv.copiar_cv_propio(origenes, carpeta_cv, perfil)
+    marca = (carpeta_cv / "cv-es.pdf").stat().st_mtime_ns
+    assert generar_cv.copiar_cv_propio(origenes, carpeta_cv, perfil) is False
+    assert (carpeta_cv / "cv-es.pdf").stat().st_mtime_ns == marca
+
+
+def test_cv_propio_incompleto_no_se_usa(tmp_path, capsys):
+    origen, _ = armar_cv_propio(tmp_path, idiomas=("es",))
+    assert generar_cv.archivos_cv_propio(origen) is None
+    assert "un solo CV propio" in capsys.readouterr().out
+    assert generar_cv.archivos_cv_propio(tmp_path / "no-existe") is None
+
+
+def test_chequear_con_cv_propio_no_pide_regenerar(tmp_path, monkeypatch):
+    origen, perfil = armar_cv_propio(tmp_path)
+    carpeta_cv = tmp_path / "public_cv"
+    salida_github = tmp_path / "salida.txt"
+    monkeypatch.setenv("GITHUB_OUTPUT", str(salida_github))
+    monkeypatch.setattr("sys.argv", [
+        "generar_cv.py", "--chequear", "--cv-propio", str(origen), "--carpeta-cv", str(carpeta_cv), "--perfil", str(perfil),
+    ])
+    assert generar_cv.main() == 0
+    assert salida_github.read_text(encoding="utf-8") == "regenerar=false\n"
+    assert (carpeta_cv / "cv-en.pdf").exists()

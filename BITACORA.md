@@ -5,6 +5,20 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 20/11/2026 — El botón de CV descarga el CV propio de Ilán en cada idioma
+
+**Cambios**
+- Con OK explícito de Ilán para publicarlos tal cual (incluidos foto y teléfono): sus CV en español e inglés en
+  `config/cv/cv-es.pdf` y `config/cv/cv-en.pdf` (una página A4 cada uno).
+- `generar_cv.py`, modo "CV propio": si están los dos PDF en `config/cv/`, no se genera nada; se copian byte a
+  byte a `public/cv/` (sin tocar metadatos), se completa `cv_pdf` y se borra `huella.txt`. Pasa también con
+  `--chequear`, que devuelve `regenerar=false`, así el workflow no instala Node ni Chromium para el CV. Con un solo
+  idioma presente, avisa y sigue generando el CV como antes.
+- Tests: copia idéntica y perfil completo, sin reescritura si no cambió, CV incompleto ignorado y `--chequear`.
+  `pytest`: 134 OK. Verificado en local: los dos PDF de `public/cv/` son idénticos a los originales.
+
+---
+
 ## 20/11/2026 — Cierre de la Fase 3: seis proyectos publicados y regla global del portfolio
 
 **Cambios**
