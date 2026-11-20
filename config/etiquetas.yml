@@ -45,11 +45,13 @@ Vercel: { categoria: infra, alias: [] }
 Cloudflare Pages: { categoria: infra, alias: [pages, cf pages] }
 Cloudflare Workers: { categoria: infra, alias: [workers, cf workers] }
 Docker: { categoria: infra, alias: [] }
+Render: { categoria: infra, alias: [render.com] }
 
 # automatización
 GitHub Actions: { categoria: automatizacion, alias: [actions, gh actions] }
 Make.com: { categoria: automatizacion, alias: [make, integromat] }
 Playwright: { categoria: automatizacion, alias: [] }
+YouTube Data API: { categoria: automatizacion, alias: [youtube api, youtube data api v3] }
 
 # mensajería
 Telegram: { categoria: mensajeria, alias: [telegram bot, telegram bot api] }
@@ -58,7 +60,12 @@ WhatsApp: { categoria: mensajeria, alias: [] }
 # IA
 Anthropic API: { categoria: ia, alias: [claude api, anthropic] }
 OpenAI API: { categoria: ia, alias: [openai] }
+Claude Code: { categoria: ia, alias: [] }
+faster-whisper: { categoria: ia, alias: [whisper, faster whisper] }
+edge-tts: { categoria: ia, alias: [edge tts] }
+Kokoro: { categoria: ia, alias: [kokoro tts, kokoro-82m] }
 
 # sin categoría
 Google Calendar: { categoria: null, alias: [google calendar api] }
 pytest: { categoria: null, alias: [] }
+FFmpeg: { categoria: null, alias: [] }

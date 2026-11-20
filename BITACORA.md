@@ -5,6 +5,27 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 20/11/2026 — Ficha de Money Minds en su repo y proyecto sin repo de videos verticales
+
+**Cambios**
+- Money Minds (aprobado por Ilán): `PORTFOLIO.md` y `docs/portfolio/captura.png` pusheados a su repo (sin bitácora
+  nueva). La captura es una composición 16:10 de tres pantallas de celular con datos de prueba, sin barras de
+  estado ni de navegación y sin metadatos.
+- `config/etiquetas.yml`: Render (infra), YouTube Data API (automatización), Claude Code, faster-whisper,
+  edge-tts y Kokoro (IA) y FFmpeg (sin categoría).
+- `config/proyectos_extra/videos-faceless.md` (aprobado por Ilán): activo, sin demo, sin link ni nombre del canal,
+  con placeholder.
+- Corrida en seco contra la API real: 6 proyectos; el extra y sus etiquetas validan sin avisos.
+
+**Problema**
+- En la corrida en seco, el repo de Money Minds figura como privado (clave `priv-…`) y su captura no se publica
+  (`imagen_sin_aprobar`); el repo del backend sigue público.
+
+**Pendiente**
+- Decisión de Ilán sobre la visibilidad de los dos repos antes del push de este commit.
+
+---
+
 ## 19/11/2026 — Primeros tres proyectos leídos de sus repos y semilla eliminada
 
 **Cambios**
