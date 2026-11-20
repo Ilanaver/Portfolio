@@ -274,6 +274,10 @@
       "bitacora": [
         {
           "fecha": "2026-11-20",
+          "titulo": "El botón de CV descarga el CV propio de Ilán en cada idioma"
+        },
+        {
+          "fecha": "2026-11-20",
           "titulo": "Cierre de la Fase 3: seis proyectos publicados y regla global del portfolio"
         },
         {
@@ -307,10 +311,6 @@
         {
           "fecha": "2026-11-18",
           "titulo": "Workflow de actualización corregido: ruta temporal fuera del contexto del job"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Nombres de repos privados quitados del código antes de publicarlo"
         }
       ],
       "clave": "pub-1ddb2727",
