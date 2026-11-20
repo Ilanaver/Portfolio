@@ -274,6 +274,14 @@
       "bitacora": [
         {
           "fecha": "2026-11-20",
+          "titulo": "Proyectos terminados muestran su fecha de fin como última actividad"
+        },
+        {
+          "fecha": "2026-11-20",
+          "titulo": "Money Minds y videos verticales publicados en el sitio"
+        },
+        {
+          "fecha": "2026-11-20",
           "titulo": "Ficha de Money Minds en su repo y proyecto sin repo de videos verticales"
         },
         {
@@ -303,14 +311,6 @@
         {
           "fecha": "2026-11-17",
           "titulo": "Ficha bilingüe del propio portfolio"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Workflow de actualización automática con commit solo si cambió algo"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Verificación automática en cada push y PR"
         }
       ],
       "clave": "pub-1ddb2727",
@@ -858,7 +858,7 @@
           "nombre": "SQL"
         }
       ],
-      "ultima_actividad": "2026-11"
+      "ultima_actividad": "2025-04"
     }
   ],
   "version": 1
