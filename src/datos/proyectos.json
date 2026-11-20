@@ -273,6 +273,10 @@
     {
       "bitacora": [
         {
+          "fecha": "2026-11-19",
+          "titulo": "Primeros tres proyectos leídos de sus repos y semilla eliminada"
+        },
+        {
           "fecha": "2026-11-18",
           "titulo": "Checkpoint 2 aprobado y hito de la actualización automática"
         },
@@ -307,10 +311,6 @@
         {
           "fecha": "2026-11-17",
           "titulo": "Auditoría local de repos, claves opacas y aprobación de capturas"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Chequeo semanal de links caídos"
         }
       ],
       "clave": "pub-1ddb2727",
