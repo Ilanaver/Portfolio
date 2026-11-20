@@ -5,6 +5,23 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 20/11/2026 — Cierre de la Fase 3: seis proyectos publicados y regla global del portfolio
+
+**Cambios**
+- Paso 47: la sección "Portfolio y bitácora" (aprobada por Ilán) quedó al final de su `CLAUDE.md` global. Los hitos
+  normales se agregan solos y se avisan en el resumen; los arreglos se proponen antes de commitearlos; los
+  cambios de visibilidad, bitácora, captura automática y aprobación de capturas necesitan su OK.
+- Paso 48: limpieza de `.revision/` (material de los checkpoints y borradores ya publicados; local, fuera de git).
+  El workflow opcional de `repository_dispatch` (§4.7) no se agregó: Ilán no lo pidió y el cron de 6 h alcanza.
+- Estado final: 6 proyectos en el sitio. Cuatro activos desde sus repos (Scanner DCA, ibit, Rivot y este
+  portfolio), Money Minds terminado (con captura manual) y videos verticales como proyecto sin repo. Quedaron
+  afuera por decisión de Ilán los TPs, los sitios de práctica, cuatro repos más y las automatizaciones de Make.com.
+
+**Pendiente**
+- Nada del plan. Mantenimiento: renovar el token antes del 2027-11-16 (avisa un issue 14 días antes).
+
+---
+
 ## 20/11/2026 — Proyectos terminados muestran su fecha de fin como última actividad
 
 **Cambios**
