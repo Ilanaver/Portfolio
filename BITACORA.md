@@ -5,6 +5,20 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 20/11/2026 — Proyectos terminados muestran su fecha de fin como última actividad
+
+**Cambios**
+- `generar_datos.py`: `ultima_actividad_de()`. Si el proyecto está `terminado` y tiene `fecha_fin`, su
+  `ultima_actividad` es el mes de `fecha_fin`; si no, sigue siendo el mes del último push (o el valor a mano en
+  los proyectos sin repo). Decisión de Ilán: editar la ficha de un proyecto viejo no tiene que hacerlo parecer
+  reciente (Money Minds figuraba nov 2026 y terminó en abr 2025).
+- Tests: el proyecto terminado de prueba pasa de 2026-11 a 2025-09 (su `fecha_fin`); el activo sigue el push.
+  `pytest`: 130 OK.
+- Paso 46 cerrado: Ilán deja afuera las automatizaciones de Make.com (la de Rivot ya está en su ficha; el resto
+  son flujos personales). Se borró el borrador local.
+
+---
+
 ## 20/11/2026 — Money Minds y videos verticales publicados en el sitio
 
 **Cambios**

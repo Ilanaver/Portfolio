@@ -128,7 +128,7 @@ def test_corrida_completa(rutas, monkeypatch):
     assert inventado["imagen"]["origen"] == "manual"
     assert (rutas["imagenes"] / "proyecto-inventado-1200.webp").exists()
     assert inventado["links"]["repo"] == "https://github.com/dueno/inventado"
-    assert inventado["ultima_actividad"] == "2026-11"
+    assert inventado["ultima_actividad"] == "2025-09"  # terminado: el mes de fecha_fin
     privado = None
     for proyecto in datos["proyectos"]:
         if proyecto["slug"] == "solo-espanol":
@@ -248,3 +248,20 @@ def test_proyectos_extra_se_suman(rutas):
         fallidos.append(item["nombre"])
     assert "nombre-equivocado" in fallidos
     assert (rutas["imagenes"] / "automatizacion-inventada-1200.webp").exists()
+
+
+def test_terminado_muestra_su_fecha_de_fin(rutas):
+    # inventado: terminado con fecha_fin 2025-09 y último push 2026-11 → ultima_actividad 2025-09.
+    correr(cliente_de_prueba(), rutas)
+    datos = json.loads(rutas["proyectos"].read_text(encoding="utf-8"))
+    meses = {}
+    for proyecto in datos["proyectos"]:
+        meses[proyecto["slug"]] = proyecto["ultima_actividad"]
+    assert meses["proyecto-inventado"] == "2025-09"
+    assert meses["solo-espanol"] == "2026-11"  # activo: sigue el último push
+
+
+def test_ultima_actividad_de():
+    assert generar_datos.ultima_actividad_de({"estado": "terminado", "fecha_fin": "2025-04-03"}, "2026-11") == "2025-04"
+    assert generar_datos.ultima_actividad_de({"estado": "pausado", "fecha_fin": None}, "2026-11") == "2026-11"
+    assert generar_datos.ultima_actividad_de({"estado": "activo", "fecha_fin": None}, "2026-10") == "2026-10"

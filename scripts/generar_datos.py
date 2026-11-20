@@ -89,6 +89,15 @@ def mes_de(fecha_iso):
     return fecha_iso[:7] if fecha_iso else None
 
 
+def ultima_actividad_de(datos, mes_por_defecto):
+    """Un proyecto terminado muestra el mes de su fecha_fin; si no, el mes por defecto (último push del repo, o
+    `ultima_actividad` a mano en los proyectos sin repo). Así editar el PORTFOLIO.md de un proyecto viejo no lo
+    hace parecer reciente."""
+    if datos["estado"] == "terminado" and datos["fecha_fin"]:
+        return mes_de(datos["fecha_fin"])
+    return mes_por_defecto
+
+
 def detalle_de_error_github(error):
     if error.codigo is None:
         return error.tipo
@@ -180,7 +189,7 @@ def procesar_repo(cliente, repo, anteriores, huellas, rutas, corrida, catalogo):
     nombre_publico = None if repo["es_privado"] else datos["nombre"]["es"]
     fuente = {
         "clave": clave, "origen": "repo", "es_privado": repo["es_privado"], "datos": datos,
-        "url_repo": repo["url"], "ultima_actividad": mes_de(repo["ultimo_push"] or repo["creado"]),
+        "url_repo": repo["url"], "ultima_actividad": ultima_actividad_de(datos, mes_de(repo["ultimo_push"] or repo["creado"])),
         "nombre_publico": nombre_publico,
     }
     for tipo in leido["advertencias"]:
@@ -207,7 +216,7 @@ def procesar_extra(ruta, anteriores, huellas, rutas, corrida, catalogo):
     nombre_publico = datos["nombre"]["es"]
     fuente = {
         "clave": extra["clave"], "origen": "extra", "es_privado": False, "datos": datos, "url_repo": None,
-        "ultima_actividad": datos["ultima_actividad"], "nombre_publico": nombre_publico,
+        "ultima_actividad": ultima_actividad_de(datos, datos["ultima_actividad"]), "nombre_publico": nombre_publico,
     }
     for tipo in extra["advertencias"]:
         corrida.advertir(extra["clave"], nombre_publico, tipo)
