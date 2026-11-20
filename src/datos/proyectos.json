@@ -273,6 +273,10 @@
     {
       "bitacora": [
         {
+          "fecha": "2026-11-20",
+          "titulo": "Ficha de Money Minds en su repo y proyecto sin repo de videos verticales"
+        },
+        {
           "fecha": "2026-11-19",
           "titulo": "Primeros tres proyectos leídos de sus repos y semilla eliminada"
         },
@@ -307,10 +311,6 @@
         {
           "fecha": "2026-11-17",
           "titulo": "Verificación automática en cada push y PR"
-        },
-        {
-          "fecha": "2026-11-17",
-          "titulo": "Auditoría local de repos, claves opacas y aprobación de capturas"
         }
       ],
       "clave": "pub-1ddb2727",
@@ -550,6 +550,312 @@
         {
           "categoria": "lenguaje",
           "nombre": "Python"
+        }
+      ],
+      "ultima_actividad": "2026-11"
+    },
+    {
+      "bitacora": [],
+      "clave": "extra-videos-faceless",
+      "descripcion": {
+        "en": "Turns a script into an animated vertical video with voice, captions and music, and builds a weekly batch of Shorts with AI agents.",
+        "es": "Convierte un guion en un video vertical animado con voz, subtítulos y música, y arma cada semana un lote de Shorts con agentes de IA."
+      },
+      "destacado": false,
+      "es_privado": false,
+      "estado": "activo",
+      "fecha_fin": null,
+      "fecha_inicio": "2026-11-04",
+      "hitos": {
+        "en": [
+          {
+            "fecha": "2026-11-15",
+            "texto": "Voice check before rendering: it is transcribed and compared with the script, and it stops if they don't match.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-08",
+            "texto": "False facts in scripts → the source sheet overstated its sources (an article's year taken as the study's year) → the researcher can't claim more than the source.",
+            "tipo": "arreglo"
+          },
+          {
+            "fecha": "2026-11-06",
+            "texto": "YouTube publisher: approved videos are uploaded and scheduled automatically.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-05",
+            "texto": "Weekly batch with research, scriptwriting and review agents, with approval before production.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-04",
+            "texto": "First version: from a JSON script to a 1080×1920 vertical video with voice, captions and music.",
+            "tipo": "hito"
+          }
+        ],
+        "es": [
+          {
+            "fecha": "2026-11-15",
+            "texto": "Control de la voz antes del render: se transcribe y se compara con el guion, y si no coincide, frena.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-08",
+            "texto": "Datos falsos en guiones → la hoja de fuentes citaba de más (un año de nota como año del estudio) → el investigador no puede afirmar más que la fuente.",
+            "tipo": "arreglo"
+          },
+          {
+            "fecha": "2026-11-06",
+            "texto": "Publicador de YouTube: los videos aprobados se suben y se programan solos.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-05",
+            "texto": "Lote semanal con agentes de investigación, guion y revisión, con aprobación antes de producir.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2026-11-04",
+            "texto": "Primera versión: de un guion JSON a un video vertical 1080×1920 con voz, subtítulos y música.",
+            "tipo": "hito"
+          }
+        ]
+      },
+      "idea_original": {
+        "en": "A single command that turns a script into a vertical video ready to upload, without showing my face or editing by hand.",
+        "es": "Un comando que convierta un guion en un video vertical listo para subir, sin mostrar la cara y sin editar a mano."
+      },
+      "imagen": null,
+      "links": {
+        "demo": null,
+        "otros": [],
+        "repo": null
+      },
+      "nombre": {
+        "en": "Faceless videos",
+        "es": "Videos faceless"
+      },
+      "origen": "extra",
+      "resultado": {
+        "en": "It became a local pipeline: generated or recorded voice, silence trimming, faster-whisper transcription to sync captions word by word, rendering with Remotion and audio normalized to -14 LUFS. On top of it runs a weekly batch of Shorts in English and Spanish: agents that research, write and review each script with sources, automatic checks on the rendered video and scheduled publishing on YouTube after my approval.",
+        "es": "Quedó un pipeline local: voz generada o grabada, recorte de silencios, transcripción con faster-whisper para sincronizar los subtítulos palabra por palabra, render con Remotion y audio normalizado a -14 LUFS. Encima corre un lote semanal de Shorts en inglés y en español: agentes que investigan, escriben y revisan cada guion con fuentes, controles automáticos sobre el video renderizado y publicación programada en YouTube después de mi aprobación."
+      },
+      "servicios": [
+        {
+          "categoria": "automatizacion",
+          "nombre": "YouTube Data API"
+        },
+        {
+          "categoria": "ia",
+          "nombre": "Claude Code"
+        }
+      ],
+      "slug": "videos-faceless",
+      "slugs_anteriores": [],
+      "tecnologias": [
+        {
+          "categoria": "lenguaje",
+          "nombre": "Python"
+        },
+        {
+          "categoria": "lenguaje",
+          "nombre": "TypeScript"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "React"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Remotion"
+        },
+        {
+          "categoria": null,
+          "nombre": "FFmpeg"
+        },
+        {
+          "categoria": "ia",
+          "nombre": "faster-whisper"
+        },
+        {
+          "categoria": "ia",
+          "nombre": "edge-tts"
+        },
+        {
+          "categoria": "ia",
+          "nombre": "Kokoro"
+        },
+        {
+          "categoria": null,
+          "nombre": "pytest"
+        }
+      ],
+      "ultima_actividad": "2026-11"
+    },
+    {
+      "bitacora": [],
+      "clave": "pub-73be6d5e",
+      "descripcion": {
+        "en": "Personal finance web app: accounts, monthly income and expenses, statistics and learning content. High school final project, built as a team.",
+        "es": "App web de finanzas personales: cuentas, ingresos y gastos por mes, estadísticas y contenido educativo. Proyecto final del secundario, en equipo."
+      },
+      "destacado": false,
+      "es_privado": false,
+      "estado": "terminado",
+      "fecha_fin": "2025-04",
+      "fecha_inicio": "2024-06",
+      "hitos": {
+        "en": [
+          {
+            "fecha": "2025-01-02",
+            "texto": "Statistics: monthly balance, spending by category and daily average.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-12-04",
+            "texto": "The manager exports transactions to PDF and Excel.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-09-05",
+            "texto": "New PostgreSQL database (Supabase).",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-08-12",
+            "texto": "Academy and video content finished.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-06-24",
+            "texto": "Own Express backend, split into controllers, services and repositories.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-06-10",
+            "texto": "Kickoff: Next.js frontend and a first SQL Server database.",
+            "tipo": "hito"
+          }
+        ],
+        "es": [
+          {
+            "fecha": "2025-01-02",
+            "texto": "Estadísticas: saldo por mes, gastos por categoría y promedio diario.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-12-04",
+            "texto": "El gestor exporta los movimientos a PDF y Excel.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-09-05",
+            "texto": "Base de datos nueva en PostgreSQL (Supabase).",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-08-12",
+            "texto": "Academia y contenido audiovisual terminados.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-06-24",
+            "texto": "Backend propio en Express, separado en controladores, servicios y repositorios.",
+            "tipo": "hito"
+          },
+          {
+            "fecha": "2024-06-10",
+            "texto": "Arranque: frontend en Next.js y primera base de datos en SQL Server.",
+            "tipo": "hito"
+          }
+        ]
+      },
+      "idea_original": {
+        "en": "An app where someone who is just starting to manage their money can log income and expenses, see where the money goes and learn basic finance concepts, all in one place.",
+        "es": "Una app para que alguien que recién empieza a manejar su plata pueda anotar ingresos y gastos, ver en qué se le va el dinero y aprender conceptos básicos de finanzas, todo en un mismo lugar."
+      },
+      "imagen": {
+        "alt": {
+          "en": "Three phone screens of the app: monthly manager, academy and spending statistics.",
+          "es": "Tres pantallas de la app en el celular: gestor mensual, academia y estadísticas de gastos."
+        },
+        "alto": 750,
+        "ancho": 1200,
+        "archivos": {
+          "en": {
+            "1200": "/proyectos/money-minds-1200.webp",
+            "600": "/proyectos/money-minds-600.webp"
+          },
+          "es": {
+            "1200": "/proyectos/money-minds-1200.webp",
+            "600": "/proyectos/money-minds-600.webp"
+          }
+        },
+        "origen": "manual"
+      },
+      "links": {
+        "demo": null,
+        "otros": [],
+        "repo": "https://github.com/Ilanaver/Proyecto_BD"
+      },
+      "nombre": {
+        "en": "Money Minds",
+        "es": "Money Minds"
+      },
+      "origen": "repo",
+      "resultado": {
+        "en": "It became a Next.js web app with an account manager and monthly income and expenses (exportable to PDF and Excel), balance and spending-by-category statistics, an academy with lessons and videos, a glossary and an advisor with a chatbot. Its own Express backend was split into controllers, services and repositories on top of PostgreSQL. My role: full-stack development, database architecture and API integration. The demo is no longer online because the database is disabled.",
+        "es": "Quedó una web en Next.js con gestor de cuentas e ingresos y gastos por mes (exportable a PDF y Excel), estadísticas de saldo y gastos por categoría, una academia con lecciones y videos, un glosario de términos y un asesor con chatbot. El backend propio en Express se separó en controladores, servicios y repositorios sobre PostgreSQL. Mi rol: desarrollo full-stack, arquitectura de la base de datos e integración de la API. Hoy la demo no está en línea porque la base de datos está deshabilitada."
+      },
+      "servicios": [
+        {
+          "categoria": "datos",
+          "nombre": "Supabase"
+        },
+        {
+          "categoria": "infra",
+          "nombre": "Vercel"
+        },
+        {
+          "categoria": "infra",
+          "nombre": "Render"
+        },
+        {
+          "categoria": "ia",
+          "nombre": "OpenAI API"
+        }
+      ],
+      "slug": "money-minds",
+      "slugs_anteriores": [],
+      "tecnologias": [
+        {
+          "categoria": "lenguaje",
+          "nombre": "JavaScript"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "React"
+        },
+        {
+          "categoria": "frontend",
+          "nombre": "Next.js"
+        },
+        {
+          "categoria": "backend",
+          "nombre": "Node.js"
+        },
+        {
+          "categoria": "backend",
+          "nombre": "Express"
+        },
+        {
+          "categoria": "datos",
+          "nombre": "PostgreSQL"
+        },
+        {
+          "categoria": "lenguaje",
+          "nombre": "SQL"
         }
       ],
       "ultima_actividad": "2026-11"
