@@ -5,6 +5,25 @@ El título de cada entrada es PÚBLICO (aparece en el portfolio en español); el
 
 ---
 
+## 20/11/2026 — Money Minds y videos verticales publicados en el sitio
+
+**Cambios**
+- Ilán corrigió la visibilidad de los dos repos de Money Minds (frontend público, backend privado). Push de
+  `74918ff` (`96b52fa..74918ff`).
+- Corrida del push 44742670718 en verde: commit del bot `1bf965a` "datos: actualización automática (6 proyectos)"
+  con los WebP de Money Minds (1200 y 600), su huella de captura manual, los 6 proyectos y el CV regenerado. Sin
+  advertencias ni issues; el log no tiene nombres privados. Vercel desplegó `1bf965a` (success).
+- Corrida manual 44742841464: sin cambios, sin commit ni deploy.
+- Producción: `/es/p/money-minds/` y `/en/p/money-minds/` 200 con la captura WebP, el alt en cada idioma y el link a
+  su repo; `/es/p/videos-faceless/` y `/en/p/videos-faceless/` 200 con placeholder; las dos tarjetas en el inicio.
+
+**Pendiente**
+- "Última actividad" de Money Minds sale nov 2026 (sale del último push, que fue el del `PORTFOLIO.md`), aunque el
+  proyecto terminó en abr 2025. Para decidir con Ilán.
+- Paso 46: el extra de las automatizaciones de Make.com (faltan los datos). Esta entrada sube en el próximo push.
+
+---
+
 ## 20/11/2026 — Ficha de Money Minds en su repo y proyecto sin repo de videos verticales
 
 **Cambios**
